@@ -1,0 +1,68 @@
+# Path to your oh-my-zsh configuration.
+ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+#ZSH_THEME="blinks"
+#ZSH_THEME="cloud"
+#ZSH_THEME="kardan"
+#ZSH_THEME="mortalscumbag"
+#ZSH_THEME="miloshadzic"
+ZSH_THEME="robbyrussell"
+#ZSH_THEME="af-magic"
+
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Set to this to use case-sensitive completion
+# CASE_SENSITIVE="true"
+
+# Comment this out to disable bi-weekly auto-update checks
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment to change how often before auto-updates occur? (in days)
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment following line if you want to disable colors in ls
+# DISABLE_LS_COLORS="true"
+
+# Uncomment following line if you want to disable autosetting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment following line if you want to disable command autocorrection
+# DISABLE_CORRECTION="true"
+
+# Uncomment following line if you want red dots to be displayed while waiting for completion
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment following line if you want to disable marking untracked files under
+# VCS as dirty. This makes repository status check for large repositories much,
+# much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+#plugins=(git battery git-flow github npm pip python screen ssh-agent vi-mode)
+plugins=(git battery git-flow github npm pip python screen vi-mode)
+
+TIME=`date +"%T"`
+
+printf '\033[0;36m'"[ $TIME ] Activating oh-my-zsh framework"'\033[0m\n'
+source $ZSH/oh-my-zsh.sh
+
+# Git config
+printf '\033[0;36m'"[ $TIME ] Setting up git env"'\033[0m\n'
+export GIT_AUTHOR_NAME='Xavier Bruhiere'
+export GIT_AUTHOR_EMAIL='xavier.bruhiere@gmail.com'
+export GIT_COMMITTER_NAME='Xavier Bruhiere'
+export GIT_COMMITTER_EMAIL='xavier.bruhiere@gmail.com'
+# Optionally, set your GitHub credentials
+export GITHUB_USER='Gusabi'
+export GITHUB_TOKEN='your_github_token'
+
+test -f $HOME/.commonrc.sh && source $HOME/.commonrc.sh
+test -f $HOME/.customrc.sh && source $HOME/.customrc.sh

@@ -1,0 +1,23 @@
+# Personal configuration file
+
+# Personal prompt
+#[[ $- == *i* ]] && . ~/git-prompt/git-prompt.sh
+#glue the bash prompt always go to the first column
+PS1="\n\t\[\033[G\]$PS1"
+
+export PS4='$0.$LINENO+ '
+HISTTIMEFORMAT="%h/%d - %H:%M:%S"
+
+test -d $HOME/openlibs/liquidprompt && source $HOME/openlibs/liquidprompt/liquidprompt
+
+# {{{
+shopt -s progcomp
+# Node Completion - Auto-generated, do not touch.
+#for f in $(command ls ~/.node-completion); do
+#  f="$HOME/.node-completion/$f"
+#  test -f "$f" && . "$f"
+#done
+# }}}
+
+test -f $HOME/.commonrc.sh && source $HOME/.commonrc.sh
+test -f $HOME/.customrc.sh && source $HOME/.customrc.sh

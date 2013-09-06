@@ -1,0 +1,20 @@
+# Read shared alias
+source $HOME/.common-alias.sh
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# Program utilities
+#alias checker='cd /home/xav/dev/projects/SamBotnet/src/checker/ && ./checker.py && cd -'
+alias checker='cd /home/xav/.config/conky/scripts/ && ./checker.py && cd -'
+alias processing='~/lib/processing-1.5.1/processing'
+alias sublime='~/lib/Sublime\ Text\ 2/sublime_text'
