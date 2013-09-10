@@ -1,5 +1,6 @@
 # Read shared alias
-source $HOME/.common-alias.sh
+test -f $HOME/.common-alias && source $HOME/.common-alias
+test -f $HOME/.custom-alias && source $HOME/.custom-alias
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -12,9 +13,3 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
-# Program utilities
-#alias checker='cd /home/xav/dev/projects/SamBotnet/src/checker/ && ./checker.py && cd -'
-alias checker='cd /home/xav/.config/conky/scripts/ && ./checker.py && cd -'
-alias processing='~/lib/processing-1.5.1/processing'
-alias sublime='~/lib/Sublime\ Text\ 2/sublime_text'

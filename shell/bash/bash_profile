@@ -8,8 +8,6 @@ PS1="\n\t\[\033[G\]$PS1"
 export PS4='$0.$LINENO+ '
 HISTTIMEFORMAT="%h/%d - %H:%M:%S"
 
-test -d $HOME/openlibs/liquidprompt && source $HOME/openlibs/liquidprompt/liquidprompt
-
 # {{{
 shopt -s progcomp
 # Node Completion - Auto-generated, do not touch.
@@ -19,5 +17,5 @@ shopt -s progcomp
 #done
 # }}}
 
-test -f $HOME/.commonrc.sh && source $HOME/.commonrc.sh
-test -f $HOME/.customrc.sh && source $HOME/.customrc.sh
+test -f $HOME/.commonrc && source $HOME/.commonrc
+test -f $HOME/.customrc && source $HOME/.customrc

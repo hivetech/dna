@@ -1,0 +1,5 @@
+user: root
+dna_root: /opt/dna
+shell: zsh
+prompt: ohmyzsh
+terminal_multiplexer: screen

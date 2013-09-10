@@ -1,0 +1,8 @@
+---
+- hosts: '{{ hosts }}'
+  gather_facts: True
+
+  vars_files : 
+    - '{{ data }}'
+
+  user: {{ user }}

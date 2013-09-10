@@ -51,10 +51,11 @@ plugins=(git battery git-flow github npm pip python screen vi-mode)
 
 TIME=`date +"%T"`
 
-printf '\033[0;36m'"[ $TIME ] Activating oh-my-zsh framework"'\033[0m\n'
-source $ZSH/oh-my-zsh.sh
+test -n "$ZSH" && printf '\033[0;36m'"[ $TIME ] Activating oh-my-zsh framework"'\033[0m\n'
+test -n "$ZSH" && source $ZSH/oh-my-zsh.sh
 
 # Git config
+#FIXME Is it still usefull ?
 printf '\033[0;36m'"[ $TIME ] Setting up git env"'\033[0m\n'
 export GIT_AUTHOR_NAME='Xavier Bruhiere'
 export GIT_AUTHOR_EMAIL='xavier.bruhiere@gmail.com'
@@ -64,5 +65,8 @@ export GIT_COMMITTER_EMAIL='xavier.bruhiere@gmail.com'
 export GITHUB_USER='Gusabi'
 export GITHUB_TOKEN='your_github_token'
 
-test -f $HOME/.commonrc.sh && source $HOME/.commonrc.sh
-test -f $HOME/.customrc.sh && source $HOME/.customrc.sh
+# Setup external configurations
+test -f $HOME/.commonrc && source $HOME/.commonrc
+test -f $HOME/.customrc && source $HOME/.customrc
+test -f $HOME/.common-alias && source $HOME/.common-alias
+test -f $HOME/.custom-alias && source $HOME/.custom-alias

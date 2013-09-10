@@ -19,7 +19,7 @@
 #    - Other open-source projects are in $HOME/openlibs
 #    - You use node version 0.10.7
 PROJECTS=$HOME/dev/projects
-OPENLIBS=$HOME/openlibs
+OPENLIBS=/opt
 NODE_VERSION="0.10.7"
 
 TIME=`date +"%T"`
@@ -60,6 +60,7 @@ function back()
     export MPWD=$P
 }
 
+#TODO Should it be replaced by https://github.com/simonwhitaker/gitignore-boilerplates ?
 # Command line access to http://gitignore.io/, powered by https://github.com/github/gitignore
 function gi() { curl http://gitignore.io/api/$@ ;}
 
@@ -67,23 +68,29 @@ function gi() { curl http://gitignore.io/api/$@ ;}
 test -f /usr/local/bin/virtualenvwrapper.sh && source /usr/local/bin/virtualenvwrapper.sh && export WORKON_HOME=$HOME/.virtualenvs
 
 # z is the new j, yo (https://github.com/rupa/z.git)
-test -d $OPENLIBS && source $OPENLIBS/z/z.sh
+test -d $OPENLIBS/z && source $OPENLIBS/z/z.sh
 
 # Adds numbered shortcuts to the output git status, and much more (https://github.com/ndbroadbent/scm_breeze.git)
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 
 # Node version management
-[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh  # This loads NVM
-nvm use v$NODE_VERSION
-[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
-export NODE_PATH=$HOME/.nvm/v$NODE_VERSION/lib/node_modules
-export NODE_ENV=development
+#[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh  # This loads NVM
+if [[ -s $HOME/.nvm/nvm.sh ]]; then
+    . $HOME/.nvm/nvm.sh  # This loads NVM
+    nvm use v$NODE_VERSION
+    [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+    export NODE_PATH=$HOME/.nvm/v$NODE_VERSION/lib/node_modules
+    export NODE_ENV=development
+fi
 
 # script for automatic environment
 test -d $OPENLIBS/autoenv && source $OPENLIBS/autoenv/activate.sh
 
 ### Added by the Heroku Toolbelt
 test -d /usr/local/heroku && export PATH="/usr/local/heroku/bin:$PATH"
+
+# A full-featured & carefully designed adaptive prompt for Bash & Zsh
+test -d $OPENLIBS/liquidprompt && source $OPENLIBS/liquidprompt/liquidprompt
 
 # Go configuration
 export GOROOT=/opt/go
