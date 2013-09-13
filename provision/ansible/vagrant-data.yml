@@ -1,5 +1,4 @@
 user: vagrant
-#dna_root: /opt/dna
 dna_root: /home/xavier/dev/projects/dna
 shell: zsh
 prompt: ohmyzsh

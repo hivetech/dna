@@ -37,6 +37,6 @@ alias processing="$HOME/openlibs/processing-2.0/processing"
 
 alias veewee='bundle exec veewee'
 
-alias gojudo="cd /home/xavier/dev/goworkspace/src/github.com/Gusabi/judo"
+alias gojudo="cd /home/xavier/dev/goworkspace/src/github.com/hivetech/judo"
 alias gocore="cd /home/xavier/dev/goworkspace/src/launchpad.net/juju-core"
 alias sjuju="sudo /home/xavier/dev/goworkspace/bin/juju -v"

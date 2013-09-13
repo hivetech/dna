@@ -1,8 +1,3 @@
 ---
-- hosts: '{{ hosts }}'
-  gather_facts: True
-
-  vars_files : 
-    - '{{ data }}'
-
-  user: {{ user }}
+# Main entry point for dotfiles installation
+- include: shell.yml

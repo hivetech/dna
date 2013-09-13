@@ -1,2 +1,7 @@
 [vagrant]
 192.168.100.10
+
+[cell]
+localhost ansible_ssh_pass=""
+
+localhost ansible_connection=local

@@ -8,8 +8,7 @@
 LOGS?=/tmp/dna.logs
 #TODO Install accordingly to this variable
 PROVIDER?=ansible
-HOSTS?=127.0.0.1
-DNA_ROOT?=/opt/dna
+TARGET_HOSTS?=localhost
 
 all: dependencies install
 
@@ -32,12 +31,13 @@ ansible:
 	@echo "[make] Install ansible, configuration manager"
 	pip install PyYAML Jinja2 paramiko 2>&1 >> ${LOGS}
 	test -d /opt/ansible || git clone git://github.com/ansible/ansible.git /opt/ansible
-	echo ${HOSTS} > ${DNA_ROOT}/provision/ansible/hosts
+	echo ${TARGET_HOSTS} > ./provision/ansible/hosts
 
-	@echo "Now source /opt/ansible/hacking/env-setup"
+	@echo "!! Now: $ source /opt/ansible/hacking/env-setup"
+	@echo "!! Now: $ edit ./provision/ansible/data.yml"
 
 up:
-	ansible-playbook ${DNA_ROOT}/provision/ansible/shell.yml --ask-pass -u ${USER} --extra-vars="hosts=${HOSTS} data=${DNA_ROOT}/build/ansible/data.yml" -i ${DNA_ROOT}/build/ansible/hosts
+	ansible-playbook --verbose ./provision/ansible/site.yml --ask-sudo-pass -u ${USER} --extra-vars="hosts=${TARGET_HOSTS} data=data.yml user=${USER}" -i ./provision/ansible/hosts
 
 dependencies:
 	@echo "[make] Update cache and install packages..."

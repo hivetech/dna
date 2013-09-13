@@ -6,7 +6,9 @@
 #   - prompt   - oh-my-zsh or liquidprompt
 #   - terminal_multiplexer - screen or tmux supported
 
-- hosts: all
+#FIXME Temporary bug in vagrantfile
+#- hosts: vagrant
+- hosts: '{{ hosts }}'
   gather_facts: True
 
   vars_files: 

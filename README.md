@@ -31,20 +31,13 @@ previous repo (https://github.com/hackliff/Dotfiles)
 Usage (ansible style)
 -----
 
-Since the makefile isn't ready yet, follow [those
-instructions](http://www.ansibleworks.com/docs/gettingstarted.html) to install
-ansible. Then:
-
 ```bash
 $ git clone https://github.com/hivetech/dna.git /opt/dna
+$ cd /opt/dna && sudo make install
 $ $EDITOR /opt/dna/provision/ansible/data.yml   # Configuration
 $ $EDITOR /opt/dna/provision/ansible/hosts      # Where to deploy
-$ ansible-playbook /opt/dna/provision/ansible/shell.yml \
-    --ask-pass -u $USER \
-    --extra-vars="data=/opt/dna/provision/ansible/data.yml" \
-    -i /opt/dna/provision/ansible/hosts
+$ make up  # Default will setup your machine
 ```
-
 
 Sandbox mode (still ansible style)
 ------------
@@ -54,7 +47,9 @@ clean dev env while working in vagrant powered machines, or test your awesome fo
 
 A Vagrantfile ready-to-use is provided and you can check out the [documentation](http://docs.vagrantup.com/v2/provisioning/ansible.html)
 for more informations. Make sure `dna/provision/ansible/vagrant-data.yml` suits
-you and a vagrant section is present in `dna/provision/ansible/hosts`. 
+you and a vagrant section is present in `dna/provision/ansible/hosts`.
+
+You also have to modified `hosts` variable in shell.yml because of a weird vagrantfile bug.
 
 Then just run `vagrant up && vagrant ssh`.
 
