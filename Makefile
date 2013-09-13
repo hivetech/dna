@@ -31,7 +31,6 @@ ansible:
 	@echo "[make] Install ansible, configuration manager"
 	pip install PyYAML Jinja2 paramiko 2>&1 >> ${LOGS}
 	test -d /opt/ansible || git clone git://github.com/ansible/ansible.git /opt/ansible
-	echo ${TARGET_HOSTS} > ./provision/ansible/hosts
 
 	@echo "!! Now: $ source /opt/ansible/hacking/env-setup"
 	@echo "!! Now: $ edit ./provision/ansible/data.yml"

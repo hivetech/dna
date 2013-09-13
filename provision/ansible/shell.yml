@@ -24,7 +24,7 @@
       action: apt pkg=$item state=latest update_cache=true
       with_items:
         - git
-        - zsh
+        - '{{ shell }}'
         - acpi
         - lm-sensors
         - '{{ terminal_multiplexer }}'
@@ -68,3 +68,11 @@
     - name: Activate zsh shell 
       shell: chsh -s /bin/zsh
       when: "'${shell}' == 'zsh'"
+
+    # Multiplexers
+    - name: Configure screen
+      copy: src={{ dna_root }}/shell/multiplexer/screenrc dest=/home/{{ user }}/.screenrc owner={{ user }} mode=600
+      when: "'${terminal_multiplexer}' == 'screen'"
+    - name: Configure tmux
+      copy: src={{ dna_root }}/shell/multiplexer/square.tmux.conf dest=/home/{{ user }}/.tmux.conf owner={{ user }} mode=600
+      when: "'${terminal_multiplexer}' == 'tmux'"

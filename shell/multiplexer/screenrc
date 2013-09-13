@@ -1,0 +1,19 @@
+#FIXME My terminal screws shortcuts anyway...
+escape	"^Tt"  #ctrl-z default interferes with emacs keybindings for terminal
+
+caption always "%{= dg} %{B}%H %{G}|%=%?%{d}%-w%?%{G}[ %{G}%n %t%?{%uw}%?%{G} ]%{w}%?%+w%?%=%{G}| %{B}%D %c"
+defscrollback 20000
+vbell off
+startup_message off
+termcapinfo xterm ti@:te@
+autodetach on
+
+bindkey -k F2 stuff "\015\012"
+#bindkey -k F2 quit  # bind f12 to quit screen
+
+multiuser on
+# Read only access + ctrl-t :wall "Hi there !"
+#aclchg guest -wx "#,?"
+#aclchg guest +x "colon,wall,detach"
+# Or full-permission
+#acladd user
