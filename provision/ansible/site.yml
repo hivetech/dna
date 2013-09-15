@@ -1,3 +1,25 @@
 ---
 # Main entry point for dotfiles installation
-- include: shell.yml
+# cli requirement: --extra-vars="hosts=x.x.x.x data=/path/to/config.yml"
+# data.yml must define:
+#   - dna_root - path where this repo was cloned
+#   - user     - user namespace to apply this configuration
+#   - prompt   - oh-my-zsh or liquidprompt
+#   - terminal_multiplexer - screen or tmux supported
+
+#FIXME bug in vagrantfile
+#- hosts: vagrant
+- hosts: '{{ hosts }}'
+  gather_facts: True
+
+  vars_files: 
+    - '{{ data }}'
+
+  user: '{{ user }}'
+  sudo: True
+
+  tasks:
+    - include: shell.yml
+    #TODO Some way to control activation and desactivation
+    - include: '{{ item }}'
+      with_fileglob: plugins/*

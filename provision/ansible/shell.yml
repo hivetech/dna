@@ -1,78 +1,60 @@
 ---
-# cli requirement: --extra-vars="hosts=x.x.x.x data=/path/to/config.yml"
-# config.yml must define:
-#   - dna_root - path where this repo was cloned
-#   - user     - user namespace to apply this configuration
-#   - prompt   - oh-my-zsh or liquidprompt
-#   - terminal_multiplexer - screen or tmux supported
 
-#FIXME Temporary bug in vagrantfile
-#- hosts: vagrant
-- hosts: '{{ hosts }}'
-  gather_facts: True
+- name: Install package dependencies
+  #when: ansible_os_family == "Debian"
+  when: ansible_pkg_mgr == "apt"
+  action: apt pkg=$item state=latest update_cache=true
+  with_items:
+    - git
+    - '{{ shell }}'
+    - acpi
+    - lm-sensors
+    - '{{ terminal_multiplexer }}'
+    
+#TODO Process termStartUp.sh
+# Note: the template system could be crazy cool to use
+- name: Copy shared shell configuration file
+  copy: src={{ dna_root }}/shell/commonrc.sh dest=/home/{{ user }}/.commonrc owner={{ user }} mode=600
+- copy: src={{ dna_root }}/shell/customrc.sh dest=/home/{{ user }}/.customrc owner={{ user }} mode=600
+- copy: src={{ dna_root }}/shell/common-alias.sh dest=/home/{{ user }}/.common-alias owner={{ user }} mode=600
+- copy: src={{ dna_root }}/shell/custom-alias.sh dest=/home/{{ user }}/.custom-alias owner={{ user }} mode=600
 
-  vars_files: 
-    # Note: Use {{ dna_root }}/provsioning/ansible/config.yml ?
-    - '{{ data }}'
+# A full-featured & carefully designed adaptive prompt for Bash & Zsh
+- name: Install liquidprompt
+  git: repo=https://github.com/nojhan/liquidprompt.git
+       dest=/opt/liquidprompt
+  when: "'${prompt}' == 'liquidprompt'"
+- name: Copy liquidprompt config
+  copy: src={{ dna_root }}/shell/liquidpromptrc-dist dest=/home/{{ user }}/.liquidpromptrc
+  when: "'${prompt}' == 'liquidprompt'"
 
-  user: '{{ user }}'
-  sudo: True
+# Bash specific stuff
+- name: Configure bash
+  copy: src={{ dna_root }}/shell/bash/bashrc dest=/home/{{ user }}/.bashrc owner={{ user }} mode=600
+  when: "'${shell}' == 'bash'"
+- copy: src={{ dna_root }}/shell/bash/bash_profile dest=/home/{{ user }}/.bash_profile owner={{ user }} mode=600
+  when: "'${shell}' == 'bash'"
+- copy: src={{ dna_root }}/shell/bash/bash_logout dest=/home/{{ user }}/.bash_logout owner={{ user }} mode=600
+  when: "'${shell}' == 'bash'"
 
-  tasks:
-    - name: Install package dependencies
-      when: ansible_os_family == "Debian"
-      action: apt pkg=$item state=latest update_cache=true
-      with_items:
-        - git
-        - '{{ shell }}'
-        - acpi
-        - lm-sensors
-        - '{{ terminal_multiplexer }}'
-        
-    #TODO Process termStartUp.sh
-    # Note: the template system could be crazy cool to use
-    - name: Copy shared shell configuration file
-      copy: src={{ dna_root }}/shell/commonrc.sh dest=/home/{{ user }}/.commonrc owner={{ user }} mode=600
-    - copy: src={{ dna_root }}/shell/customrc.sh dest=/home/{{ user }}/.customrc owner={{ user }} mode=600
-    - copy: src={{ dna_root }}/shell/common-alias.sh dest=/home/{{ user }}/.common-alias owner={{ user }} mode=600
-    - copy: src={{ dna_root }}/shell/custom-alias.sh dest=/home/{{ user }}/.custom-alias owner={{ user }} mode=600
+# Zsh specific stuff
+- name: Install oh-my-zsh framework
+  shell: export HOME=/home/{{ user }} && curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+  when: "'${prompt}' == 'ohmyzsh'"
+  when: "'${shell}' == 'zsh'"
+  ignore_errors: yes   # The script ends up with a non-fatal error, so don't stop ansible for that
+- name: Configure zsh
+  copy: src={{ dna_root }}/shell/zsh/zshrc dest=/home/{{ user }}/.zshrc owner={{ user }} mode=600
+  when: "'${shell}' == 'zsh'"
+#FIXME This command runs for root
+- name: Activate zsh shell 
+  shell: chsh -s /bin/zsh
+  when: "'${shell}' == 'zsh'"
 
-    # A full-featured & carefully designed adaptive prompt for Bash & Zsh
-    - name: Install liquidprompt
-      git: repo=https://github.com/nojhan/liquidprompt.git
-           dest=/opt/liquidprompt
-      when: "'${prompt}' == 'liquidprompt'"
-    - name: Copy liquidprompt config
-      copy: src={{ dna_root }}/shell/liquidpromptrc-dist dest=/home/{{ user }}/.liquidpromptrc
-      when: "'${prompt}' == 'liquidprompt'"
-
-    # Bash specific stuff
-    - name: Configure bash
-      copy: src={{ dna_root }}/shell/bash/bashrc dest=/home/{{ user }}/.bashrc owner={{ user }} mode=600
-      when: "'${shell}' == 'bash'"
-    - copy: src={{ dna_root }}/shell/bash/bash_profile dest=/home/{{ user }}/.bash_profile owner={{ user }} mode=600
-      when: "'${shell}' == 'bash'"
-    - copy: src={{ dna_root }}/shell/bash/bash_logout dest=/home/{{ user }}/.bash_logout owner={{ user }} mode=600
-      when: "'${shell}' == 'bash'"
-
-    # Zsh specific stuff
-    - name: Install oh-my-zsh framework
-      shell: export HOME=/home/{{ user }} && curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-      when: "'${prompt}' == 'ohmyzsh'"
-      when: "'${shell}' == 'zsh'"
-      ignore_errors: yes   # The script ends up with a non-fatal error, so don't stop ansible for that
-    - name: Configure zsh
-      copy: src={{ dna_root }}/shell/zsh/zshrc dest=/home/{{ user }}/.zshrc owner={{ user }} mode=600
-      when: "'${shell}' == 'zsh'"
-    #FIXME This command runs for root
-    - name: Activate zsh shell 
-      shell: chsh -s /bin/zsh
-      when: "'${shell}' == 'zsh'"
-
-    # Multiplexers
-    - name: Configure screen
-      copy: src={{ dna_root }}/shell/multiplexer/screenrc dest=/home/{{ user }}/.screenrc owner={{ user }} mode=600
-      when: "'${terminal_multiplexer}' == 'screen'"
-    - name: Configure tmux
-      copy: src={{ dna_root }}/shell/multiplexer/square.tmux.conf dest=/home/{{ user }}/.tmux.conf owner={{ user }} mode=600
-      when: "'${terminal_multiplexer}' == 'tmux'"
+# Multiplexers
+- name: Configure screen
+  copy: src={{ dna_root }}/shell/multiplexer/screenrc dest=/home/{{ user }}/.screenrc owner={{ user }} mode=600
+  when: "'${terminal_multiplexer}' == 'screen'"
+- name: Configure tmux
+  copy: src={{ dna_root }}/shell/multiplexer/square.tmux.conf dest=/home/{{ user }}/.tmux.conf owner={{ user }} mode=600
+  when: "'${terminal_multiplexer}' == 'tmux'"

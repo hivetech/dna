@@ -1,0 +1,15 @@
+---
+#NOTE Should the alias be written there ?
+- name: Install package dependencies
+  when: ansible_os_family == "Debian"
+  action: apt pkg=$item state=latest update_cache=true
+  with_items:
+    - mercurial
+    
+# z is the new j, yo
+- name: Install todolist manager t
+  hg: repo=http://bitbucket.org/sjl/t/
+       dest=/opt/t
+
+- name: Create tasks directory
+  file: dest=/home/{{ user }}/.tasks state=directory owner={{ user }} mode=600

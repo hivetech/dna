@@ -1,5 +1,5 @@
 user: vagrant
-dna_root: /home/xavier/dev/projects/dna
+dna_root: /home/xavier/dev/projects/hivetech/dna
 shell: zsh
 prompt: ohmyzsh
 terminal_multiplexer: screen

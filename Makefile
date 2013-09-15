@@ -10,7 +10,7 @@ LOGS?=/tmp/dna.logs
 PROVIDER?=ansible
 TARGET_HOSTS?=localhost
 
-all: dependencies install
+all: install
 
 install: dependencies ansible
 	@echo "Installation is done."
@@ -27,7 +27,7 @@ salt:
 	cp -r shell /srv/salt
 
 ansible:
-	apt-get install python-pip python-dev git-core
+	apt-get install -y python-pip python-dev git-core
 	@echo "[make] Install ansible, configuration manager"
 	pip install PyYAML Jinja2 paramiko 2>&1 >> ${LOGS}
 	test -d /opt/ansible || git clone git://github.com/ansible/ansible.git /opt/ansible
@@ -36,6 +36,8 @@ ansible:
 	@echo "!! Now: $ edit ./provision/ansible/data.yml"
 
 up:
+	#FIXME is -u $USER needed if - user: {{ user }} specified in shell.yml ?
+	. /opt/ansible/hacking/env-setup 
 	ansible-playbook --verbose ./provision/ansible/site.yml --ask-sudo-pass -u ${USER} --extra-vars="hosts=${TARGET_HOSTS} data=data.yml user=${USER}" -i ./provision/ansible/hosts
 
 dependencies:

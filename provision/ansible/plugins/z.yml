@@ -1,0 +1,11 @@
+---
+- name: Install package dependencies
+  when: ansible_os_family == "Debian"
+  action: apt pkg=$item state=latest update_cache=true
+  with_items:
+    - git
+    
+# z is the new j, yo
+- name: Install z
+  git: repo=https://github.com/rupa/z.git
+       dest=/opt/z

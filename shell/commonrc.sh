@@ -18,9 +18,9 @@
 #    - Your IT projects are in $HOME/dev/projects
 #    - Other open-source projects are in $HOME/openlibs
 #    - You use node version 0.10.7
-PROJECTS=$HOME/dev/projects
-OPENLIBS=/opt
-NODE_VERSION="0.10.7"
+export PROJECTS=$HOME/dev/projects
+export OPENLIBS=/opt
+export NODE_VERSION="0.10.7"
 
 TIME=`date +"%T"`
 
