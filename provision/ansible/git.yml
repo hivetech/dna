@@ -1,0 +1,13 @@
+---
+#FIXME Untested
+
+- name: Install git-flow and dependencies
+  when: ansible_pkg_mgr == "apt"
+  action: apt pkg=$item state=latest update_cache=true
+  with_items:
+      - git-core
+      - git-flow
+      - make
+
+- name: Install git-extras
+  shell: (cd /tmp && git clone --depth 1 https://github.com/visionmedia/git-extras.git && cd git-extras && sudo make install)

@@ -6,7 +6,7 @@
     - wget
     
 # Quickly go back to a parent directory in linux instead of typing "cd ../../.." repeatedly
-- name: Install bc
+- name: Install bd
   shell: wget -O /usr/bin/bd https://raw.github.com/vigneshwaranr/bd/master/bd && chmod +rx /usr/bin/bd
 
 - name: Install autocomplete support

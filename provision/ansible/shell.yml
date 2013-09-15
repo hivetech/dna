@@ -5,6 +5,7 @@
   when: ansible_pkg_mgr == "apt"
   action: apt pkg=$item state=latest update_cache=true
   with_items:
+    - curl
     - git
     - '{{ shell }}'
     - acpi

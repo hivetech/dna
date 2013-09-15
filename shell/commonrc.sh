@@ -14,6 +14,7 @@
 # limitations under the License.
 
 
+# ------------------------------------------------------------ Constants
 # Assumptions (born to be tuned):
 #    - Your IT projects are in $HOME/dev/projects
 #    - Other open-source projects are in $HOME/openlibs
@@ -34,6 +35,17 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 test -d $HOME/local/bin && PATH="$HOME/local/bin:$PATH"
 test -d $HOME/local/lib && PATH="$HOME/local/lib:$PATH"
 
+# Go configuration
+export GOROOT=/opt/go
+export GOOS=linux
+export GOARCH=amd64
+#export GOBIN=$GOROOT/bin
+export GOPATH=$HOME/dev/goworkspace
+export PATH=$PATH:/opt/go/bin:$GOPATH/bin
+
+export EDITOR=vim
+
+# ------------------------------------------------------------- Functions
 # Useful personal function, a little combinaison of two other one
 function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
 function up()
@@ -64,15 +76,7 @@ function back()
 # Command line access to http://gitignore.io/, powered by https://github.com/github/gitignore
 function gi() { curl http://gitignore.io/api/$@ ;}
 
-# Python virtualenv made easy
-test -f /usr/local/bin/virtualenvwrapper.sh && source /usr/local/bin/virtualenvwrapper.sh && export WORKON_HOME=$HOME/.virtualenvs
-
-# z is the new j, yo (https://github.com/rupa/z.git)
-test -d $OPENLIBS/z && source $OPENLIBS/z/z.sh
-
-# Adds numbered shortcuts to the output git status, and much more (https://github.com/ndbroadbent/scm_breeze.git)
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
-
+# ------------------------------------------------------------- Plugins
 # Node version management
 #[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh  # This loads NVM
 if [[ -s $HOME/.nvm/nvm.sh ]]; then
@@ -83,6 +87,15 @@ if [[ -s $HOME/.nvm/nvm.sh ]]; then
     export NODE_ENV=development
 fi
 
+# Python virtualenv made easy
+test -f /usr/local/bin/virtualenvwrapper.sh && source /usr/local/bin/virtualenvwrapper.sh && export WORKON_HOME=$HOME/.virtualenvs
+
+# z is the new j, yo (https://github.com/rupa/z.git)
+test -d $OPENLIBS/z && source $OPENLIBS/z/z.sh
+
+# Adds numbered shortcuts to the output git status, and much more (https://github.com/ndbroadbent/scm_breeze.git)
+[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
+
 # script for automatic environment
 test -d $OPENLIBS/autoenv && source $OPENLIBS/autoenv/activate.sh
 
@@ -92,12 +105,5 @@ test -d /usr/local/heroku && export PATH="/usr/local/heroku/bin:$PATH"
 # A full-featured & carefully designed adaptive prompt for Bash & Zsh
 test -d $OPENLIBS/liquidprompt && source $OPENLIBS/liquidprompt/liquidprompt
 
-# Go configuration
-export GOROOT=/opt/go
-export GOOS=linux
-export GOARCH=amd64
-#export GOBIN=$GOROOT/bin
-export GOPATH=$HOME/dev/goworkspace
-export PATH=$PATH:/opt/go/bin:$GOPATH/bin
-
-export EDITOR=vim
+# A BASH wrapper for getopts, for simple command line arguments
+test -d $OPENLIBS/optparse && source $OPENLIBS/optparse/optparse.bash

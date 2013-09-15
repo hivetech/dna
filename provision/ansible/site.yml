@@ -20,6 +20,8 @@
 
   tasks:
     - include: shell.yml
+    - include: git.yml
+    - include: dev.yml
     #TODO Some way to control activation and desactivation
     - include: '{{ item }}'
       with_fileglob: plugins/*
