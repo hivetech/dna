@@ -1,10 +1,14 @@
-Level up your dev environment
-=============================
+![Unide](https://raw.github.com/hivetech/hivetech.github.io/master/images/logo-unide.png)
+
+
+
+DNA - ReCode your dev environment
+===================================
 
 This project is a community-driven compilation of dotfiles and projects, aimed
 at creating the most awesome and powerful development environment.
 
-The installation is performed through famous configuration manager like ansible
+The installation is performed through famous configuration managers like ansible
 and [salt](http://saltstack.com/community.html) (currently focus on [ansible](www.ansibleworks.com)) as they obviously play nicely with a
 dotfiles repository and allow you to configure in seconds thousands of machines,
 as well as simply your beloved local one.  
@@ -26,18 +30,19 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * [A full-featured & carefully designed adaptive prompt for Bash & Zsh](https://github.com/nojhan/liquidprompt)
     * [Generate useful .gitignore files for your project](https://github.com/joeblau/gitignore.io)
     * An easy way to extend the configuration with hooks shell/customrc.sh and shell/custom-alias.sh
-    * carefully designed screen and tmux configuration
-    * Various cool stuff in rc files
+    * carefully designed \*rc files, screen and tmux configuration
 
 * Git
 
     * [Git extensions to provide high-level repository operations for Vincent Driessen's branching model](https://github.com/nvie/gitflow)
     * [GIT utilities -- repo summary, repl, changelog population, author commit percentages and more](https://github.com/visionmedia/git-extras)
+    * [Adds numbered shortcuts to the output git status, and much more](https://github.com/ndbroadbent/scm_breeze)
 
 * Dev
 
     * [A BASH wrapper for getopts, for simple command line arguments](https://github.com/nk412/optparse)
     * [A tool that automatically formats Python code to conform to the PEP 8 style guide](https://github.com/hhatto/autopep8)
+    * [Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
 
 * Plugins
 
@@ -66,7 +71,7 @@ A Vagrantfile ready-to-use is provided and you can check out the [documentation]
 for more informations. Make sure `dna/provision/ansible/vagrant-data.yml` suits
 you and a vagrant section is present in `dna/provision/ansible/hosts`.
 
-You also have to modified `hosts` variable in shell.yml because of a weird vagrantfile bug.
+You also have to modified `hosts` variable in site.yml because of a weird vagrantfile bug.
 
 Then just run `vagrant up && vagrant ssh`.
 
@@ -88,9 +93,29 @@ And constructed with the following guidelines:
   (and resets the patch)
 * Bug fixes and misc changes bumps the patch
 
+Commit messages convention
+--------------------------
 
-Credits - Your work rocks
+From now on git commit messages will follow this [Angular wise document](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#).
+To sum up :
+
+```
+{{ type }} ({{ scope }}): {{ subject }}
+
+{{ body }}
+
+{{ footer }}
+```
+
+Where type = { feat | fix | doc | style | refactor | test | chore }
+
+License
 -------
+
+DNA is available under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
+
+Super Credits
+-------------
 
 * [nvie](https://github.com/nvie)
 * [visionmedia](https://github.com/visionmedia)
@@ -104,3 +129,5 @@ Credits - Your work rocks
 * [vigneshwaranr](https://github.com/vigneshwaranr)
 * [nk412](https://github.com/nk412)
 * [hhatto](https://github.com/hhatto)
+* [ndbroadbent](https://github.com/ndbroadbent)
+* [creationix](https://github.com/creationix)

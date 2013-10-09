@@ -1,13 +1,22 @@
 ---
-#FIXME Untested
-
 - name: Install git-flow and dependencies
   when: ansible_pkg_mgr == "apt"
   action: apt pkg=$item state=latest update_cache=true
   with_items:
-      - git-core
+      # Git extensions to provide high-level repository operations for Vincent Driessen's branching model
       - git-flow
       - make
 
+#TODO Git flow autocompletion (https://github.com/bobthecow/git-flow-completion
+
+# GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
 - name: Install git-extras
   shell: (cd /tmp && git clone --depth 1 https://github.com/visionmedia/git-extras.git && cd git-extras && sudo make install)
+
+# Adds numbered shortcuts to the output git status, and much more
+- name: Download scm breeze
+  git: repo=https://github.com/ndbroadbent/scm_breeze.git
+       dest=/home/{{ user }}/.scm_breeze
+
+- name: Install scm breeze
+  shell: /home/{{ user }}/.scm_breeze/install.sh

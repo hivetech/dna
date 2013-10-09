@@ -59,3 +59,6 @@ test -f $HOME/.commonrc && source $HOME/.commonrc
 test -f $HOME/.customrc && source $HOME/.customrc
 test -f $HOME/.common-alias && source $HOME/.common-alias
 test -f $HOME/.custom-alias && source $HOME/.custom-alias
+
+#TODO Move to zsh specific alias
+alias bower='noglob bower'

@@ -8,8 +8,8 @@
 #   - terminal_multiplexer - screen or tmux supported
 
 #FIXME bug in vagrantfile
-#- hosts: vagrant
-- hosts: '{{ hosts }}'
+- hosts: vagrant
+#- hosts: '{{ hosts }}'
   gather_facts: True
 
   vars_files: 
@@ -19,6 +19,14 @@
   sudo: True
 
   tasks:
+    #FIXME Should playbooks be standalone, or refactored here ?
+    - name: Install common dependencies
+      when: ansible_pkg_mgr == "apt"
+      action: apt pkg=$item state=latest update_cache=true
+      with_items:
+        - wget
+        - git
+    
     - include: shell.yml
     - include: git.yml
     - include: dev.yml

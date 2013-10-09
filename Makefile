@@ -5,9 +5,10 @@
 # vim:ft=make
 #
 
-LOGS?=/tmp/dna.logs
+#TODO Vagrant installer
 #TODO Install accordingly to this variable
 PROVIDER?=ansible
+LOGS?=/tmp/dna.logs
 TARGET_HOSTS?=localhost
 
 all: install
@@ -44,7 +45,4 @@ dependencies:
 	@echo "[make] Update cache and install packages..."
 	apt-get update 2>&1 >> ${LOGS}
 
-tests:
-	@echo "Coming soon"
-
-.PHONY: dependencies install tests
+.PHONY: dependencies install

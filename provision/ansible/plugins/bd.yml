@@ -1,10 +1,4 @@
 ---
-- name: Install package dependencies
-  when: ansible_os_family == "Debian"
-  action: apt pkg=$item state=latest update_cache=true
-  with_items:
-    - wget
-    
 # Quickly go back to a parent directory in linux instead of typing "cd ../../.." repeatedly
 - name: Install bd
   shell: wget -O /usr/bin/bd https://raw.github.com/vigneshwaranr/bd/master/bd && chmod +rx /usr/bin/bd
