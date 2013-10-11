@@ -1,0 +1,187 @@
+" ===================== Header ======================
+" This line should not be removed as it ensures that various options are
+" properly set to work with the Vim-related packages available in Debian.
+runtime! debian.vim
+
+set nocompatible
+set enc=utf-8
+
+" Load external configuration before anything else
+if filereadable(expand("~/.vim/before.vimrc"))
+  source ~/.vim/before.vimrc
+endif
+
+let mapleader=","
+imap ii <Esc>
+nnoremap ; :
+
+" ============= Vundle Initialization =============
+" Automatic Vundle and bundles installation
+if filereadable(expand("~/.vim/plugin/bundles.vim"))
+    source ~/.vim/plugin/bundles.vim
+endif
+
+" ================ General Config ====================
+set number                      " Line numbers are good
+set fileformats=unix
+set backspace=indent,eol,start  " Allow backspace in insert mode
+set history=1000                " Store lots of :cmdline history
+set showcmd                     " Show incomplete cmds down the bottom
+set showmode                    " Show current mode down the bottom
+set autoread                    " Reload files changed outside vim
+set showmatch		            " Show matching brackets.
+set hidden                      " Hide buffers when they are abandoned
+set mouse=a		                " Enable mouse usage (all modes)
+
+" Uncomment the following to have Vim jump to the last position when reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" ================ Search Settings  =================
+set incsearch                   " Find the next match as we type the search
+set hlsearch                    " Hilight searches by default
+set viminfo='100,f1             " Save up to 100 marks, enable capital marks
+set smartcase		            " Do smart case matching
+nmap <silent> // :nohlsearch<cr>
+map <space> /                   " <space> to search
+map <c-space> ?                 " <Ctrl>+<space> to search backwards
+
+" ================ Turn Off Swap Files ==============
+set noswapfile
+set nobackup
+set nowb
+
+" ================ Persistent Undo ==================
+silent !mkdir ~/.vim/backups > /dev/null 2>&1
+set undodir=~/.vim/backups
+set undofile
+
+" ================ Indentation ======================
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+
+if has("syntax")
+  syntax on
+endif
+if has("autocmd")
+  filetype plugin on
+  filetype indent on
+endif
+
+set nowrap       "Don't wrap lines
+
+" ================ Folds ============================
+set foldmethod=indent       " Fold based on indent
+set foldnestmax=3           " Deepest fold is 3 levels
+set foldcolumn=1
+
+" ================ Completion =======================
+set wildmode=list:longest
+set wildmenu                " Enable ctrl-n and ctrl-p to scroll thru matches
+set wildignore=*.o,*.obj,*~ " Stuff to ignore when tab completing
+set wildignore+=*.swp,*.bak,*.class,*.pyc
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+
+" ================ Scrolling ========================
+set scrolloff=8             " Start scrolling when we're 8 lines away from margins
+set sidescrolloff=15
+set sidescroll=5
+
+" =============== Compilation stuff =================
+map <F5> :make<CR>
+map <F12> :!make run<CR>
+
+"Key mapping for compilation error navigation
+nnoremap <leader>o <Esc>:copen<CR>
+nnoremap <leader>p <Esc>:cprevious<CR>
+nnoremap <leader>n <Esc>:cnext<CR>
+nnoremap <leader>c <Esc>:cclose<CR>
+
+" 'A' plugin, toggle between .h and .c files
+nmap <leader>h <Esc>:A<CR>
+
+" ================= Moving stuff ======================
+"Stuff from items.sjbach.com/319/configuring-vim-right
+nnoremap <C-e> 4<C-e>
+nnoremap <C-y> 4<C-y>
+
+" Left/Right arrow keys change buffers in all modes but insertion
+noremap <Left> <Esc>:bp<CR>
+nnoremap <Left> <Esc>:bp<CR>
+vnoremap <Left> <Esc>:bp<CR>
+
+noremap <Right> <Esc>:bn<CR>
+nnoremap <Right> <Esc>:bn<CR>
+vnoremap <Right> <Esc>:bn<CR>
+
+" Up/Down arrow keys change windows in all modes but insertion
+noremap <Up> <C-w>k
+nnoremap <Up> <C-w>k
+vnoremap <Up> <C-w>k
+
+noremap <Down> <C-w>j
+nnoremap <Down> <C-w>j
+vnoremap <Down> <C-w>j
+
+" ====================== Misc ========================
+nnoremap <leader>w <Esc>:w<CR>  " Save file
+
+nnoremap <leader>N :new<CR>     " Opens a new file
+
+"Dict file completion
+set complete+=k
+set dictionary+=/usr/share/vim/vim73/spell/fr.utf-8.spl
+" Pressing <leader>ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" Switch CWD to the directory of the open buffer:
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Copy from clipboard
+"FIXME Error with getrep
+vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\" ))<CR>
+nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+
+" =================== Status line ====================
+" Make the command line two lines high and change the statusline display to
+" something that looks useful.
+function! CWD()
+    let curdir = substitute(getcwd(), '/home/xavier', "~", "g")
+    return curdir
+endfunction
+
+set cmdheight=1
+set statusline=[%l,%v\ %P%M][Cwd\ %{CWD()}][File\ %f]\ %r%h%w\ %#warningmsg#%{SyntasticStatuslineFlag()}%*
+set statusline+=%{fugitive#statusline()}\ (%{&ff})
+nnoremap <leader>l <Esc>:set number<CR>
+
+" define :HighlightLongLines command to highlight the offending parts of
+" lines that are longer than the specified length (defaulting to 80)
+command! -nargs=? HighlightLongLines call s:HighlightLongLines('<args>')
+function! s:HighlightLongLines(width)
+    let targetWidth = a:width != '' ? a:width : 79
+    if targetWidth > 0
+        exec 'match Todo /\%>' . (targetWidth) . 'v/'
+    else
+        echomsg "Usage: HighlightLongLines [natural number]"
+    endif
+endfunction
+
+" Load external configuration after anything else
+if filereadable(expand("~/.vim/after.vimrc"))
+  source ~/.vim/after.vimrc
+endif

@@ -8,28 +8,35 @@
 #   - terminal_multiplexer - screen or tmux supported
 
 #FIXME bug in vagrantfile
-- hosts: vagrant
-#- hosts: '{{ hosts }}'
+#- hosts: vagrant
+- hosts: '{{ hosts }}'
   gather_facts: True
 
   vars_files: 
     - '{{ data }}'
 
   user: '{{ user }}'
-  sudo: True
+  #FIXME False for ansible, true for others
+  sudo: False
 
   tasks:
+    #TODO Try to replace {{ user }} with {{ whoami.stdout }}
+    #- name: Determining username
+      #action: shell whoami
+      #register: whoami
+      #sudo: False
     #FIXME Should playbooks be standalone, or refactored here ?
     - name: Install common dependencies
       when: ansible_pkg_mgr == "apt"
       action: apt pkg=$item state=latest update_cache=true
       with_items:
         - wget
-        - git
+        - git-core
     
     - include: shell.yml
     - include: git.yml
     - include: dev.yml
+    - include: vim.yml
     #TODO Some way to control activation and desactivation
     - include: '{{ item }}'
       with_fileglob: plugins/*

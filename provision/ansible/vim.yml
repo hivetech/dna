@@ -1,0 +1,24 @@
+---
+- name: Install package dependencies
+  when: ansible_pkg_mgr == "apt"
+  action: apt pkg=$item state=latest update_cache=true
+  with_items:
+      - vim
+      - exuberant-ctags
+      - python-dev
+
+- name: Install python dependencies
+  #TODO Use proper virtualenv keyword
+  pip: name=twisted
+- name: Install python dependencies
+  pip: name=twisted
+  pip: name=flake8
+
+- name: Prepare vim configuration
+  file: path={{ home }}/.vim/plugin state=directory recurse=yes owner={{ user }} mode=600
+    
+- name: Copy vimrc configuration file
+  copy: src={{ dna_root }}/vim/vimrc dest={{ home }}/.vimrc owner={{ user }} mode=600
+- copy: src={{ dna_root }}/vim/plugin/bundles.vim dest={{ home }}/.vim/plugin/bundles.vim owner={{ user }} mode=600
+- copy: src={{ dna_root }}/vim/plugin/reminder.txt dest={{ home }}/.vim/plugin/reminder.txt owner={{ user }} mode=600
+  sudo: False

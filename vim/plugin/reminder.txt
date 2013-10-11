@@ -1,0 +1,60 @@
+Vim Help NoteBook
+
+We assume here <leader>=,
+
+<F2>          : Display this note
+<F3>          : Show tags
+<F4>          : Show FileSystem
+<F5>          : Run make
+<F8>          : Switch ColorScheme
+
+<CR>          : Open ctrlp
+(Ctrl)<space> : (Back)Search
+
+^d^f and ^b^u : 1/2 page move
+^e   and ^y   : more modest moves
+z{z|b|t}      : Move the page around the cursor
+,jl           : Shortcut for CtrlP lib directory
+,,{w|b}       : EasyMotion forward and backward
+,cd           : Move to the buffer directory
+
+ZZ and ZQ     : Quit (with and without saving)
+{vv|ss}       : Split the window
+
+,yr           : Show pasts registers
+
+,c<space>     : Toggle comments on selection/line
+,c{o,n,p,c}   : Open, Next, Previous, Close debug
+,h            : Toggle header and source file
+
+,t{y|b|n|i|r} : Open console
+,e            : Send the selection to the console
+
+,u            : Gundo tree
+
+,<delimiter>  : Surround the word or the selection with <delimiter>
+
+;;            : Write ";" at the end of the line
+
+,.            : Go to the last modification
+
+,ocf          : Open every git dirty files
+
+,q/           : Show the last search
+,qa/          : Same in all files
+
+,s            : Save
+:w!!          : Save as sudo
+
+,t            : Tasklist display
+
+,ci           : Change content surrounded
+
+:Gist -P      : Post current buffer to gist
+
+CTRL-a <char> : Align selection on <char>
+
+Python
+,b            : Set a breakpoint
+
+,ss           : Toggle spell checking

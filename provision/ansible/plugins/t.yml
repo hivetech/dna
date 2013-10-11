@@ -12,4 +12,4 @@
        dest=/opt/t
 
 - name: Create tasks directory
-  file: dest=/home/{{ user }}/.tasks state=directory owner={{ user }} mode=600
+  file: dest={{ home }}/.tasks state=directory owner={{ user }} mode=600

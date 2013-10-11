@@ -5,6 +5,8 @@
   with_items:
       - python-pip
       - pep8
+      - make
+      - ipython
     
 # z is the new j, yo
 - name: Install optparse

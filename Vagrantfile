@@ -1,11 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-#FIXME Lxc can't boot properly
-#BOX_NAME = ENV["BOX_NAME"] || "quantal64"
-#BOX_URI = ENV["BOX_URI"] || "http://dl.dropbox.com/u/13510779/lxc-quantal-amd64-2013-07-12.box"
-BOX_NAME = ENV["BOX_NAME"] || "precise64"
-BOX_URI = ENV["BOX_URI"] || "http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-vagrant-amd64-disk1.box"
+#FIXME No route to host
+BOX_NAME = ENV["BOX_NAME"] || "quantal64"
+BOX_URI = ENV["BOX_URI"] || "http://dl.dropbox.com/u/13510779/lxc-quantal-amd64-2013-07-12.box"
+#BOX_NAME = ENV["BOX_NAME"] || "precise64"
+#BOX_URI = ENV["BOX_URI"] || "http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-vagrant-amd64-disk1.box"
 
 Vagrant.configure("2") do |config|
   config.vm.box = BOX_NAME

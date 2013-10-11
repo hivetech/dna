@@ -5,7 +5,6 @@
 # vim:ft=make
 #
 
-#TODO Vagrant installer
 #TODO Install accordingly to this variable
 PROVIDER?=ansible
 LOGS?=/tmp/dna.logs
@@ -41,8 +40,21 @@ up:
 	. /opt/ansible/hacking/env-setup 
 	ansible-playbook --verbose ./provision/ansible/site.yml --ask-sudo-pass -u ${USER} --extra-vars="hosts=${TARGET_HOSTS} data=data.yml user=${USER}" -i ./provision/ansible/hosts
 
+install-dev:
+	pip install -U ansible-shell
+	#TODO Install docker
+
+	test ! -d /tmp/vagrant || rm -r /tmp/vagrant
+	git clone https://github.com/mitchellh/vagrant.git /tmp/vagrant
+	cd /tmp/vagrant && bundle install && rake install
+	@echo "You also need virtualbox (sudo apt-get install virtualbox)"
+
 dependencies:
 	@echo "[make] Update cache and install packages..."
 	apt-get update 2>&1 >> ${LOGS}
+
+prototype:
+	#docker build -t hivetech/sandbox - < sandbox/Dockerfile
+	./prototype.sh
 
 .PHONY: dependencies install

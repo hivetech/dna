@@ -14,10 +14,10 @@
 #TODO Process termStartUp.sh
 # Note: the template system could be crazy cool to use
 - name: Copy shared shell configuration file
-  copy: src={{ dna_root }}/shell/commonrc.sh dest=/home/{{ user }}/.commonrc owner={{ user }} mode=600
-- copy: src={{ dna_root }}/shell/customrc.sh dest=/home/{{ user }}/.customrc owner={{ user }} mode=600
-- copy: src={{ dna_root }}/shell/common-alias.sh dest=/home/{{ user }}/.common-alias owner={{ user }} mode=600
-- copy: src={{ dna_root }}/shell/custom-alias.sh dest=/home/{{ user }}/.custom-alias owner={{ user }} mode=600
+  copy: src={{ dna_root }}/shell/commonrc.sh dest={{ home }}/.commonrc owner={{ user }} mode=600
+- copy: src={{ dna_root }}/shell/customrc.sh dest={{ home }}/.customrc owner={{ user }} mode=600
+- copy: src={{ dna_root }}/shell/common-alias.sh dest={{ home }}/.common-alias owner={{ user }} mode=600
+- copy: src={{ dna_root }}/shell/custom-alias.sh dest={{ home }}/.custom-alias owner={{ user }} mode=600
 
 # A full-featured & carefully designed adaptive prompt for Bash & Zsh
 - name: Install liquidprompt
@@ -25,36 +25,40 @@
        dest=/opt/liquidprompt
   when: "'${prompt}' == 'liquidprompt'"
 - name: Copy liquidprompt config
-  copy: src={{ dna_root }}/shell/liquidpromptrc-dist dest=/home/{{ user }}/.liquidpromptrc
+  copy: src={{ dna_root }}/shell/liquidpromptrc-dist dest={{ home }}/.liquidpromptrc
   when: "'${prompt}' == 'liquidprompt'"
 
 # Bash specific stuff
 - name: Configure bash
-  copy: src={{ dna_root }}/shell/bash/bashrc dest=/home/{{ user }}/.bashrc owner={{ user }} mode=600
+  copy: src={{ dna_root }}/shell/bash/bashrc dest={{ home }}/.bashrc owner={{ user }} mode=600
   when: "'${shell}' == 'bash'"
-- copy: src={{ dna_root }}/shell/bash/bash_profile dest=/home/{{ user }}/.bash_profile owner={{ user }} mode=600
+- copy: src={{ dna_root }}/shell/bash/bash_profile dest={{ home }}/.bash_profile owner={{ user }} mode=600
   when: "'${shell}' == 'bash'"
-- copy: src={{ dna_root }}/shell/bash/bash_logout dest=/home/{{ user }}/.bash_logout owner={{ user }} mode=600
+- copy: src={{ dna_root }}/shell/bash/bash_logout dest={{ home }}/.bash_logout owner={{ user }} mode=600
   when: "'${shell}' == 'bash'"
 
 # Zsh specific stuff
+# #FIXME To avoid the script: https://github.com/lmacken/ansible-hacker-playbook/blob/master/playbook.yml
 - name: Install oh-my-zsh framework
-  shell: export HOME=/home/{{ user }} && curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+  shell: export HOME={{ home }} && curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
   when: "'${prompt}' == 'ohmyzsh'"
   when: "'${shell}' == 'zsh'"
   ignore_errors: yes   # The script ends up with a non-fatal error, so don't stop ansible for that
 - name: Configure zsh
-  copy: src={{ dna_root }}/shell/zsh/zshrc dest=/home/{{ user }}/.zshrc owner={{ user }} mode=600
+  copy: src={{ dna_root }}/shell/zsh/zshrc dest={{ home }}/.zshrc owner={{ user }} mode=600
   when: "'${shell}' == 'zsh'"
 #FIXME This command runs for root
-- name: Activate zsh shell 
-  shell: chsh -s /bin/zsh
+#- name: Activate zsh shell 
+  #shell: chsh -s /bin/zsh
+  #when: "'${shell}' == 'zsh'"
+- name: Changing the default shell to zsh
+  action: user shell=/bin/zsh user={{ user }}
   when: "'${shell}' == 'zsh'"
 
 # Multiplexers
 - name: Configure screen
-  copy: src={{ dna_root }}/shell/multiplexer/screenrc dest=/home/{{ user }}/.screenrc owner={{ user }} mode=600
+  copy: src={{ dna_root }}/shell/multiplexer/screenrc dest={{ home }}/.screenrc owner={{ user }} mode=600
   when: "'${terminal_multiplexer}' == 'screen'"
 - name: Configure tmux
-  copy: src={{ dna_root }}/shell/multiplexer/square.tmux.conf dest=/home/{{ user }}/.tmux.conf owner={{ user }} mode=600
+  copy: src={{ dna_root }}/shell/multiplexer/square.tmux.conf dest={{ home }}/.tmux.conf owner={{ user }} mode=600
   when: "'${terminal_multiplexer}' == 'tmux'"
