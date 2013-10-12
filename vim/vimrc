@@ -101,16 +101,6 @@ set scrolloff=8             " Start scrolling when we're 8 lines away from margi
 set sidescrolloff=15
 set sidescroll=5
 
-" =============== Compilation stuff =================
-map <F5> :make<CR>
-map <F12> :!make run<CR>
-
-"Key mapping for compilation error navigation
-nnoremap <leader>o <Esc>:copen<CR>
-nnoremap <leader>p <Esc>:cprevious<CR>
-nnoremap <leader>n <Esc>:cnext<CR>
-nnoremap <leader>c <Esc>:cclose<CR>
-
 " 'A' plugin, toggle between .h and .c files
 nmap <leader>h <Esc>:A<CR>
 

@@ -10,21 +10,16 @@
 #FIXME bug in vagrantfile
 #- hosts: vagrant
 - hosts: '{{ hosts }}'
+  #FIXME accelerate: true
   gather_facts: True
 
   vars_files: 
     - '{{ data }}'
 
-  user: '{{ user }}'
   #FIXME False for ansible, true for others
-  sudo: False
+  sudo: true
 
   tasks:
-    #TODO Try to replace {{ user }} with {{ whoami.stdout }}
-    #- name: Determining username
-      #action: shell whoami
-      #register: whoami
-      #sudo: False
     #FIXME Should playbooks be standalone, or refactored here ?
     - name: Install common dependencies
       when: ansible_pkg_mgr == "apt"

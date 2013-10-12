@@ -1,0 +1,13 @@
+---
+# http://jpmens.net/2012/10/01/dramatically-speeding-up-ansible-runs/
+- hosts: '{{ hosts }}'
+  gather_facts: false
+  connection: ssh
+  #user: f2
+  sudo: True
+  tasks:
+  - action: apt pkg=python-pip state=latest update_cache=true
+  - action: pip name=pyzmq state=present
+  - action: pip name=pyasn1
+  - action: pip name=PyCrypto 
+  - action: pip name=python-keyczar

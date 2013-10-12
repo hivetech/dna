@@ -9,11 +9,13 @@
 PROVIDER?=ansible
 LOGS?=/tmp/dna.logs
 TARGET_HOSTS?=localhost
+USERNAME?=${USER}
 
 all: install
 
 install: dependencies ansible
 	@echo "Installation is done."
+	@echo "If docker is not installed on your system and you want to experiment the sandbox mode, head up to https://www.docker.io/gettingstarted/"
 
 salt:
 	@echo "Install salt master"
@@ -36,25 +38,27 @@ ansible:
 	@echo "!! Now: $ edit ./provision/ansible/data.yml"
 
 up:
-	#FIXME is -u $USER needed if - user: {{ user }} specified in shell.yml ?
 	. /opt/ansible/hacking/env-setup 
-	ansible-playbook --verbose ./provision/ansible/site.yml --ask-sudo-pass -u ${USER} --extra-vars="hosts=${TARGET_HOSTS} data=data.yml user=${USER}" -i ./provision/ansible/hosts
+	#DNA_ROOT=$(find / -name "dna")
+	DNA_ROOT=${locate -b -l 1 -r \"^dna$\"}
+	#TODO Use synthetize.sh
+	ansible-playbook --verbose ./provision/ansible/site.yml --ask-sudo-pass -u ${USERNAME} --extra-vars="hosts=${TARGET_HOSTS} data=data.yml dna_root=${DNA_ROOT}" -i ./provision/ansible/hosts
 
 install-dev:
 	pip install -U ansible-shell
-	#TODO Install docker
 
-	test ! -d /tmp/vagrant || rm -r /tmp/vagrant
-	git clone https://github.com/mitchellh/vagrant.git /tmp/vagrant
-	cd /tmp/vagrant && bundle install && rake install
-	@echo "You also need virtualbox (sudo apt-get install virtualbox)"
+	#test ! -d /tmp/vagrant || rm -r /tmp/vagrant
+	#git clone https://github.com/mitchellh/vagrant.git /tmp/vagrant
+	#cd /tmp/vagrant && bundle install && rake install
+	#@echo "You also need virtualbox (sudo apt-get install virtualbox)"
 
 dependencies:
 	@echo "[make] Update cache and install packages..."
 	apt-get update 2>&1 >> ${LOGS}
 
+	test -f optparse.bash || curl -o optparse.bash https://raw.github.com/nk412/optparse/master/optparse.bash
+
 prototype:
-	#docker build -t hivetech/sandbox - < sandbox/Dockerfile
-	./prototype.sh
+	./synthetize -a prototype --user prototype --image hivetech/prototype --verbose
 
 .PHONY: dependencies install

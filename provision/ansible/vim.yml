@@ -6,6 +6,7 @@
       - vim
       - exuberant-ctags
       - python-dev
+      - xclip
 
 - name: Install python dependencies
   #TODO Use proper virtualenv keyword
@@ -15,10 +16,18 @@
   pip: name=flake8
 
 - name: Prepare vim configuration
-  file: path={{ home }}/.vim/plugin state=directory recurse=yes owner={{ user }} mode=600
+  file: path={{ home }}/.vim/plugin/settings state=directory recurse=yes owner={{ ansible_user_id }} mode=600
     
 - name: Copy vimrc configuration file
-  copy: src={{ dna_root }}/vim/vimrc dest={{ home }}/.vimrc owner={{ user }} mode=600
-- copy: src={{ dna_root }}/vim/plugin/bundles.vim dest={{ home }}/.vim/plugin/bundles.vim owner={{ user }} mode=600
-- copy: src={{ dna_root }}/vim/plugin/reminder.txt dest={{ home }}/.vim/plugin/reminder.txt owner={{ user }} mode=600
-  sudo: False
+  copy: src={{ dna_root }}/vim/vimrc dest={{ home }}/.vimrc owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/vim/plugin/bundles.vim dest={{ home }}/.vim/plugin/bundles.vim owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/vim/plugin/helper.txt dest={{ home }}/.vim/plugin/helper.txt owner={{ ansible_user_id }} mode=600
+
+- name: Copy plugins configurations
+  copy: src={{ dna_root }}/vim/plugin/settings/fugitive.vim dest={{ home }}/.vim/plugin/settings/fugitive.vim owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/vim/plugin/settings/solarized.vim dest={{ home }}/.vim/plugin/settings/solarized.vim owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/vim/plugin/settings/syntastic.vim dest={{ home }}/.vim/plugin/settings/syntastic.vim owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/vim/plugin/settings/appearance.vim dest={{ home }}/.vim/plugin/settings/appearance.vim owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/vim/plugin/settings/ctrlp.vim dest={{ home }}/.vim/plugin/settings/ctrlp.vim owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/vim/plugin/settings/delimitmate.vim dest={{ home }}/.vim/plugin/settings/delimitmate.vim owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/vim/plugin/settings/helper.vim dest={{ home }}/.vim/plugin/settings/helper.vim owner={{ ansible_user_id }} mode=600

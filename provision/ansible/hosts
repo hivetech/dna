@@ -7,4 +7,4 @@ localhost ansible_connection=local
 localhost ansible_connection=local
 
 [prototype]
-prototype ansible_ssh_host=127.0.0.1 ansible_ssh_port=49500 ansible_ssh_user=root ansible_ssh_pass=prototype
+prototype ansible_ssh_host=127.0.0.1 ansible_ssh_port=49500 ansible_ssh_user=prototype ansible_ssh_pass=proto

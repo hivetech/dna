@@ -18,6 +18,5 @@
 - name: Download scm breeze
   git: repo=https://github.com/ndbroadbent/scm_breeze.git
        dest={{ home }}/.scm_breeze
-
 - name: Install scm breeze
   shell: /{{ home }}/.scm_breeze/install.sh

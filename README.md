@@ -1,14 +1,17 @@
-![Unide](https://raw.github.com/hivetech/hivetech.github.io/master/images/logo-unide.png)
+<p align="center">
+  <img src="https://raw.github.com/hivetech/hivetech.github.io/master/images/logo-unide.png" alt="Unide logo"/>
+</p>
+
+DNA
+====
+
+> Hacking environment genetics
 
 
-
-DNA - ReCode your dev environment
-===================================
-
-This project is a community-driven compilation of dotfiles and projects, aimed
+DNA is a community-driven compilation of dotfiles and projects, aimed
 at creating the most awesome and powerful development environment.
 
-The installation is performed through famous configuration managers like ansible
+Installation is performed through famous configuration managers like ansible
 and [salt](http://saltstack.com/community.html) (currently focus on [ansible](www.ansibleworks.com)) as they obviously play nicely with a
 dotfiles repository and allow you to configure in seconds thousands of machines,
 as well as simply your beloved local one.  
@@ -44,6 +47,15 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * [A tool that automatically formats Python code to conform to the PEP 8 style guide](https://github.com/hhatto/autopep8)
     * [Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
 
+* Vim
+
+    * [Vundle, the plug-in manager for Vim](https://github.com/gmarik/vundle)
+    * [a Git wrapper so awesome, it should be illegal ](https://github.com/tpope/vim-fugitive)
+    * [Syntax checking hacks for vim](https://github.com/scrooloose/syntastic)
+    * [Precision colorscheme for the vim text editor](https://github.com/altercation/vim-colors-solarized)
+    * [Vim plugin, provides insert mode auto-completion for quotes, parens, brackets, etc](https://github.com/Raimondi/delimitMate)
+    * [Fuzzy file, buffer, mru, tag, etc finder](https://github.com/kien/ctrlp.vim)
+
 * Plugins
 
     * [z is the new j, yo](https://github.com/rupa/z)
@@ -64,10 +76,17 @@ $ make up  # Default will setup your machine
 Sandbox mode (still ansible style)
 ------------
 
-You can use this project with vagrant. Typical use case would be to enjoy a
-clean dev env while working in vagrant powered machines, or test your awesome fork.
+You can use this project in a virtualize environment. Typical use case would be
+to enjoy a clean dev env while working in docker powered machines, or test your
+awesome fork.
 
-A Vagrantfile ready-to-use is provided and you can check out the [documentation](http://docs.vagrantup.com/v2/provisioning/ansible.html)
+```console
+$ ./prototype.sh --help
+$ ./prototype.sh --action test --port 49500 --verbose
+$ ssh root@127.0.0.1 -p 49500  # Password is proto (set in dockerfile)
+```
+
+(**Experimental**) A Vagrantfile is provided and you can check out the [documentation](http://docs.vagrantup.com/v2/provisioning/ansible.html)
 for more informations. Make sure `dna/provision/ansible/vagrant-data.yml` suits
 you and a vagrant section is present in `dna/provision/ansible/hosts`.
 
@@ -131,3 +150,5 @@ Super Credits
 * [hhatto](https://github.com/hhatto)
 * [ndbroadbent](https://github.com/ndbroadbent)
 * [creationix](https://github.com/creationix)
+* [gmarik](https://github.com/gmarik)
+* [tpope](https://github.com/tpope/vim-fugitive)

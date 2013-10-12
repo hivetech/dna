@@ -1,5 +1,8 @@
-#dna_root: /opt/dna
-dna_root: /home/xavier/dev/projects/hivetech/dna
-shell: zsh
-prompt: ohmyzsh
+openlibs: /opt
+editor: vim
 terminal_multiplexer: screen
+shell:
+  default: zsh
+  prompt: ohmyzsh
+dev:
+  node_version: 10.0.7

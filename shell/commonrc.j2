@@ -3,9 +3,11 @@
 #    - Your IT projects are in $HOME/dev/projects
 #    - Other open-source projects are in $HOME/openlibs
 #    - You use node version 0.10.7
-export PROJECTS=$HOME/dev/projects
-export OPENLIBS=/opt
-export NODE_VERSION="0.10.7"
+#export PROJECTS=$HOME/dev/projects
+#export OPENLIBS=/opt
+export OPENLIBS={{ openlibs }}
+export NODE_VERSION={{ dev.node_version }}
+export EDITOR={{ editor }}
 
 TIME=`date +"%T"`
 
@@ -20,14 +22,13 @@ test -d $HOME/local/bin && PATH="$HOME/local/bin:$PATH"
 test -d $HOME/local/lib && PATH="$HOME/local/lib:$PATH"
 
 # Go configuration
+#TODO Generic configuration
 export GOROOT=/opt/go
 export GOOS=linux
 export GOARCH=amd64
 #export GOBIN=$GOROOT/bin
 export GOPATH=$HOME/dev/goworkspace
 export PATH=$PATH:/opt/go/bin:$GOPATH/bin
-
-export EDITOR=vim
 
 # ------------------------------------------------------------- Functions
 # Useful personal function, a little combinaison of two other one

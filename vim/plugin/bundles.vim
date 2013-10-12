@@ -1,9 +1,10 @@
 " Hivetech Vim distribution plugins, for Vundle (https://github.com/gmarik/vundle)
 function! LoadBundles()
-    Bundle 'tpope/vim-fugitive'
     Bundle 'Syntastic'
     Bundle 'altercation/vim-colors-solarized' 
     Bundle 'https://github.com/tpope/vim-fugitive' 
+    Bundle 'https://github.com/kien/ctrlp.vim'
+    Bundle 'Raimondi/delimitMate'
     if executable('ack')
         Bundle 'mileszs/ack.vim'
     endif

@@ -18,19 +18,15 @@ ENV LC_ALL en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 RUN dpkg-reconfigure locales
 
-#RUN apt-get install -y openssh-server python build-essential make gcc python-dev wget 
 # Common needed stuff for an efficient ansible-ready machine
-RUN apt-get install -y openssh-server python python-apt python-pip build-essential gcc python-dev
+RUN apt-get install -y openssh-server python python-apt python-pip build-essential gcc python-dev wget
 
-#RUN wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
-#RUN python ez_setup.py
-
-#RUN wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py 
-#RUN python get-pip.py
-
-#RUN apt-get install -y python-apt
 RUN mkdir -p /var/run/sshd
-RUN echo "root:prototype" | chpasswd
+RUN echo "root:proto" | chpasswd
+
+# Create a normal default user (vagrant or docker images have just root)
+RUN useradd -m -d /home/prototype -g 100 -s /bin/bash prototype
+RUN echo "prototype:proto" | chpasswd
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
 

@@ -8,12 +8,10 @@
       - make
       - ipython
     
-# z is the new j, yo
+# A BASH wrapper for getopts, for simple command line arguments
 - name: Install optparse
-  git: repo=https://github.com/nk412/optparse.git
-       dest=/opt/optparse
+  command: wget -O /usr/local/lib/optparse.bash https://raw.github.com/nk412/optparse/master/optparse.bash
 
 # A tool that automatically formats Python code to conform to the PEP 8 style guide
 - name: Install automatic pep8 formater
-  #TODO Use proper virtualenv
   pip: name=autopep8
