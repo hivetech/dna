@@ -10,7 +10,7 @@
     
 # A BASH wrapper for getopts, for simple command line arguments
 - name: Install optparse
-  command: wget -O /usr/local/lib/optparse.bash https://raw.github.com/nk412/optparse/master/optparse.bash
+  shell: wget -O /usr/local/lib/optparse.bash https://raw.github.com/nk412/optparse/master/optparse.bash
 
 # A tool that automatically formats Python code to conform to the PEP 8 style guide
 - name: Install automatic pep8 formater

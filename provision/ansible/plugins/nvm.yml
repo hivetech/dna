@@ -1,6 +1,9 @@
 ---
-#NOTE should it be installed in /opt/nvm as well ?
 # Node Version Manager - Simple bash script to manage multiple active node.js versions
 - name: Install Node version manager
   git: repo=https://github.com/creationix/nvm
        dest={{ home }}/.nvm
+
+- name: install node using nvm
+  shell: bash -c ". {{ home }}/.nvm/nvm.sh && nvm install {{ dev.node_version }}"
+  when: false  # The output is terrible (at dev time)

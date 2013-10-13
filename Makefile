@@ -59,6 +59,6 @@ dependencies:
 	test -f optparse.bash || curl -o optparse.bash https://raw.github.com/nk412/optparse/master/optparse.bash
 
 prototype:
-	./synthetize -a prototype --user prototype --image hivetech/prototype --verbose
+	./synthetize -a prototype --user prototype --image hivetech/prototype --check --verbose
 
 .PHONY: dependencies install

@@ -2,31 +2,38 @@
 # A generic machine ready to be configured by ansible
 # VERSION 0.0.1
 
+# Administration
 FROM ubuntu
 MAINTAINER Xavier Bruhiere, xavier.bruhiere@gmail.com
 
-# make sure the package repository is up to date
+# Make sure the package repository is up to date
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get upgrade -y
 
-RUN apt-get install -y language-pack-en
-ENV LANGUAGE en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LC_ALL en_US.UTF-8
+# Local settings
+# Change eventually fr_FR to us_US
+RUN apt-get install -y language-pack-fr
+ENV LANGUAGE fr_FR.UTF-8
+ENV LANG fr_FR.UTF-8
+ENV LC_ALL fr_FR.UTF-8
 
-RUN locale-gen en_US.UTF-8
+RUN locale-gen fr_FR.UTF-8
 RUN dpkg-reconfigure locales
 
 # Common needed stuff for an efficient ansible-ready machine
-RUN apt-get install -y openssh-server python python-apt python-pip build-essential gcc python-dev wget
+RUN apt-get install -y openssh-server python python-apt python-pip build-essential gcc python-dev wget sudo git-core
 
 RUN mkdir -p /var/run/sshd
 RUN echo "root:proto" | chpasswd
 
-# Create a normal default user (vagrant or docker images have just root)
+# Create a normal default user (vagrant / docker images have just vagrant / root)
+# #TODO I'm pretty sure there is a smarter way to do that
 RUN useradd -m -d /home/prototype -g 100 -s /bin/bash prototype
 RUN echo "prototype:proto" | chpasswd
+RUN adduser prototype sudo
+RUN groupadd prototype
+RUN adduser prototype prototype
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
 

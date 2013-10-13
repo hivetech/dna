@@ -22,13 +22,14 @@ test -d $HOME/local/bin && PATH="$HOME/local/bin:$PATH"
 test -d $HOME/local/lib && PATH="$HOME/local/lib:$PATH"
 
 # Go configuration
-#TODO Generic configuration
+#FIXME use of gvm ======================
 export GOROOT=/opt/go
 export GOOS=linux
 export GOARCH=amd64
 #export GOBIN=$GOROOT/bin
 export GOPATH=$HOME/dev/goworkspace
 export PATH=$PATH:/opt/go/bin:$GOPATH/bin
+# ======================================
 
 # ------------------------------------------------------------- Functions
 # Useful personal function, a little combinaison of two other one

@@ -9,13 +9,11 @@
 #TODO flag to setup the target for fireball use
 
 # const (
-    #INVENTORY=provision/ansible/hosts
     INVENTORY=$(locate -b '\hosts' | grep dna)
     DNA_ROOT=$(locate -l 1 -b -r "^dna$")
     DATA=data.yml
     PARALLEL_LEVEL=10
     #FIXME home is a temporary hard coded value
-    #TARGET_HOME=/root
     TARGET_HOME=/home/prototype
 # )
 
@@ -23,11 +21,13 @@
 function check_dependencies() {
     #TODO Check for ansible installation (and right version)
     #TODO Check for docker installation (and right version)
+    #TODO Check for ansible-shell
     echo 0
 }
 
 function play_playbook() {
-    ansible-playbook ${playbook} --ask-sudo-pass \
+    #ansible-playbook ${playbook} --check --diff --ask-sudo-pass \
+    ansible-playbook ${playbook} --ask-sudo-pass ${check} \
         -u ${user} -i ${INVENTORY} -f $PARALLEL_LEVEL --verbose \
         --extra-vars "data=${DATA} hosts=${target_hosts} home=${TARGET_HOME} dna_root=${DNA_ROOT}"
 }
@@ -102,6 +102,9 @@ function main() {
         log "Building $image"
         build_prototype_image
 
+    elif [ "$action" == "connect" ]; then
+	    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${user}@127.0.0.1 -p ${port}
+
     else
         if [ "$action" == "prototype" ]; then
             log "Prototype mode, setup docker..."
@@ -131,13 +134,33 @@ function main() {
     success "Done"
 }
 
+function pre_processing() {
+    if [[ $(check_dependencies) -eq 1 ]]; then
+        die "unable to satisfie $0 requirements"
+    else
+        success "$0 requirements satisfied"
+    fi
+
+    if [ "$action" == "prototype" ]; then
+        target_hosts="prototype"
+        user="prototype"
+    fi
+
+    if [[ "$check" == "true" ]]; then
+        check="--check --diff"
+    else
+        check=""
+    fi
+}
+
 # cli management
 source ./optparse.bash
 
 optparse.define short=a long=action desc="Command to run" variable=action default="test"
-optparse.define short=u long=user desc="Ansible user" variable=user default="root"
+optparse.define short=u long=user desc="Ansible user" variable=user default="prototype"
 optparse.define short=i long=image desc="Image to use with docker" variable=image default="hivetech/prototype"
 optparse.define short=v long=verbose desc="Flag to set verbose mode on" variable=verbose value=true default=false
+optparse.define short=c long=check desc="Check mode, will not apply change" variable=check value=true default=false
 optparse.define short=p long=port desc="Container ssh port to expose" variable=port default="49500"
 optparse.define short=b long=playbook desc="Playbook to test" variable=playbook default="provision/ansible/site.yml"
 optparse.define short=t long=target desc="Target hosts group to configure, as defined in the inventory" variable=target_hosts default="localhost"
@@ -146,16 +169,7 @@ optparse.define short=d long=dockerfile desc="Dockerfile used to build the image
 source $( optparse.build )
 # --------------
 
-if [[ $(check_dependencies) -eq 1 ]]; then
-    die "unable to satisfie $0 requirements"
-else
-    success "$0 requirements satisfied"
-fi
-
-if [ "$action" == "prototype" ]; then
-    target_hosts="prototype"
-    user="prototype"
-fi
+pre_processing
 
 main
 

@@ -9,7 +9,6 @@
       - xclip
 
 - name: Install python dependencies
-  #TODO Use proper virtualenv keyword
   pip: name=twisted
 - name: Install python dependencies
   pip: name=twisted

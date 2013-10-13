@@ -21,7 +21,7 @@
 # A full-featured & carefully designed adaptive prompt for Bash & Zsh
 - name: Install liquidprompt
   git: repo=https://github.com/nojhan/liquidprompt.git
-       dest=/opt/liquidprompt
+       dest={{ openlibs }}/liquidprompt
   when: "'${shell.prompt}' == 'liquidprompt'"
 - name: Copy liquidprompt config
   copy: src={{ dna_root }}/shell/liquidpromptrc-dist dest={{ home }}/.liquidpromptrc
@@ -46,11 +46,10 @@
 - name: Configure zsh
   copy: src={{ dna_root }}/shell/zsh/zshrc dest={{ home }}/.zshrc owner={{ ansible_user_id }} mode=600
   when: "'${shell.default}' == 'zsh'"
-#FIXME This command runs for root
+
 - name: Changing the default shell to zsh
-  #shell: chsh -s /bin/zsh
-  action: user shell=/bin/zsh user={{ ansible_user_id }}
-  when: "'${shell.default}' == 'zsh'"
+  action: user shell=/bin/{{ shell.default }} user={{ ansible_user_id }}
+  #when: "'${shell.default}' == 'zsh'"
 
 # Multiplexers
 - name: Configure screen

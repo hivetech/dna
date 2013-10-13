@@ -19,12 +19,12 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.inventory_path = "provision/ansible/hosts"
     ansible.playbook = "provision/ansible/site.yml"
-    #ansible.extra_vars = { 
-        #data: "vagrant-data.yml",
-        #user: "vagrant",
-        #hosts: "vagrant",
-    #}
-    ansible.extra_vars = { data: "vagrant-data.yml" }
+    ansible.extra_vars = { 
+        data: "data.yml",
+        hosts: "vagrant",
+        home: "/home/vagrant",
+        dna_root: ENV['PWD'],
+    }
     ansible.verbose = true
   end
 end

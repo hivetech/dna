@@ -2,4 +2,4 @@
 # z is the new j, yo
 - name: Install z
   git: repo=https://github.com/rupa/z.git
-       dest=/opt/z
+       dest='{{ openlibs }}'/z
