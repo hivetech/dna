@@ -77,7 +77,7 @@ namespace :dna do
     desc "Check your dna on a bench docker-powered machine"
     task :prototype do
         msg "Test dna on docker machines"
-        sh "./synthetize -a prototype --user prototype --image hivetech/prototype --check --verbose"
+        sh "./synthetize -a prototype --user prototype --image hivetech/prototype --verbose --check"
     end
 end
 

@@ -30,7 +30,9 @@ function check_dependencies() {
     echo 0
 }
 
-function is_installed() { command -v $1 > /dev/null }
+function is_installed() { 
+    command -v $1 > /dev/null 
+}
 
 function play_playbook() {
     #ansible-playbook ${playbook} --check --diff --ask-sudo-pass \
