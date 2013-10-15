@@ -26,7 +26,6 @@
   sudo: true
 
   tasks:
-    #TODO Should playbooks be standalone, or refactored here ?
     # Factored instructions
     - name: Install common dependencies
       when: ansible_pkg_mgr == "apt"
@@ -34,12 +33,14 @@
       with_items:
         - wget
         - git-core
+        #FIXME t plugin instruction is skipped
+        - mercurial
     
     # Core components
-    - include: shell.yml
-    - include: git.yml
+    #- include: shell.yml
+    #- include: git.yml
     - include: dev.yml
-    - include: vim.yml
+    #- include: vim.yml
 
     # Plugins
     - include: '{{ item }}'
