@@ -1,10 +1,30 @@
 " Hivetech Vim distribution plugins, for Vundle (https://github.com/gmarik/vundle)
 function! LoadBundles()
+
+    " Core plugins -------------------------------------
     Bundle 'Syntastic'
     Bundle 'altercation/vim-colors-solarized' 
+    Bundle 'Raimondi/delimitMate'
     Bundle 'https://github.com/tpope/vim-fugitive' 
     Bundle 'https://github.com/kien/ctrlp.vim'
-    Bundle 'Raimondi/delimitMate'
+    Bundle 'https://github.com/sjl/gundo.vim'
+    Bundle 'https://github.com/vim-scripts/Conque-Shell'
+    Bundle 'https://github.com/fholgado/minibufexpl.vim'
+    Bundle 'https://github.com/scrooloose/nerdcommenter'
+    Bundle 'https://github.com/scrooloose/nerdtree'
+    Bundle 'https://github.com/jistr/vim-nerdtree-tabs'
+    Bundle 'https://github.com/honza/vim-snippets'
+    Bundle 'https://github.com/godlygeek/tabular'
+    Bundle 'https://github.com/majutsushi/tagbar'
+    Bundle 'https://github.com/vim-scripts/TaskList.vim'
+    Bundle 'https://github.com/aperezdc/vim-template'
+    Bundle 'https://github.com/tomtom/tlib_vim'
+    Bundle 'https://github.com/vim-scripts/YankRing.vim'
+    " --------------------------------------------------
+    
+    " Extra plugins ------------------------------------
+    " --------------------------------------------------
+
     if executable('ack')
         Bundle 'mileszs/ack.vim'
     endif

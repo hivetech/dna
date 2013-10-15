@@ -4,6 +4,7 @@
   action: apt pkg=$item state=latest update_cache=true
   with_items:
       - vim
+      - curl
       - exuberant-ctags
       - python-dev
       - xclip
@@ -23,10 +24,6 @@
 - copy: src={{ dna_root }}/vim/plugin/helper.txt dest={{ home }}/.vim/plugin/helper.txt owner={{ ansible_user_id }} mode=600
 
 - name: Copy plugins configurations
-  copy: src={{ dna_root }}/vim/plugin/settings/fugitive.vim dest={{ home }}/.vim/plugin/settings/fugitive.vim owner={{ ansible_user_id }} mode=600
-- copy: src={{ dna_root }}/vim/plugin/settings/solarized.vim dest={{ home }}/.vim/plugin/settings/solarized.vim owner={{ ansible_user_id }} mode=600
-- copy: src={{ dna_root }}/vim/plugin/settings/syntastic.vim dest={{ home }}/.vim/plugin/settings/syntastic.vim owner={{ ansible_user_id }} mode=600
-- copy: src={{ dna_root }}/vim/plugin/settings/appearance.vim dest={{ home }}/.vim/plugin/settings/appearance.vim owner={{ ansible_user_id }} mode=600
-- copy: src={{ dna_root }}/vim/plugin/settings/ctrlp.vim dest={{ home }}/.vim/plugin/settings/ctrlp.vim owner={{ ansible_user_id }} mode=600
-- copy: src={{ dna_root }}/vim/plugin/settings/delimitmate.vim dest={{ home }}/.vim/plugin/settings/delimitmate.vim owner={{ ansible_user_id }} mode=600
-- copy: src={{ dna_root }}/vim/plugin/settings/helper.vim dest={{ home }}/.vim/plugin/settings/helper.vim owner={{ ansible_user_id }} mode=600
+  copy: src=$item dest={{ home }}/.vim/plugin/settings owner={{ ansible_user_id }} mode=600
+  with_fileglob: 
+      - ${dna_root}/vim/plugin/settings/*.vim

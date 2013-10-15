@@ -47,14 +47,7 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * [A tool that automatically formats Python code to conform to the PEP 8 style guide](https://github.com/hhatto/autopep8)
     * [Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
 
-* Vim
-
-    * [Vundle, the plug-in manager for Vim](https://github.com/gmarik/vundle)
-    * [a Git wrapper so awesome, it should be illegal ](https://github.com/tpope/vim-fugitive)
-    * [Syntax checking hacks for vim](https://github.com/scrooloose/syntastic)
-    * [Precision colorscheme for the vim text editor](https://github.com/altercation/vim-colors-solarized)
-    * [Vim plugin, provides insert mode auto-completion for quotes, parens, brackets, etc](https://github.com/Raimondi/delimitMate)
-    * [Fuzzy file, buffer, mru, tag, etc finder](https://github.com/kien/ctrlp.vim)
+* [Vim](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#plugins)
 
 * Plugins
 
@@ -98,19 +91,21 @@ Then just run `vagrant up && vagrant ssh`.
 Versioning Semantics
 --------------------
 
-[From Carl Boettiger](http://carlboettiger.info/)
+For transparency and insight into our release cycle, and for striving to
+maintain backward compatibility, Ghost will be maintained according to the
+[Semantic Versioning](http://semver.org/) guidelines as much as possible.
 
-Releases will be numbered with the following semantic versioning format:
+Releases will be numbered with the following format:
 
-major.minor.patch
+`<major>.<minor>.<patch>-<build>`
 
-And constructed with the following guidelines:
+Constructed with the following guidelines:
 
-* Breaking backward compatibility bumps the major (and resets the minor 
-  and patch)
-* New additions without breaking backward compatibility bumps the minor 
-  (and resets the patch)
-* Bug fixes and misc changes bumps the patch
+* A new *major* release indicates a large change where backwards compatibility is broken.
+* A new *minor* release indicates a normal change that maintains backwards compatibility.
+* A new *patch* release indicates a bugfix or small change which does not affect compatibility.
+* A new *build* release indicates this is a pre-release of the version.
+
 
 Commit messages convention
 --------------------------
@@ -150,5 +145,5 @@ Super Credits
 * [hhatto](https://github.com/hhatto)
 * [ndbroadbent](https://github.com/ndbroadbent)
 * [creationix](https://github.com/creationix)
-* [gmarik](https://github.com/gmarik)
-* [tpope](https://github.com/tpope/vim-fugitive)
+
+* [Vim credits](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#super-credits)

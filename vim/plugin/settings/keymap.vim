@@ -140,3 +140,7 @@ nnoremap <silent> <leader>bf ^i{ <esc>$a }
 
 " Remove windows end of line symbol
 nmap <leader>wr :%s///g
+
+"open the taglist (method browser) using F3
+nnoremap <silent> <F3> :TagbarToggle<CR>
+"set tags=~/myCtags

@@ -34,13 +34,13 @@
         - wget
         - git-core
     
-    - include: shell.yml
-    - include: git.yml
-    - include: dev.yml
+    #- include: shell.yml
+    #- include: git.yml
+    #- include: dev.yml
     - include: vim.yml
-    - include: '{{ item }}'
-      when: "'{{ item }}'.split('/')[-1][:-4] in {{ plugins }}"
-      with_fileglob: plugins/*
+    #- include: '{{ item }}'
+      #when: "'{{ item }}'.split('/')[-1][:-4] in {{ plugins }}"
+      #with_fileglob: plugins/*
 
     - name: giving back permissions to the user
       shell: chown -R {{ ansible_user_id }}:{{ ansible_user_id }} {{ home }}
