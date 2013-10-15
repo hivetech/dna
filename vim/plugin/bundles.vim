@@ -53,4 +53,6 @@ endfunction
         echo ""
         :BundleInstall
     endif
+
+    filetype on   " set it back
 " Setting up Vundle - the vim plugin bundler end

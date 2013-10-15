@@ -6,6 +6,11 @@
 # Distributed under terms of the MIT license.
 #
 
+
+trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
+set -e
+
+### end common-components/exit-trap
 #TODO flag to setup the target for fireball use
 
 # const (
@@ -24,6 +29,8 @@ function check_dependencies() {
     #TODO Check for ansible-shell
     echo 0
 }
+
+function is_installed() { command -v $1 > /dev/null }
 
 function play_playbook() {
     #ansible-playbook ${playbook} --check --diff --ask-sudo-pass \
@@ -87,6 +94,24 @@ function die()
     exit 1
 }
 
+function pre_processing() {
+    if [[ $(check_dependencies) -eq 1 ]]; then
+        die "unable to satisfie $0 requirements"
+    else
+        success "$0 requirements satisfied"
+    fi
+
+    if [ "$action" == "prototype" ]; then
+        target_hosts="prototype"
+        user="prototype"
+    fi
+
+    if [[ "$check" == "true" ]]; then
+        check="--check --diff"
+    else
+        check=""
+    fi
+}
 
 function main() {
     if [ "$action" == "interactive" ]; then
@@ -102,7 +127,7 @@ function main() {
         log "Building $image"
         build_prototype_image
 
-    elif [ "$action" == "connect" ]; then
+    elif [ "$action" == "analysis" ]; then
 	    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${user}@127.0.0.1 -p ${port}
 
     else
@@ -111,9 +136,14 @@ function main() {
             if [[ $(is_built $image) -eq 0 ]]; then
                 log "Found $image docker image, moving on"
             else
-                log "No $image found locally, building it..."
-                #TODO Try to pull it from docker.index.io first
-                build_prototype_image
+                log "no $image found locally, searching online..."
+                output=$(docker pull $image)
+                if [[ $? -eq 1 ]]; then
+                    log "unable to fetch $image, building it"
+                    build_prototype_image
+                else
+                    log "$image successfully pulled from repository"
+                fi
             fi
 
             if [[ $(is_running $image) -eq 0 ]]; then
@@ -132,25 +162,6 @@ function main() {
         play_playbook
     fi
     success "Done"
-}
-
-function pre_processing() {
-    if [[ $(check_dependencies) -eq 1 ]]; then
-        die "unable to satisfie $0 requirements"
-    else
-        success "$0 requirements satisfied"
-    fi
-
-    if [ "$action" == "prototype" ]; then
-        target_hosts="prototype"
-        user="prototype"
-    fi
-
-    if [[ "$check" == "true" ]]; then
-        check="--check --diff"
-    else
-        check=""
-    fi
 }
 
 # cli management

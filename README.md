@@ -12,7 +12,7 @@ DNA is a community-driven compilation of dotfiles and projects, aimed
 at creating the most awesome and powerful development environment.
 
 Installation is performed through famous configuration managers like ansible
-and [salt](http://saltstack.com/community.html) (currently focus on [ansible](www.ansibleworks.com)) as they obviously play nicely with a
+and [salt](http://saltstack.com/community.html) (currently focused on [ansible](www.ansibleworks.com)) as they obviously play nicely with a
 dotfiles repository and allow you to configure in seconds thousands of machines,
 as well as simply your beloved local one.  
 
@@ -29,61 +29,62 @@ previous repo (https://github.com/hackliff/Dotfiles)
 
 * Shell
 
-    * [A community-driven framework for managing your zsh configuration](https://github.com/robbyrussell/oh-my-zsh)
-    * [A full-featured & carefully designed adaptive prompt for Bash & Zsh](https://github.com/nojhan/liquidprompt)
-    * [Generate useful .gitignore files for your project](https://github.com/joeblau/gitignore.io)
+    * Oh-my-zsh - [A community-driven framework for managing your zsh configuration](https://github.com/robbyrussell/oh-my-zsh)
+    * Liquidprompt - [A full-featured & carefully designed adaptive prompt for Bash & Zsh](https://github.com/nojhan/liquidprompt)
+    * Gitignore.io - [Generate useful .gitignore files for your project](https://github.com/joeblau/gitignore.io)
     * An easy way to extend the configuration with hooks shell/customrc.sh and shell/custom-alias.sh
     * carefully designed \*rc files, screen and tmux configuration
 
 * Git
 
-    * [Git extensions to provide high-level repository operations for Vincent Driessen's branching model](https://github.com/nvie/gitflow)
-    * [GIT utilities -- repo summary, repl, changelog population, author commit percentages and more](https://github.com/visionmedia/git-extras)
-    * [Adds numbered shortcuts to the output git status, and much more](https://github.com/ndbroadbent/scm_breeze)
+    * Git flow - [Git extensions to provide high-level repository operations for Vincent Driessen's branching model](https://github.com/nvie/gitflow)
+    * Git-extras - [GIT utilities -- repo summary, repl, changelog population, author commit percentages and more](https://github.com/visionmedia/git-extras)
+    * Scm breeze - [Adds numbered shortcuts to the output git status, and much more](https://github.com/ndbroadbent/scm_breeze)
 
 * Dev
 
-    * [A BASH wrapper for getopts, for simple command line arguments](https://github.com/nk412/optparse)
-    * [A tool that automatically formats Python code to conform to the PEP 8 style guide](https://github.com/hhatto/autopep8)
-    * [Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
+    * Optparse - [A BASH wrapper for getopts, for simple command line arguments](https://github.com/nk412/optparse)
+    * Autopep8 - [A tool that automatically formats Python code to conform to the PEP 8 style guide](https://github.com/hhatto/autopep8)
 
 * [Vim](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#plugins)
 
 * Plugins
 
-    * [z is the new j, yo](https://github.com/rupa/z)
-    * [A command-line todo list manager for people that want to finish tasks, not organize them](http://stevelosh.com/projects/t/)
-    * [Quickly go back to a parent directory in linux](https://github.com/vigneshwaranr/bd)
+    * z - [z is the new j, yo](https://github.com/rupa/z)
+    * t - [A command-line todo list manager for people that want to finish tasks, not organize them](http://stevelosh.com/projects/t/)
+    * bd - [Quickly go back to a parent directory in linux](https://github.com/vigneshwaranr/bd)
+    * nvm - [Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
 
 Usage (ansible style)
 -----
 
-```bash
+```console
 $ git clone https://github.com/hivetech/dna.git /opt/dna
-$ cd /opt/dna && sudo make install
+$ cd /opt/dna && sudo rake install
 $ $EDITOR /opt/dna/provision/ansible/data.yml   # Configuration
 $ $EDITOR /opt/dna/provision/ansible/hosts      # Where to deploy
-$ make up  # Default will setup your machine
+$ rake dna:synthetize                           # Default will setup your local machine
 ```
 
 Sandbox mode (still ansible style)
 ------------
 
-You can use this project in a virtualize environment. Typical use case would be
+You can use test project in a virtualize environment. Typical use case would be
 to enjoy a clean dev env while working in docker powered machines, or test your
 awesome fork.
 
 ```console
-$ ./prototype.sh --help
-$ ./prototype.sh --action test --port 49500 --verbose
-$ ssh root@127.0.0.1 -p 49500  # Password is proto (set in dockerfile)
+$ ./synthetize --help
+$ ./synthetize --action prototype --check --verbose   # Changes won't be applied, just tested
+$ ./synthetize --action target --port 49500 --image hivetech/prototype --user you
+$ ./synthetize connect  # Password is proto (set in dockerfile)
 ```
 
 (**Experimental**) A Vagrantfile is provided and you can check out the [documentation](http://docs.vagrantup.com/v2/provisioning/ansible.html)
-for more informations. Make sure `dna/provision/ansible/vagrant-data.yml` suits
+for more informations. Make sure `dna/provision/ansible/data.yml` suits
 you and a vagrant section is present in `dna/provision/ansible/hosts`.
 
-You also have to modified `hosts` variable in site.yml because of a weird vagrantfile bug.
+You also have to modified `hosts` variable in site.yml to `vagrant` because of a weird vagrantfile bug.
 
 Then just run `vagrant up && vagrant ssh`.
 

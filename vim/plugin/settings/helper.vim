@@ -5,7 +5,7 @@ let helperDisplay = 0
 function! Helper()
     if g:helperDisplay == 0
         silent! topleft vertical 40split +buffer Helper
-        let g:reminderDisplay = 1
+        let g:helperDisplay = 1
         set buftype=nofile
         0read $HOME/.vim/plugin/helper.txt
         set nonumber

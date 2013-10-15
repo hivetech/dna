@@ -1,4 +1,11 @@
 ---
+#FIXME This step is skipped 
+- name: Install package dependencies
+  when: false
+  action: apt pkg=$item state=latest update_cache=true
+  with_items:
+    - mercurial
+    
 - name: Install package dependencies
   when: ansible_os_family == "Debian"
   action: apt pkg=$item state=latest update_cache=true

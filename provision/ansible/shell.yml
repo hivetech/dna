@@ -49,7 +49,6 @@
 
 - name: Changing the default shell to zsh
   action: user shell=/bin/{{ shell.default }} user={{ ansible_user_id }}
-  #when: "'${shell.default}' == 'zsh'"
 
 # Multiplexers
 - name: Configure screen

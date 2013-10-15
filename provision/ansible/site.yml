@@ -27,6 +27,7 @@
 
   tasks:
     #TODO Should playbooks be standalone, or refactored here ?
+    # Factored instructions
     - name: Install common dependencies
       when: ansible_pkg_mgr == "apt"
       action: apt pkg=$item state=latest update_cache=true
@@ -34,14 +35,18 @@
         - wget
         - git-core
     
-    #- include: shell.yml
-    #- include: git.yml
-    #- include: dev.yml
+    # Core components
+    - include: shell.yml
+    - include: git.yml
+    - include: dev.yml
     - include: vim.yml
-    #- include: '{{ item }}'
-      #when: "'{{ item }}'.split('/')[-1][:-4] in {{ plugins }}"
-      #with_fileglob: plugins/*
 
+    # Plugins
+    - include: '{{ item }}'
+      when: "'{{ item }}'.split('/')[-1][:-4] in {{ plugins }}"
+      with_fileglob: plugins/*
+
+    # Finish him
     - name: giving back permissions to the user
       shell: chown -R {{ ansible_user_id }}:{{ ansible_user_id }} {{ home }}
     - shell: chmod -R ug+rxw,o+rx {{ home }}
