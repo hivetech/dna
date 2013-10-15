@@ -1,35 +1,47 @@
 ---
 # Main entry point for dotfiles installation
-# cli requirement: --extra-vars="hosts=x.x.x.x data=/path/to/config.yml"
+# cli requirement: 
+# ansible-playbook site.yml --ask-sudo-pass -u user \
+#   --extra-vars="hosts=x.x.x.x data=/path/to/config.yml home=/home/you dna_root=some/where"
 # data.yml must define:
-#   - dna_root - path where this repo was cloned
-#   - user     - user namespace to apply this configuration
-#   - prompt   - oh-my-zsh or liquidprompt
+#   - openlibs             - where projects will be stored
 #   - terminal_multiplexer - screen or tmux supported
+#   - shell.default        - bash or zsh
+#   - shell.prompt         - oh-my-zsh or liquidprompt
+#   - dev.node_version     - node version to install with nvm
+#   - plugins              - list of plugins to install
 
-#FIXME bug in vagrantfile
-- hosts: vagrant
-#- hosts: '{{ hosts }}'
-  gather_facts: True
+# I want ansible_user_id to be the given --user $USER, not root
+# https://github.com/ansible/ansible/issues/2516
+- hosts: '{{ hosts }}'
+  sudo: no
+  gather_facts: yes
+
+- hosts: '{{ hosts }}'
+  #FIXME accelerate: true
 
   vars_files: 
     - '{{ data }}'
 
-  user: '{{ user }}'
-  sudo: True
+  sudo: true
 
   tasks:
-    #FIXME Should playbooks be standalone, or refactored here ?
+    #TODO Should playbooks be standalone, or refactored here ?
     - name: Install common dependencies
       when: ansible_pkg_mgr == "apt"
       action: apt pkg=$item state=latest update_cache=true
       with_items:
         - wget
-        - git
+        - git-core
     
-    - include: shell.yml
-    - include: git.yml
-    - include: dev.yml
-    #TODO Some way to control activation and desactivation
-    - include: '{{ item }}'
-      with_fileglob: plugins/*
+    #- include: shell.yml
+    #- include: git.yml
+    #- include: dev.yml
+    - include: vim.yml
+    #- include: '{{ item }}'
+      #when: "'{{ item }}'.split('/')[-1][:-4] in {{ plugins }}"
+      #with_fileglob: plugins/*
+
+    - name: giving back permissions to the user
+      shell: chown -R {{ ansible_user_id }}:{{ ansible_user_id }} {{ home }}
+    - shell: chmod -R ug+rxw,o+rx {{ home }}

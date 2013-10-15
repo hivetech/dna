@@ -1,4 +1,19 @@
-dna_root: /opt/dna
-shell: zsh
-prompt: ohmyzsh
-terminal_multiplexer: screen
+---
+# DNA configuration
+
+openlibs: /opt
+editor: vim
+terminal_multiplexer: tmux
+
+shell:
+  default: bash
+  prompt: liquidprompt
+
+dev:
+  node_version: 0.11.7
+
+plugins:
+  - nvm
+  - t
+  - z
+  - bd
