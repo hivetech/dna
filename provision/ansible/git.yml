@@ -1,7 +1,7 @@
 ---
-- name: Install git-flow and dependencies
+- name: Install git-flow and git module dependencies
   when: ansible_pkg_mgr == "apt"
-  action: apt pkg=$item state=latest update_cache=true
+  action: apt pkg={{ item }} state=latest update_cache=true
   with_items:
       - git-core
       # Git extensions to provide high-level repository operations for Vincent Driessen's branching model

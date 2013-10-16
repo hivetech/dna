@@ -44,8 +44,8 @@ set hlsearch                    " Hilight searches by default
 set viminfo='100,f1             " Save up to 100 marks, enable capital marks
 set smartcase		            " Do smart case matching
 nmap <silent> // :nohlsearch<cr>
-map <space> /                   " <space> to search
-map <c-space> ?                 " <Ctrl>+<space> to search backwards
+map <space> /
+map <c-space> ?
 
 " ================ Turn Off Swap Files ==============
 set noswapfile

@@ -1,7 +1,7 @@
 ---
-- name: Install package dependencies
+- name: Install vim module dependencies
   when: ansible_pkg_mgr == "apt"
-  action: apt pkg=$item state=latest update_cache=true
+  action: apt pkg={{ item }} state=latest update_cache=true
   with_items:
       - vim
       - curl
@@ -9,8 +9,6 @@
       - python-dev
       - xclip
 
-- name: Install python dependencies
-  pip: name=twisted
 - name: Install python dependencies
   pip: name=twisted
   pip: name=flake8
@@ -24,6 +22,6 @@
 - copy: src={{ dna_root }}/vim/plugin/helper.txt dest={{ home }}/.vim/plugin/helper.txt owner={{ ansible_user_id }} mode=600
 
 - name: Copy plugins configurations
-  copy: src=$item dest={{ home }}/.vim/plugin/settings owner={{ ansible_user_id }} mode=600
+  copy: src={{ item }} dest={{ home }}/.vim/plugin/settings owner={{ ansible_user_id }} mode=600
   with_fileglob: 
       - ${dna_root}/vim/plugin/settings/*.vim

@@ -99,8 +99,8 @@ Plugins
 * YankRing - [Maintains a history of previous yanks, changes and deletes ](https://github.com/vim-scripts/YankRing.vim)
 
 
-Super Credits
--------------
+Kudos
+-----
 
 * [gmarik](https://github.com/gmarik)
 * [tpope](https://github.com/tpope/vim-fugitive)

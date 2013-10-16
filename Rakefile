@@ -14,7 +14,7 @@ logs = "/tmp/dna.rake"
 task :default => [:install]
 
 desc "Install dna"
-task :install => [ "install:deps",  "install:ansible", "install:extras"]
+task :install => [ "install:deps",  "install:ansible"]
 
 namespace :install do
     desc "Install app dependencies"
@@ -30,9 +30,9 @@ namespace :install do
     desc "Install ansible, configuration manager"
     task :ansible do
         msg "install ansible dependencies"
-        sh "apt-get install -y python-pip python-dev git-core 2>&1 #{logs}"
+        sh "apt-get install -y python-pip python-dev git-core 2>&1 >> #{logs}"
         msg "install ansible, configuration manager"
-        sh "pip install PyYAML Jinja2 paramiko 2>&1 >> #{logs}"
+        sh "pip --upgrade install PyYAML Jinja2 paramiko 2>&1 >> #{logs}"
         sh "test -d /opt/ansible || git clone git://github.com/ansible/ansible.git /opt/ansible"
 
         msg "!! now: $ source /opt/ansible/hacking/env-setup"
@@ -63,26 +63,35 @@ namespace :install do
 end
 
 namespace :dna do
-    desc "Synthetize dna on your specified hosts"
-    task :synthetize do
-        msg "Synthetize dna"
+    desc "Synthetize dna on your specified hosts, for the given user [default: local username]"
+    task :synthetize, :user do |t, args|
+        args.with_defaults(:user => ENV['USER'])
+		#FIXME sh ". /opt/ansible/hacking/env-setup"
+        msg "Synthetize dna on host for user #{args[:user]}."
         msg "Make sure you edited data.yml and hosts files"
-        #TODO Get user entry
-        #FIXME get  user
-	    sh ". /opt/ansible/hacking/env-setup"
-        user = "unknown"
-	    sh "./synthetize -a target --user #{user} --image hivetech/prototype --verbose"
+        sh "./synthetize -a target --user #{args[:user]} --image hivetech/prototype --verbose"
     end
 
-    desc "Check your dna on a bench docker-powered machine"
-    task :prototype do
+    desc "Check your dna on a bench docker-powered machine, --check will disable changes"
+    task :prototype, :check do |t, args|
+        args.with_defaults(:check => '')
         msg "Test dna on docker machines"
-        sh "./synthetize -a prototype --user prototype --image hivetech/prototype --verbose --check"
+        if args[:check] == "--check"
+            msg "check mode, changes won't be applied"
+        end
+        sh "./synthetize -a prototype --user prototype --image hivetech/prototype --verbose #{args[:check]}"
+    end
+
+    desc "Connect through ssh to the prototype"
+    task :explore do
+        msg "connecting to the prototype"
+        sh './synthetize -a explore --verbose'
+        msg 'disconnected'
     end
 end
 
 private
 
 def msg(text)
-    ap "-- rake: #{text}"
+    ap "  => rake: #{text}"
 end

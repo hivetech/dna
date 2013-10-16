@@ -3,11 +3,11 @@
 
 openlibs: /opt
 editor: vim
-terminal_multiplexer: tmux
+terminal_multiplexer: screen
 
 shell:
-  default: bash
-  prompt: liquidprompt
+  default: zsh
+  prompt: ohmyzsh
 
 dev:
   node_version: 0.11.7

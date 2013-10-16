@@ -37,10 +37,11 @@
         - mercurial
     
     # Core components
-    #- include: shell.yml
-    #- include: git.yml
+    - include: shell.yml
+    - include: git.yml
     - include: dev.yml
-    #- include: vim.yml
+    - include: vim.yml
+      when: "'{{ editor }}' == 'vim'"
 
     # Plugins
     - include: '{{ item }}'

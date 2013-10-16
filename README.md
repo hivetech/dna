@@ -59,11 +59,13 @@ Usage (ansible style)
 -----
 
 ```console
-$ git clone https://github.com/hivetech/dna.git /opt/dna
-$ cd /opt/dna && sudo rake install
-$ $EDITOR /opt/dna/provision/ansible/data.yml   # Configuration
-$ $EDITOR /opt/dna/provision/ansible/hosts      # Where to deploy
-$ rake dna:synthetize                           # Default will setup your local machine
+$ export DNA_PATH=where/you/want    # Optional, default will be /opt
+$ export EDITOR=nano                # Optional, default will be vim
+
+$ wget -qO- https://raw.github.com/hivetech/dna/master/bootstrap.sh | bash
+
+$ cd $DNA_PATH && rake -T
+$ rake dna:synthetize               # Default will setup your local machine
 ```
 
 Sandbox mode (still ansible style)
@@ -129,8 +131,8 @@ License
 
 DNA is available under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
 
-Super Credits
--------------
+Kudos
+-----
 
 * [nvie](https://github.com/nvie)
 * [visionmedia](https://github.com/visionmedia)
@@ -147,4 +149,4 @@ Super Credits
 * [ndbroadbent](https://github.com/ndbroadbent)
 * [creationix](https://github.com/creationix)
 
-* [Vim credits](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#super-credits)
+* [Vim kudos](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#kudos)
