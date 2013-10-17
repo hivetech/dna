@@ -20,7 +20,8 @@ set -e
     PARALLEL_LEVEL=10
 # )
 
-source ./libsynthetize.sh
+source utils/libutils.sh
+source libsynthetize.sh
 
 function pre_processing() {
     if [[ $(check_dependencies) -eq 1 ]]; then
@@ -65,7 +66,7 @@ function main() {
     else
         if [ "$action" == "prototype" ]; then
             log "Prototype mode, setup docker..."
-            if [[ $(is_built $image) -eq 0 ]]; then
+            if [[ $(is_container_built $image) -eq 0 ]]; then
                 log "Found $image docker image, moving on"
             else
                 log "no $image found locally, searching online..."
@@ -78,7 +79,7 @@ function main() {
                 fi
             fi
 
-            if [[ $(is_running $image) -eq 0 ]]; then
+            if [[ $(is_container_running $image) -eq 0 ]]; then
                 log "Found $image running, moving on"
             else
                 log "No $image running, starting it"

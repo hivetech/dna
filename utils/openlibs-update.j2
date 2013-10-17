@@ -1,0 +1,55 @@
+#! /bin/bash
+#
+# Copyright (C) 2013 Xavier Bruhiere
+
+#set -e
+#TODO What about re-installation (re-run setup.py for example)
+#TODO Detect and manage non-git based repo
+
+source libutils.sh
+
+export OPENLIBS_PATH={{ openlibs }}
+
+function pull_repos() {
+    log "Pulling from $PWD"
+    #TODO Check if it's a git repository
+    git pull
+
+    if [[ $? == 0 ]]; then
+        success "$PWD Done"
+    else
+        fail "an error occured updating $directory"
+    fi
+}
+
+log "Checking for open-source libraries updates"
+while IFS=' ' read -ra ADDR; do
+    for directory in "${ADDR[@]}"; do
+        if [ ! -d "$OPENLIBS_PATH/$directory" ]; then
+            fail "! $directory Not a directory"
+            continue
+        fi
+
+        if [ ! -d "$OPENLIBS_PATH/$directory/.git" ]; then
+            fail "! $directory Not a git repository"
+            continue
+        fi
+
+        cd $OPENLIBS_PATH/$directory
+
+        #TODO A beautifu recursive thing
+        if [[ ! -d "$OPENLIBS_PATH/$directory/.git" ]]; then
+            log "Not a git repos, checking sub-directories"
+            while IFS=' ' read -ra ADDR; do
+                for subdirectory in "${ADDR[@]}"; do
+                    cd $OPENLIBS_PATH/$directory/$subdirectory
+                    pull_repos
+                done
+            done <<< "$(ls)"
+
+        else
+            pull_repos
+        fi
+
+    done
+done <<< "$(ls $OPENLIBS_PATH)"

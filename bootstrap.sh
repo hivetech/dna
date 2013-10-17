@@ -4,8 +4,7 @@
 # Copyright (C) 2013 Xavier Bruhiere
 #
 
-export DNA_PATH=${DNA_PATH:-"/opt"}
-export EDITOR=${EDITOR:-"vim"}
+export DNA_PATH=${DNA_PATH:-"/opt/dna"}
 
 function install() {
     echo "install ruby dependencies"
@@ -13,11 +12,11 @@ function install() {
     sudo gem install rake awesome_print
 
     echo "clone dna and install it"
-    sudo git clone https://github.com/hivetech/dna.git $DNA_PATH/dna
+    test -d $DNA_PATH || sudo git clone https://github.com/hivetech/dna.git $DNA_PATH
     cd $DNA_PATH && sudo rake install
 
-    echo "activate ansible"
-    . /opt/ansible/hacking/env-setup
+    #echo "activate ansible"
+    #. /opt/ansible/hacking/env-setup
 }
 
 echo "install dna..."
