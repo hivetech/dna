@@ -59,13 +59,17 @@ Usage (ansible style)
 -----
 
 ```console
-$ export DNA_PATH=where/you/want    # Optional, default will be /opt
-$ export EDITOR=nano                # Optional, default will be vim
+$ export DNA_PATH=where/you/want/dna  # Optional, default will be /opt/dna
+$ export EDITOR=nano                  # Optional, default will be vim
 
 $ wget -qO- https://raw.github.com/hivetech/dna/master/bootstrap.sh | bash
 
 $ cd $DNA_PATH && rake -T
 $ rake dna:synthetize               # Default will setup your local machine
+
+$ # Once installed
+$ dna-help -h
+$ dna-help --all
 ```
 
 Sandbox mode (still ansible style)

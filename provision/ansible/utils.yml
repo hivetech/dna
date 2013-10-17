@@ -3,4 +3,4 @@
 - name: Copy utils scripts in /usr/local/bin
   copy: src={{ item }} dest=/usr/local/bin owner={{ ansible_user_id }} mode=755
   with_fileglob: 
-      - {{ dna_root }}/utils/*
+      - /{{ dna_root }}/utils/*
