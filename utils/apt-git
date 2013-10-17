@@ -1,0 +1,206 @@
+#!/bin/bash
+#
+# Copyright (C) 2013 Xavier Bruhiere
+
+#NOTE Check if we are root ?
+
+set -e
+export DEBIAN_FRONTEND=noninteractive
+
+#TODO Replace echo with \n \
+function usage() {
+    echo "Generic installation from git repository."
+    echo "You can use whatever you already are in the git repository you wanna install, or you didn't even download it yet."
+    echo "Every parameters can be set as env variable using export satetement, or through command line. Anyway all have default values."
+    echo
+    echo "Usage: # apt-git [OPTIONS]"
+    echo
+    #TODO Long options
+    echo  "Available command line options:"
+    echo -e "\t-u [https://github.com/]octopus/project[.git]\tSet remote project url"
+    echo -e "\t-i /tmp\t\t\tInstallation path"
+    echo -e "\t-l /tmp/project.log\tInstallation logs location"
+    echo -e "\t-m all\t\t\tMake target if makefile is used"
+    echo -e "\t-v\t\t\tVirtualization flag, will make the script to use vagrant if possible"
+    echo -e "\t-p lxc\t\t\tVirtualization provider"
+    echo
+    echo "Remote usage"
+    echo "Command: wget -qO- https://raw.github.com/Gusabi/Dotfiles/master/utils/git-bootstrap.sh | sudo -E bash"
+    echo
+    echo "Available customization (with default values):"
+    echo -e "\texport PROJECT_URL=[https://github.com/]octopus/project[.git]"
+    echo -e "\texport INSTALL_PATH=$HOME"
+    echo -e "\texport LOGS=/tmp/project.log"
+    echo -e "\texport MAKE_TARGET=all"
+    echo -e "\texport VIRTUALIZE=false"
+    echo -e "\texport PROVIDER=lxc"
+    echo -e "\tAnd every env parameter the Makefile could use"
+}
+
+function log() {
+  printf "\r\033[00;36m  [ \033[00;34m..\033[00;36m ] $1\033[0m\n"
+}
+
+success () {
+  printf "\r\033[00;36m  [ \033[00;32mOK\033[00;36m ] $1\033[0m\n"
+}
+
+fail () {
+  printf "\r\033[00;36m  [\033[00;31mFAIL\033[00;36m] $1\033[0m\n"
+  echo ''
+}
+
+function extract_project() {
+    PROJECT_URL=$1
+    if [[ ! "$PROJECT_URL" == *git ]]; then
+        PROJECT_URL="$PROJECT_URL.git"
+    fi
+
+    if [[ ! "$PROJECT_URL" == https* ]]; then
+        PROJECT_URL="https://github.com/$PROJECT_URL"
+    fi
+
+    export CLEAN_PROJECT_URL=$PROJECT_URL
+    # Let's remove https:// and .git, to make it easy to split
+    tmp=${PROJECT_URL:8:${#challenge}-4}
+    export PROJECT=${tmp##*/}
+}
+
+function virtualized_install() {
+    #TODO A more up to date version ?
+    #log " Installing minimum packages for virtualization..."
+    #apt-get install vagrant
+
+    log "Installation in virtualize environment"
+    PROVIDER=${PROVIDER:-lxc}
+
+    if [ "$PROVIDER" == "lxc" ]; then
+        #######TODO Only if they're not installed
+        #log "Installing minimum packages for virtualization..."
+        #apt-get -y --force-yes install lxc redir 2>&1 >> "$LOGS"
+
+        #log "Upgrading kernel..."
+        #apt-get update 2>&1 >> "$LOGS"
+        #apt-get dist-upgrade 2>&1 >> "$LOGS"
+        #######
+
+        log "Installing lxc vagrant plugin"
+        vagrant plugin install vagrant-lxc
+    fi
+    #TODO Parse Vagrant file to get more informations
+    #FIXME If this script is ran from a Vagrantfile and VIRTUALIZE is set, it might be ugly... Forbid it
+
+    if [ -f Vagrantfile ]; then 
+        success "Found Vagrantfile to process"
+        log "Fire up vagrant with $PROVIDER"
+        vagrant up --provider=$PROVIDER
+    else
+        fail "Not yet implemented"
+        #TODO Generate here a vagrantfile template and use it
+    fi
+}
+
+function local_install() {
+    log "Installing minimum packages..."
+    apt-get -y --force-yes install git make ruby1.9.1-dev 2>&1 >> "$LOGS"
+
+    if [ -f Makefile ]; then
+        success "Found project makefile."
+        log "Building $MAKE_TARGET ..."
+        make $MAKE_TARGET
+
+    elif [ -f bootstrap.sh ]; then
+        success "Found project bootstrap script"
+        ./bootstrap.sh
+
+    elif [ -f install.sh ]; then
+        success "Found project install script"
+        ./install.sh
+
+    elif [ -f Rakefile ]; then
+        gem install rake bundler
+        success "Found ruby project install script"
+        bundle install
+        rake install
+
+    elif [ -f setup.py ]; then
+        success "Found python setup.py"
+        ./install.sh
+
+    elif [ -f package.json ]; then
+        success "Found package.json for node installation"
+        #FIXME Need node and npm to be installed
+        npm install
+    fi
+}
+
+# An hacky try for generic use, especially vagrant and docker compliant
+function sanitize_plateform() {
+    if [[ "$HOME" == "/root" ]]; then
+        ## We are in a vagrant box, at bootstrap
+        export HOME="/home/vagrant"
+        export USER="vagrant"
+    elif [[ "$HOME" == "/" ]]; then
+        # We are in a docker (lxc ?) container
+        export HOME="/root"
+        export USER=$(whoami)
+    #else
+        #TODO Check if I'm root
+    fi
+
+    export LOGS=${LOGS:-"/tmp/install.log"}
+    log "logs stored in $LOGS"
+
+    # Run a full apt-get update first.
+    log "Updating apt-get caches..."
+    apt-get update 2>&1 >> "$LOGS"
+
+    test -n $INSTALL_PATH || export INSTALL_PATH=$HOME
+    test -d $INSTALL_PATH || exit 1
+}
+
+function install() {
+    if [ -n "$VIRTUALIZE" ]; then
+        virtualized_install
+    else
+        local_install
+    fi
+}
+
+while getopts ":i:m:p:u:vh" optname
+do
+  case "$optname" in
+    "u") export PROJECT_URL=$OPTARG;;
+    "i") export INSTALL_PATH=$OPTARG;;
+    "l") export LOGS=$OPTARG;;
+    "m") export MAKE_TARGET=$OPTARG;;
+    "p") export PROVIDER=$OPTARG;;
+    "v") export VIRTUALIZE=true;;
+    "h") usage; exit;;
+    "?") fail "Unknown option $OPTARG";;
+    ":") fail "No argument value for option $OPTARG";;
+    *) echo "Unknown error while processing options";;
+  esac
+done
+
+sanitize_plateform
+
+test -n "PROJECT_URL" && extract_project $PROJECT_URL
+
+if [ ! -d .git ]; then
+    if [ -z "$PROJECT_URL" ]; then
+        fail "No Git repo url set and not in project tree"
+        fail "Please use 'export PROJECT_URL=[https://]your/repo[.git]' and retry:"
+        echo -e "[bootstrap]\twget -qO https://raw.github.com/Gusabi/Dotfiles/master/utils/apt-git | sudo -e bash" 
+        exit 1
+    fi
+    log "Installing $PROJECT in $INSTALL_PATH"
+    cd $INSTALL_PATH
+
+    test -d $PROJECT || git clone --depth=1 $CLEAN_PROJECT_URL
+    chown -R $USER $PROJECT && cd $PROJECT
+fi
+
+install
+
+success "Done !"

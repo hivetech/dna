@@ -2,9 +2,7 @@
 #
 # libsynthetize.sh
 # Copyright (C) 2013 Xavier Bruhiere
-#
-# Distributed under terms of the MIT license.
-#
+
 
 # Synthetize needs ansible and docker to work
 function check_dependencies() {
@@ -12,10 +10,6 @@ function check_dependencies() {
     #TODO Check for docker installation (and right version)
     #TODO Check for ansible-shell
     echo 0
-}
-
-function is_installed() { 
-    command -v $1 > /dev/null 
 }
 
 function play_playbook() {
@@ -30,7 +24,7 @@ function build_prototype_image() {
     docker build -rm -t ${image} - < $dockerfile
 }
 
-function is_built() {
+function is_container_built() {
     image=$1
     OUTPUT=$(docker images | grep ${image})
 
@@ -41,7 +35,7 @@ function is_built() {
     fi
 }
 
-function is_running() {
+function is_container_running() {
     image=$1
     OUTPUT=$(docker ps | grep ${image})
 
@@ -50,32 +44,4 @@ function is_running() {
     else
         echo 0
     fi
-}
-
-function log () {
-    if [ "$verbose" == "true" ]; then
-        printf "\r\033[00;36m  [ \033[00;34m..\033[00;36m ] $1\033[0m\n"
-    fi
-}
-
-
-function success () {
-    if [ "$verbose" == "true" ]; then
-        printf "\r\033[00;36m  [ \033[00;32mOK\033[00;36m ] $1\033[0m\n"
-    fi
-}
-
-
-function fail () {
-    if [ "$verbose" == "true" ]; then
-        printf "\r\033[00;36m  [\033[00;31mFAIL\033[00;36m] $1\033[0m\n"
-        echo ''
-    fi
-}
-
-
-function die()
-{
-    fail "${@}"
-    exit 1
 }

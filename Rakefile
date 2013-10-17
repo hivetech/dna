@@ -32,8 +32,9 @@ namespace :install do
         msg "install ansible dependencies"
         sh "apt-get install -y python-pip python-dev git-core 2>&1 >> #{logs}"
         msg "install ansible, configuration manager"
-        sh "pip --upgrade install PyYAML Jinja2 paramiko 2>&1 >> #{logs}"
-        sh "test -d /opt/ansible || git clone git://github.com/ansible/ansible.git /opt/ansible"
+        sh "pip install --upgrade ansible==1.3.3 2>&1 >> #{logs}"
+        #sh "pip install --upgrade PyYAML Jinja2 paramiko 2>&1 >> #{logs}"
+        #sh "test -d /opt/ansible || git clone git://github.com/ansible/ansible.git /opt/ansible"
 
         msg "!! now: $ source /opt/ansible/hacking/env-setup"
         msg "!! now: $ edit ./provision/ansible/data.yml"
