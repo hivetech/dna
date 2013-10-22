@@ -1,0 +1,12 @@
+---
+#TODO Distinction between bin, lib and templates
+- name: Copy utils scripts in /usr/local/bin
+  copy: src={{ item }} dest=/usr/local/bin owner={{ ansible_user_id }} mode=755
+  with_fileglob: 
+      - /{{ dna_root }}/utils/*
+
+#FIXME Don't change template extension
+- name: Copy template scripts in /usr/local/bin
+  template: src={{ item }} dest=/usr/local/bin owner={{ ansible_user_id }} mode=755
+  with_fileglob: 
+      - /{{ dna_root }}/utils/*.j2

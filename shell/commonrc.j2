@@ -1,10 +1,8 @@
 # ------------------------------------------------------------ Constants
 # Assumptions (born to be tuned):
 #    - Your IT projects are in $HOME/dev/projects
-#    - Other open-source projects are in $HOME/openlibs
 #    - You use node version 0.10.7
 #export PROJECTS=$HOME/dev/projects
-#export OPENLIBS=/opt
 export OPENLIBS={{ openlibs }}
 export NODE_VERSION={{ dev.node_version }}
 export EDITOR={{ editor }}
@@ -22,7 +20,7 @@ test -d $HOME/local/bin && PATH="$HOME/local/bin:$PATH"
 test -d $HOME/local/lib && PATH="$HOME/local/lib:$PATH"
 
 # Go configuration
-#FIXME use of gvm ======================
+#TODO use of gvm ======================
 export GOROOT=/opt/go
 export GOOS=linux
 export GOARCH=amd64

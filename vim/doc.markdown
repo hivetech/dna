@@ -17,11 +17,13 @@ Features
 * Automatic Vundle and plugins installation
 * Autojump to last position when opening a file
 * Template loading
-* Useful tlib and webapi libs installed
 * Tabs with MinibufExpl
 * Persistent undo
 * Leader key : ","
 * Solarized color theme
+* Airline status line
+* Useful tlib and webapi libs installed
+* Git diff show
 
 
 Keymaps
@@ -65,6 +67,7 @@ Keymaps
     * opens tasks list                   : ,t
     * opens git dirty files              : ,ocf
     * Open a window with {ipython,bash,zsh,mysql,node,irb,R} prompt : ,t{y,b,z,s,n,i,r}
+    * Go to {next,previous} git change   : g{h,H}
 
 * Move
 
@@ -97,10 +100,12 @@ Plugins
 * Tlib - [Some utility functions for VIM](https://github.com/tomtom/tlib_vim)
 * WebAPI - [vim interface to Web API ](https://github.com/mattn/webapi-vim)
 * YankRing - [Maintains a history of previous yanks, changes and deletes ](https://github.com/vim-scripts/YankRing.vim)
+* Airline - [lean & mean status/tabline for vim that's light as air](https://github.com/bling/vim-airline)
+* Gitgutter - [A Vim plugin which shows a git diff in the gutter (sign column)](https://github.com/airblade/vim-gitgutter)
 
 
-Super Credits
--------------
+Kudos
+-----
 
 * [gmarik](https://github.com/gmarik)
 * [tpope](https://github.com/tpope/vim-fugitive)
@@ -119,3 +124,5 @@ Super Credits
 * [tomtom](https://github.com/tomtom)
 * [mattn](https://github.com/mattn)
 * [fishburn](http://www.vim.org/account/profile.php?user_id=837)
+* [bling](https://github.com/bling)
+* [airblade](https://github.com/airblade)

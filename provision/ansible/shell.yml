@@ -1,9 +1,9 @@
 ---
 
-- name: Install package dependencies
+- name: Install shell module dependencies
   #when: ansible_os_family == "Debian"
   when: ansible_pkg_mgr == "apt"
-  action: apt pkg=$item state=latest update_cache=true
+  action: apt pkg={{ item }} state=latest update_cache=true
   with_items:
     - curl
     - '{{ shell.default }}'
@@ -11,7 +11,6 @@
     - lm-sensors
     - '{{ terminal_multiplexer }}'
     
-#TODO The template system could be crazy cool to use
 - name: Copy shared shell configuration file
   template: src={{ dna_root }}/shell/commonrc.j2 dest={{ home }}/.commonrc owner={{ ansible_user_id }} mode=600
 - copy: src={{ dna_root }}/shell/customrc.sh dest={{ home }}/.customrc owner={{ ansible_user_id }} mode=600
@@ -22,30 +21,30 @@
 - name: Install liquidprompt
   git: repo=https://github.com/nojhan/liquidprompt.git
        dest={{ openlibs }}/liquidprompt
-  when: "'${shell.prompt}' == 'liquidprompt'"
+  when: "'{{ shell.prompt }}' == 'liquidprompt'"
 - name: Copy liquidprompt config
   copy: src={{ dna_root }}/shell/liquidpromptrc-dist dest={{ home }}/.liquidpromptrc
-  when: "'${shell.prompt}' == 'liquidprompt'"
+  when: "'{{ shell.prompt }}' == 'liquidprompt'"
 
 # Bash specific stuff
 - name: Configure bash
   copy: src={{ dna_root }}/shell/bash/bashrc dest={{ home }}/.bashrc owner={{ ansible_user_id }} mode=600
-  when: "'${shell.default}' == 'bash'"
+  when: "'{{ shell.default }}' == 'bash'"
 - copy: src={{ dna_root }}/shell/bash/bash_profile dest={{ home }}/.bash_profile owner={{ ansible_user_id }} mode=600
-  when: "'${shell.default}' == 'bash'"
+  when: "'{{ shell.default }}' == 'bash'"
 - copy: src={{ dna_root }}/shell/bash/bash_logout dest={{ home }}/.bash_logout owner={{ ansible_user_id }} mode=600
-  when: "'${shell.default}' == 'bash'"
+  when: "'{{ shell.default }}' == 'bash'"
 
 # Zsh specific stuff
 # #FIXME To avoid the script: https://github.com/lmacken/ansible-hacker-playbook/blob/master/playbook.yml
 - name: Install oh-my-zsh framework
   shell: export HOME={{ home }} && curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-  when: "'${shell.prompt}' == 'ohmyzsh'"
-  when: "'${shell.default}' == 'zsh'"
+  when: "'{{ shell.prompt }}' == 'ohmyzsh'"
+  when: "'{{ shell.default }}' == 'zsh'"
   ignore_errors: yes   # The script ends up with a non-fatal error, so don't stop ansible for that
 - name: Configure zsh
   copy: src={{ dna_root }}/shell/zsh/zshrc dest={{ home }}/.zshrc owner={{ ansible_user_id }} mode=600
-  when: "'${shell.default}' == 'zsh'"
+  when: "'{{ shell.default }}' == 'zsh'"
 
 - name: Changing the default shell to zsh
   action: user shell=/bin/{{ shell.default }} user={{ ansible_user_id }}
@@ -53,7 +52,7 @@
 # Multiplexers
 - name: Configure screen
   copy: src={{ dna_root }}/shell/multiplexer/screenrc dest={{ home }}/.screenrc owner={{ ansible_user_id }} mode=600
-  when: "'${terminal_multiplexer}' == 'screen'"
+  when: "'{{ terminal_multiplexer }}' == 'screen'"
 - name: Configure tmux
   copy: src={{ dna_root }}/shell/multiplexer/square.tmux.conf dest={{ home }}/.tmux.conf owner={{ ansible_user_id }} mode=600
-  when: "'${terminal_multiplexer}' == 'tmux'"
+  when: "'{{ terminal_multiplexer }}' == 'tmux'"

@@ -1,13 +1,17 @@
 ---
 # DNA configuration
+# Parameters here will be used for template variable and conditional task execution
 
+# Open source codes will be store there
 openlibs: /opt
 editor: vim
-terminal_multiplexer: tmux
+# Screen or tmux configurations available
+terminal_multiplexer: screen
 
 shell:
-  default: bash
-  prompt: liquidprompt
+  default: zsh
+  # ohmyzsh, liquidprompt or nothing special
+  prompt: ohmyzsh
 
 dev:
   node_version: 0.11.7

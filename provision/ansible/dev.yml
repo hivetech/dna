@@ -1,7 +1,7 @@
 ---
-- name: Install package dependencies
+- name: Install dev module dependencies
   when: ansible_pkg_mgr == "apt"
-  action: apt pkg=$item state=latest update_cache=true
+  action: apt pkg={{ item }} state=latest update_cache=true
   with_items:
       - python-pip
       - pep8
