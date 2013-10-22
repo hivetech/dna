@@ -3,9 +3,9 @@ function! LoadBundles()
 
     " Core plugins -------------------------------------
     Bundle 'Syntastic'
-    Bundle 'altercation/vim-colors-solarized' 
+    Bundle 'altercation/vim-colors-solarized'
     Bundle 'Raimondi/delimitMate'
-    Bundle 'https://github.com/tpope/vim-fugitive' 
+    Bundle 'https://github.com/tpope/vim-fugitive'
     Bundle 'https://github.com/kien/ctrlp.vim'
     Bundle 'https://github.com/sjl/gundo.vim'
     Bundle 'https://github.com/vim-scripts/Conque-Shell'
@@ -20,8 +20,10 @@ function! LoadBundles()
     Bundle 'https://github.com/aperezdc/vim-template'
     Bundle 'https://github.com/tomtom/tlib_vim'
     Bundle 'https://github.com/vim-scripts/YankRing.vim'
+    Bundle 'https://github.com/airblade/vim-gitgutter'
+    Bundle 'bling/vim-airline'
     " --------------------------------------------------
-    
+
     " Extra plugins ------------------------------------
     " --------------------------------------------------
 

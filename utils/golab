@@ -1,0 +1,35 @@
+#! /bin/bash
+#
+# golab
+# Copyright (C) 2013 Xavier Bruhiere
+#
+# Distributed under terms of the MIT license.
+#TODO Test
+
+# const (
+  export CONTAINER_LAB="hivetech/lab"
+  export SSH_PORT=22
+  export USER_LAB="prototype"
+# )
+
+function check_docker() {
+  command -v docker > /dev/null 
+  if [[ $? -eq 0 ]]; then
+    echo "docker already installed"
+  else
+    echo "you need docker to be installed"
+    echo "You can check: http://docs.docker.io/en/latest/installation/ubuntulinux/"
+  fi
+}
+
+function kick_off_lab() {
+  [[ -n "$(docker images | grep $CONTAINER_LAB)" ]] || docker pull $CONTAINER_LAB
+  ID=$(docker run -d $CONTAINER_LAB)
+  PORT=$(docker port  $ID $SSH_PORT)
+  echo "[!] ssh password: proto"
+  ssh $USER_LAB@127.0.0.1 -p $PORT
+}
+
+
+check_docker
+kick_off_lab

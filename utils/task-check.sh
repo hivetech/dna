@@ -11,17 +11,19 @@ clear
 
 if [ $# -lt 1 ]; then
     echo "Usage: ./task-check 'pattern to match' 'start directory'"
-    exit 1
+    PATTERN="TODO"
+elif [ $# == 2 ]; then
+    PATTERN=$1
 elif [ $# == 2 ]; then
     echo "Location provided, going there..."
     cd $2
 fi
 
-echo -e " [ $(basename $PWD) - $1 list ]"
+echo -e " [ $(basename $PWD) - $PATTERN list ]"
 
 count=0
 for file in $(find . -type f | egrep -v "res|git|doc|README|check"); do 
-    TODOS=$(cat $file | grep -i "$1")
+    TODOS=$(cat $file | grep -i "$PATTERN")
     if [ ! -z "${TODOS}" ]; then
         count=$((count + 1))
         echo
@@ -30,5 +32,5 @@ for file in $(find . -type f | egrep -v "res|git|doc|README|check"); do
     fi
 done
 
-zenity --info --text "$1 list: $count tasks, have fun !"
-echo -e "\n\t=> $1 list: $count tasks, have fun !"
+zenity --info --text "$PATTERN list: $count tasks, have fun !"
+echo -e "\n\t=> $PATTERN list: $count tasks, have fun !"

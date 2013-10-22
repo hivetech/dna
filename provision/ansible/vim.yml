@@ -8,6 +8,7 @@
       - exuberant-ctags
       - python-dev
       - xclip
+      - fontconfig
 
 - name: Install python dependencies
   pip: name=twisted
@@ -21,7 +22,13 @@
 - copy: src={{ dna_root }}/vim/plugin/bundles.vim dest={{ home }}/.vim/plugin/bundles.vim owner={{ ansible_user_id }} mode=600
 - copy: src={{ dna_root }}/vim/plugin/helper.txt dest={{ home }}/.vim/plugin/helper.txt owner={{ ansible_user_id }} mode=600
 
-- name: Copy plugins configurations
+- name: Copy vim plugins configurations
   copy: src={{ item }} dest={{ home }}/.vim/plugin/settings owner={{ ansible_user_id }} mode=600
-  with_fileglob: 
+  with_fileglob:
       - ${dna_root}/vim/plugin/settings/*.vim
+
+- name: Install Powerline fonts
+  copy: src={{ dna_root }}/misc/fonts/PowerlineSymbols.otf dest={{ home }}/.fonts owner={{ ansible_user_id }} mode=600
+- shell: fc-cache -vf '{{ home }}'/.fonts
+- shell: mkdir -p '{{ home }}'/.config/fontconfig/conf.d/
+- copy: src={{ dna_root }}/misc/fonts/10-powerline-symbols.conf dest={{ home }}/.config/fontconfig/conf.d/ owner={{ ansible_user_id }} mode=600

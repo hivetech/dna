@@ -39,7 +39,7 @@ class bd(dnalib.Help):
 
 class vim(dnalib.Help):
     help_command = 'vim -h | head -n 6'
-    message = ['check https://github.com/hivetech/dna/blob/develop/vim'
+    message = ['Check https://github.com/hivetech/dna/blob/develop/vim'
                '/doc.markdown, or type <F2> from vim']
 
 
