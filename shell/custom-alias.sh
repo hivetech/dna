@@ -29,3 +29,6 @@ alias sjuju="sudo $GOPATH/bin/juju -v"
 
 # https://github.com/benweet/stackedit
 alias stackedit="chromium-browser --disable-application-cache http://localhost/stackedit/\?debug"
+
+# Fireup a docker container with dna installed on it
+alias golab="wget -qO- https://raw.github.com/hivetech/dna/develop/utils/golab | bash"

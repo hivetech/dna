@@ -102,7 +102,7 @@ source ./optparse.bash
 
 optparse.define short=a long=action desc="Command to run" variable=action default="test"
 optparse.define short=u long=user desc="Ansible user" variable=user default="prototype"
-optparse.define short=i long=image desc="Image to use with docker" variable=image default="hivetech/prototype"
+optparse.define short=i long=image desc="Image to use with docker" variable=image default="hivetech/lab"
 optparse.define short=v long=verbose desc="Flag to set verbose mode on" variable=verbose value=true default=false
 optparse.define short=c long=check desc="Check mode, will not apply change" variable=check value=true default=false
 optparse.define short=p long=port desc="Container ssh port to expose" variable=port default="49500"

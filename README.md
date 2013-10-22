@@ -9,7 +9,10 @@ DNA
 
 
 DNA is a community-driven compilation of dotfiles and projects, aimed
-at creating the most awesome and powerful development environment.
+at creating the most awesome and powerful development environment. 
+We use it here a Hivetech to setup fresh new machines and to provide our
+[hivelab charm](https://github.com/hivetech/cells/tree/master/precise/hivelab)
+for the Unide project.
 
 Installation is performed through famous configuration managers like ansible
 and [salt](http://saltstack.com/community.html) (currently focused on [ansible](www.ansibleworks.com)) as they obviously play nicely with a
@@ -19,6 +22,15 @@ as well as simply your beloved local one.
 It is designed to be plugin-friendly: A new awesome, github featured
 project you discovered for your environment ? Star it and just plug
 a playbook ( / minion / recipe / manifest / script) in the plugin directory.
+
+If you are familiar with [docker](http://www.docker.io), you can test the environment:
+
+```console
+$ docker pull hivetech/lab
+$ ID=$(docker run -d hivetech/lab)
+$ PORT=$(docker port $ID 22)
+$ ssh prototype@127.0.0.1 -p $PORT   # Password: proto
+```
 
 
 Content
@@ -46,14 +58,16 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * Optparse - [A BASH wrapper for getopts, for simple command line arguments](https://github.com/nk412/optparse)
     * Autopep8 - [A tool that automatically formats Python code to conform to the PEP 8 style guide](https://github.com/hhatto/autopep8)
 
-* [Vim](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#plugins)
-
 * Plugins
 
     * z - [z is the new j, yo](https://github.com/rupa/z)
     * t - [A command-line todo list manager for people that want to finish tasks, not organize them](http://stevelosh.com/projects/t/)
     * bd - [Quickly go back to a parent directory in linux](https://github.com/vigneshwaranr/bd)
     * nvm - [Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
+
+* [Vim](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#plugins)
+
+* [Utils](https://github.com/hivetech/dna/blob/develop/utils/doc.markdown)
 
 Usage (ansible style)
 -----
@@ -71,6 +85,8 @@ $ # Once installed
 $ dna-help -h
 $ dna-help --all
 ```
+
+Note that the `synthetize` action is idempotent.
 
 Sandbox mode (still ansible style)
 ------------

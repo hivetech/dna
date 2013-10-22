@@ -26,3 +26,8 @@ else
   colorscheme solarized
   set background=dark
 endif
+
+" Powerline support
+"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+" Airline support
+let g:airline_powerline_fonts = 1

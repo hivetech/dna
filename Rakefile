@@ -33,8 +33,6 @@ namespace :install do
         sh "apt-get install -y python-pip python-dev git-core 2>&1 >> #{logs}"
         msg "install ansible, configuration manager"
         sh "pip install --upgrade ansible==1.3.3 2>&1 >> #{logs}"
-        #sh "pip install --upgrade PyYAML Jinja2 paramiko 2>&1 >> #{logs}"
-        #sh "test -d /opt/ansible || git clone git://github.com/ansible/ansible.git /opt/ansible"
 
         msg "!! now: $ source /opt/ansible/hacking/env-setup"
         msg "!! now: $ edit ./provision/ansible/data.yml"
@@ -67,10 +65,9 @@ namespace :dna do
     desc "Synthetize dna on your specified hosts, for the given user [default: local username]"
     task :synthetize, :user do |t, args|
         args.with_defaults(:user => ENV['USER'])
-		#FIXME sh ". /opt/ansible/hacking/env-setup"
         msg "Synthetize dna on host for user #{args[:user]}."
         msg "Make sure you edited data.yml and hosts files"
-        sh "./synthetize -a target --user #{args[:user]} --image hivetech/prototype --verbose"
+        sh "./synthetize -a target --user #{args[:user]} --image hivetech/lab --verbose"
     end
 
     desc "Check your dna on a bench docker-powered machine, --check will disable changes"
@@ -80,7 +77,7 @@ namespace :dna do
         if args[:check] == "--check"
             msg "check mode, changes won't be applied"
         end
-        sh "./synthetize -a prototype --user prototype --image hivetech/prototype --verbose #{args[:check]}"
+        sh "./synthetize -a prototype --user prototype --image hivetech/lab --verbose #{args[:check]}"
     end
 
     desc "Connect through ssh to the prototype"

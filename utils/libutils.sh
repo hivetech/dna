@@ -3,9 +3,6 @@
 #
 # Copyright 2013 Xavier Bruhiere
 
-
-#FIXME Those methods don't detect ls command, check in /usr/lib ?
-
 #dpkg --get-selections | grep "^python$"
 
 function log () {

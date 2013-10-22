@@ -1,5 +1,5 @@
 " Arpeggio lets us define key-chord combos (simultaneous key presses)
-"TODO Checker arpeggio utilitée
+"TODO Is arpeggio useful ?
 "call arpeggio#load()
 
 " ========================================
@@ -11,7 +11,6 @@
 nnoremap ,yw yiww
 
 " ,ow = 'overwrite word', replace a word with what's in the yank buffer
-" FIXME: will not properly repeat when you use a dot (tie into repeat.vim)
 nnoremap ,ow "_diwhp
 
 "make Y consistent with C and D
