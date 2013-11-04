@@ -5,6 +5,8 @@
 #export PROJECTS=$HOME/dev/projects
 export OPENLIBS={{ openlibs }}
 export NODE_VERSION={{ dev.node_version }}
+export GO_VERSION={{ dev.go_version }}
+export PYTHON_VERSION={{ dev.python_version }}
 export EDITOR={{ editor }}
 
 TIME=`date +"%T"`
@@ -65,14 +67,19 @@ function gi() { curl http://gitignore.io/api/$@ ;}
 #[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh  # This loads NVM
 if [[ -s $HOME/.nvm/nvm.sh ]]; then
     . $HOME/.nvm/nvm.sh  # This loads NVM
-    nvm use v$NODE_VERSION
+    if [ -z "$(nvm list | grep $NODE_VERSION)" ]; then
+      nvm install $NODE_VERSION
+    else
+      nvm use v$NODE_VERSION
+    fi
     [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
     export NODE_PATH=$HOME/.nvm/v$NODE_VERSION/lib/node_modules
     export NODE_ENV=development
 fi
 
 # Python virtualenv made easy
-test -f /usr/local/bin/virtualenvwrapper.sh && source /usr/local/bin/virtualenvwrapper.sh && export WORKON_HOME=$HOME/.virtualenvs
+#test -f /usr/local/bin/virtualenvwrapper.sh && source /usr/local/bin/virtualenvwrapper.sh && export WORKON_HOME=$HOME/.virtualenvs
+#TODO Testing https://github.com/brainsik/virtualenv-burrito
 
 # z is the new j, yo (https://github.com/rupa/z.git)
 test -d $OPENLIBS/z && source $OPENLIBS/z/z.sh
@@ -91,3 +98,24 @@ test -d $OPENLIBS/liquidprompt && source $OPENLIBS/liquidprompt/liquidprompt
 
 # A BASH wrapper for getopts, for simple command line arguments
 test -d $OPENLIBS/optparse && source $OPENLIBS/optparse/optparse.bash
+
+# Python interpreter management
+if [[ -d $HOME/.pyenv ]]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+  #TODO Install $PYTHON_VERSION if not already
+  if [ -z "$(pyenv local | grep -e ^$PYTHON_VERSION$)" ]; then
+    pyenv install $PYTHON_VERSION
+  fi
+  pyenv local $PYTHON_VERSION
+fi
+
+# Go version management
+if [[ -d $HOME/.gvm ]]; then
+  . $HOME/.gvm/scripts/gvm
+  if [ -z "$(gvm list | grep $GO_VERSION)" ]; then
+    gvm install $GO_VERSION
+  fi
+  gvm use $GO_VERSION
+fi

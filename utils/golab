@@ -24,9 +24,11 @@ function check_docker() {
 
 function kick_off_lab() {
   [[ -n "$(docker images | grep $CONTAINER_LAB)" ]] || docker pull $CONTAINER_LAB
+  #TODO Get Id if a container is already running
   ID=$(docker run -d $CONTAINER_LAB)
   PORT=$(docker port  $ID $SSH_PORT)
   echo "[!] ssh password: proto"
+  #FIXME Either exit or error with wget or curl use
   ssh $USER_LAB@127.0.0.1 -p $PORT
 }
 

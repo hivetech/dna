@@ -7,6 +7,11 @@
       - pep8
       - make
       - ipython
+      - bison
+      - libncurses5-dev
+      - libreadline-dev
+      - libbz2-dev
+      - libsqlite3-dev
     
 # A BASH wrapper for getopts, for simple command line arguments
 - name: Install optparse
@@ -15,3 +20,19 @@
 # A tool that automatically formats Python code to conform to the PEP 8 style guide
 - name: Install automatic pep8 formater
   pip: name=autopep8
+
+# With one command, have a working Python virtualenv + virtualenvwrapper environment.
+#FIXME Error while using it
+- name: Install python Virtualenv Burrito
+  shell: export HOME={{ home }} && curl -s https://raw.github.com/brainsik/virtualenv-burrito/master/virtualenv-burrito.sh | '{{ shell.default }}'
+  ignore_errors: yes   # The script ends up with wrong status if it already exists but that is not an error and we want to stay idempotent
+
+# Simple Python version management
+#FIXME How does it work with the above ?
+- name: Download python version manager
+  git: repo=git://github.com/yyuu/pyenv.git dest={{ home }}/.pyenv
+
+# Go Version Manager http://github.com/moovweb/gvm
+- name: Install go version manager
+  shell: export HOME={{ home }} && curl -s https://raw.github.com/moovweb/gvm/master/binscripts/gvm-installer | bash
+  ignore_errors: yes   # The script ends up with wrong status if it already exists but that is not an error and we want to stay idempotent

@@ -10,7 +10,7 @@ DNA
 
 DNA is a community-driven compilation of dotfiles and projects, aimed
 at creating the most awesome and powerful development environment. 
-We use it here a Hivetech to setup fresh new machines and to provide our
+We use it here a Hivetech to setup fresh new machines and provide our
 [hivelab charm](https://github.com/hivetech/cells/tree/master/precise/hivelab)
 for the Unide project.
 
@@ -57,6 +57,9 @@ previous repo (https://github.com/hackliff/Dotfiles)
 
     * Optparse - [A BASH wrapper for getopts, for simple command line arguments](https://github.com/nk412/optparse)
     * Autopep8 - [A tool that automatically formats Python code to conform to the PEP 8 style guide](https://github.com/hhatto/autopep8)
+    * Virtual Burrito - [One command to have a working virtualenv + virtualenvwrapper environment](https://github.com/brainsik/virtualenv-burrito)
+    * Gvm - [Go Version Manager](https://github.com/moovweb/gvm)
+    * Pyenv - [Simple Python version management](https://github.com/yyuu/pyenv)
 
 * Plugins
 
@@ -168,5 +171,8 @@ Kudos
 * [hhatto](https://github.com/hhatto)
 * [ndbroadbent](https://github.com/ndbroadbent)
 * [creationix](https://github.com/creationix)
+* [brainsik](https://github.com/brainsik)
+* [moovweb](https://github.com/moovweb)
+* [yyuu](https://github.com/yyuu)
 
 * [Vim kudos](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#kudos)
