@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-#FIXME My terminal screws shortcuts anyway...
 escape	"^Tt"  #ctrl-z default interferes with emacs keybindings for terminal
 
 caption always "%{= dg} %{B}%H %{G}|%=%?%{d}%-w%?%{G}[ %{G}%n %t%?{%uw}%?%{G} ]%{w}%?%+w%?%=%{G}| %{B}%D %c"

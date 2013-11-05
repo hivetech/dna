@@ -36,7 +36,7 @@
   when: "'{{ shell.default }}' == 'bash'"
 
 # Zsh specific stuff
-# #FIXME To avoid the script: https://github.com/lmacken/ansible-hacker-playbook/blob/master/playbook.yml
+#FIXME To avoid the script: https://github.com/lmacken/ansible-hacker-playbook/blob/master/playbook.yml
 - name: Install oh-my-zsh framework
   shell: export HOME={{ home }} && curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
   when: "'{{ shell.prompt }}' == 'ohmyzsh'"

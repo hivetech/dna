@@ -57,5 +57,3 @@ And shoot:
 ```
 $ wget -qO- https://raw.github.com/hivetech/dna/blob/develop/utils/apt-git | bash
 ```
-
-Note this command is aliased as golab with `dna`.

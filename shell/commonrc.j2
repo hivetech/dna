@@ -21,16 +21,6 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 test -d $HOME/local/bin && PATH="$HOME/local/bin:$PATH"
 test -d $HOME/local/lib && PATH="$HOME/local/lib:$PATH"
 
-# Go configuration
-#TODO use of gvm ======================
-export GOROOT=/opt/go
-export GOOS=linux
-export GOARCH=amd64
-#export GOBIN=$GOROOT/bin
-export GOPATH=$HOME/dev/goworkspace
-export PATH=$PATH:/opt/go/bin:$GOPATH/bin
-# ======================================
-
 # ------------------------------------------------------------- Functions
 # Useful personal function, a little combinaison of two other one
 function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
@@ -68,6 +58,7 @@ function gi() { curl http://gitignore.io/api/$@ ;}
 if [[ -s $HOME/.nvm/nvm.sh ]]; then
     . $HOME/.nvm/nvm.sh  # This loads NVM
     if [ -z "$(nvm list | grep $NODE_VERSION)" ]; then
+      echo "Node $NODE_VERSION not found, install it..."
       nvm install $NODE_VERSION
     else
       nvm use v$NODE_VERSION
@@ -104,8 +95,8 @@ if [[ -d $HOME/.pyenv ]]; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
-  #TODO Install $PYTHON_VERSION if not already
   if [ -z "$(pyenv local | grep -e ^$PYTHON_VERSION$)" ]; then
+      echo "Python $GO_VERSION not found, install it..."
     pyenv install $PYTHON_VERSION
   fi
   pyenv local $PYTHON_VERSION
@@ -115,7 +106,11 @@ fi
 if [[ -d $HOME/.gvm ]]; then
   . $HOME/.gvm/scripts/gvm
   if [ -z "$(gvm list | grep $GO_VERSION)" ]; then
+      echo "Go $GO_VERSION not found, install it..."
     gvm install $GO_VERSION
   fi
   gvm use $GO_VERSION
 fi
+
+# Enable cheatsheets color syntaxing
+test -d $HOME/.cheat && export CHEATCOLORS=true

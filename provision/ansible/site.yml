@@ -18,7 +18,7 @@
   gather_facts: yes
 
 - hosts: '{{ hosts }}'
-  #FIXME accelerate: true
+  #TODO accelerate: true
 
   vars_files: 
     - '{{ data }}'
@@ -33,11 +33,11 @@
       with_items:
         - wget
         - git-core
-        #FIXME t plugin instruction is skipped
         - mercurial
     
     # Core components
     - include: shell.yml
+    - include: cheatsheet.yml
     - include: git.yml
     - include: dev.yml
     - include: utils.yml

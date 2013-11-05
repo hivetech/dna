@@ -44,8 +44,12 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * Oh-my-zsh - [A community-driven framework for managing your zsh configuration](https://github.com/robbyrussell/oh-my-zsh)
     * Liquidprompt - [A full-featured & carefully designed adaptive prompt for Bash & Zsh](https://github.com/nojhan/liquidprompt)
     * Gitignore.io - [Generate useful .gitignore files for your project](https://github.com/joeblau/gitignore.io)
+    * Cheat - [cheat allows you to create and view interactive cheatsheets on
+      the command-line. It was designed to help remind *nix system
+      administrators of options for commands that they use frequently, but not
+      frequently enough to remember.](https://github.com/chrisallenlane/cheat)
     * An easy way to extend the configuration with hooks shell/customrc.sh and shell/custom-alias.sh
-    * carefully designed \*rc files, screen and tmux configuration
+    * carefully designed and organized \*rc files, screen and tmux configurations
 
 * Git
 
@@ -85,8 +89,8 @@ $ cd $DNA_PATH && rake -T
 $ rake dna:synthetize               # Default will setup your local machine
 
 $ # Once installed
-$ dna-help -h
-$ dna-help --all
+$ cheat dna
+$ cheat <sub-command>  # t for example
 ```
 
 Note that the `synthetize` action is idempotent.
@@ -174,5 +178,6 @@ Kudos
 * [brainsik](https://github.com/brainsik)
 * [moovweb](https://github.com/moovweb)
 * [yyuu](https://github.com/yyuu)
+* [chrisallenlane](https://github.com/chrisallenlane)
 
 * [Vim kudos](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#kudos)

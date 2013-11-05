@@ -41,7 +41,7 @@ function pre_processing() {
         check=""
     fi
 
-    #FIXME home is a temporary hard coded value
+    #TODO home is a temporary hard coded value
     # For now it is useful as it allows /root or /vagrant as homes
     TARGET_HOME=/home/$user
 }

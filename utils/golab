@@ -4,7 +4,6 @@
 # Copyright (C) 2013 Xavier Bruhiere
 #
 # Distributed under terms of the MIT license.
-#TODO Test
 
 # const (
   export CONTAINER_LAB="hivetech/lab"
@@ -28,8 +27,9 @@ function kick_off_lab() {
   ID=$(docker run -d $CONTAINER_LAB)
   PORT=$(docker port  $ID $SSH_PORT)
   echo "[!] ssh password: proto"
-  #FIXME Either exit or error with wget or curl use
-  ssh $USER_LAB@127.0.0.1 -p $PORT
+  #TODO Automatic connection
+  echo "Now run:" 
+  echo -e "\t$ ssh $USER_LAB@127.0.0.1 -p $PORT"
 }
 
 

@@ -1,0 +1,13 @@
+# t - A command-line todo list manager for people that want to finish tasks, not organize them
+
+# Show tasks
+t
+
+# Register a new task
+t task
+
+# Edit an existing task
+t -e <task_id> <task_edition>
+
+# Mark a task as done
+t -f <task_id>
