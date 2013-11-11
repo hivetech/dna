@@ -1,0 +1,15 @@
+---
+# Dropbox Uploader is a BASH script which can be used to upload, download, list
+# or delete files from Dropbox, an online file sharing, synchronization and
+# backup service. http://www.andreafabrizi.it/?dropbox_uploader
+- name: Install Dropbox uploader
+  git: repo=https://github.com/andreafabrizi/Dropbox-Uploader.git 
+       dest=/{{ openlibs }}/dropbox-uploader
+
+- name: Link dropbox scripts
+  file: src=/{{ openlibs }}/dropbox-uploader/dropbox_uploader.sh 
+        path=/usr/local/bin/dropbox_uploader.sh
+        state=link
+- file: src=/{{ openlibs }}/dropbox-uploader/dropShell.sh state=link
+        path=/usr/local/bin/dropShell.sh
+        state=link

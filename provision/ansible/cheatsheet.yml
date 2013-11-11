@@ -1,7 +1,7 @@
 ---
 - name: Install cheatsheet project
   git: repo=git://github.com/chrisallenlane/cheat.git dest={{ openlibs }}/cheat
-- shell: chdir={{ openlibs }}//cheat python setup.py install
+- shell: chdir={{ openlibs }}/cheat python setup.py install
 
 - name: Copy cheatsheets
   file: dest={{ home }}/.cheat state=directory recurse=yes owner={{ ansible_user_id }} mode=600

@@ -9,9 +9,11 @@ editor: vim
 terminal_multiplexer: screen
 
 shell:
-  default: zsh
-  # ohmyzsh, liquidprompt or nothing special
-  prompt: ohmyzsh
+  # bash or zsh
+  default: bash
+  # ohmyzsh, bashit, liquidprompt or nothing special
+  #TODO Change "prompt" into "distribution"
+  prompt: bashit
 
 dev:
   # Leave it empty to skip the installation
@@ -20,7 +22,8 @@ dev:
   python_version: 2.7.5
 
 plugins:
-  - nvm
   - t
   - z
   - bd
+  - dropbox
+  - utils

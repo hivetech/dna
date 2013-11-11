@@ -46,8 +46,19 @@
   copy: src={{ dna_root }}/shell/zsh/zshrc dest={{ home }}/.zshrc owner={{ ansible_user_id }} mode=600
   when: "'{{ shell.default }}' == 'zsh'"
 
-- name: Changing the default shell to zsh
+- name: Setting default shell
   action: user shell=/bin/{{ shell.default }} user={{ ansible_user_id }}
+
+- name: Downlaod bash-it framework
+  git: repo=git://github.com/revans/bash-it.git dest={{ home }}/.bash_it
+  when: "'{{ shell.prompt }}' == 'bashit'"
+#FIXME Interactive installation not allowed with ansible
+- name: Copy non-interactive installation script
+  copy: src={{ dna_root }}/shell/bash/install-bash-it.sh dest={{ home }}/.bash_it owner={{ ansible_user_id }} mode=755
+  when: "'{{ shell.prompt }}' == 'bashit'"
+- name: Install bash-it
+  shell: export HOME={{ home }} && /{{ home }}/.bash_it/install-bash-it.sh
+  when: "'{{ shell.prompt }}' == 'bashit'"
 
 # Multiplexers
 - name: Configure screen

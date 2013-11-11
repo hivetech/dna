@@ -56,7 +56,7 @@ alias corr='shopt -s cdspell'
 
 # Misc
 alias starwars='telnet towel.blinkenlights.nl.'
-
 alias clipboard='xclip -sel clip'
+alias chx='chmod +x'
 
 #TODO alias pair-code

@@ -15,7 +15,8 @@ set -e
 
 # const (
     INVENTORY=$(locate -b '\hosts' | grep dna)
-    DNA_ROOT=$(locate -l 1 -b -r "^dna$")
+    #DNA_ROOT=$(locate -l 1 -b -r "^dna$")
+    DNA_ROOT=$PWD
     DATA=data.yml
     PARALLEL_LEVEL=10
 # )
@@ -61,6 +62,7 @@ function main() {
         build_prototype_image
 
     elif [ "$action" == "explore" ]; then
+      echo "[!] ssh password (and sudo) is proto"
 	    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${user}@127.0.0.1 -p ${port}
 
     else

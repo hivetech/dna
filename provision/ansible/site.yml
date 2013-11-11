@@ -53,3 +53,4 @@
     - name: giving back permissions to the user
       shell: chown -R {{ ansible_user_id }}:{{ ansible_user_id }} {{ home }}
     - shell: chmod -R ug+rxw,o+rx {{ home }}
+

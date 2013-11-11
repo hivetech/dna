@@ -1,3 +1,4 @@
+#TODO Ask user choice before installing go, python or node version (this is long process)
 # ------------------------------------------------------------ Constants
 # Assumptions (born to be tuned):
 #    - Your IT projects are in $HOME/dev/projects
@@ -96,10 +97,11 @@ if [[ -d $HOME/.pyenv ]]; then
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
   if [ -z "$(pyenv local | grep -e ^$PYTHON_VERSION$)" ]; then
-      echo "Python $GO_VERSION not found, install it..."
+      echo "Python $PYTHON_VERSION not found, install it..."
     pyenv install $PYTHON_VERSION
   fi
   pyenv local $PYTHON_VERSION
+  echo "Now using python $PYTHON_VERSION"
 fi
 
 # Go version management

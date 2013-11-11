@@ -1,0 +1,10 @@
+## Funcy python functions - A fancy and practical functional tools
+# Get full documentation
+firefox http://funcy.readthedocs.org/en/latest/
+
+## Pip-tools - A set of tools to keep your pinned Python dependencies fresh
+# Report installed libraries
+pip-review   # --auto or --interactive to upgrade them
+
+# Dump installed packages in your current library
+pip-dump   # You can use a .pipignore

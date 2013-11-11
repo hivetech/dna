@@ -43,6 +43,7 @@ previous repo (https://github.com/hackliff/Dotfiles)
 
     * Oh-my-zsh - [A community-driven framework for managing your zsh configuration](https://github.com/robbyrussell/oh-my-zsh)
     * Liquidprompt - [A full-featured & carefully designed adaptive prompt for Bash & Zsh](https://github.com/nojhan/liquidprompt)
+    * Bash-it - [A community bash framework](https://github.com/revans/bash-it)
     * Gitignore.io - [Generate useful .gitignore files for your project](https://github.com/joeblau/gitignore.io)
     * Cheat - [cheat allows you to create and view interactive cheatsheets on
       the command-line. It was designed to help remind *nix system
@@ -64,13 +65,18 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * Virtual Burrito - [One command to have a working virtualenv + virtualenvwrapper environment](https://github.com/brainsik/virtualenv-burrito)
     * Gvm - [Go Version Manager](https://github.com/moovweb/gvm)
     * Pyenv - [Simple Python version management](https://github.com/yyuu/pyenv)
+    * Funcy - [A fancy and practical functional tools](https://github.com/Suor/funcy)
+    * Nvm - [Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
+    * Pip-tools - [A set of tools to keep your pinned Python dependencies fresh](https://github.com/nvie/pip-tools)
+    * Tox - [standardize testing in python](http://tox.readthedocs.org/en/latest/)
 
 * Plugins
 
     * z - [z is the new j, yo](https://github.com/rupa/z)
     * t - [A command-line todo list manager for people that want to finish tasks, not organize them](http://stevelosh.com/projects/t/)
-    * bd - [Quickly go back to a parent directory in linux](https://github.com/vigneshwaranr/bd)
-    * nvm - [Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
+    * Bd - [Quickly go back to a parent directory in linux](https://github.com/vigneshwaranr/bd)
+    * Httpie - [HTTPie is a CLI, cURL-like tool for humans](https://github.com/jkbr/httpie)
+    * Dropbox - [A BASH script which can be used to upload, download, list or delete files from Dropbox](https://github.com/andreafabrizi/Dropbox-Uploader)
 
 * [Vim](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#plugins)
 
@@ -179,5 +185,11 @@ Kudos
 * [moovweb](https://github.com/moovweb)
 * [yyuu](https://github.com/yyuu)
 * [chrisallenlane](https://github.com/chrisallenlane)
+* [revans](https://github.com/revans)
+* [Suor](https://github.com/Suor)
+* [nvie](https://github.com/nvie)
+* holger krekel
+* [jkbr](https://github.com/jkbr)
+* [andreafabrizi](https://github.com/andreafabrizi)
 
 * [Vim kudos](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#kudos)
