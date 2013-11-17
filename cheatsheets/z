@@ -1,0 +1,13 @@
+# z - z is the new j, yo
+
+# cd into most frequent directory matching `pattern`
+z <pattern>
+
+# Show moves statistics
+z
+
+# cd to most recently accessed dir matching `pattern`
+z -t <pattern>
+
+# list all dirs matching `pattern` (by frecency)
+z -l <pattern>

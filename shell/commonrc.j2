@@ -1,3 +1,4 @@
+#TODO Ask user choice before installing go, python or node version (this is long process)
 # ------------------------------------------------------------ Constants
 # Assumptions (born to be tuned):
 #    - Your IT projects are in $HOME/dev/projects
@@ -5,6 +6,8 @@
 #export PROJECTS=$HOME/dev/projects
 export OPENLIBS={{ openlibs }}
 export NODE_VERSION={{ dev.node_version }}
+export GO_VERSION={{ dev.go_version }}
+export PYTHON_VERSION={{ dev.python_version }}
 export EDITOR={{ editor }}
 
 TIME=`date +"%T"`
@@ -18,16 +21,6 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 
 test -d $HOME/local/bin && PATH="$HOME/local/bin:$PATH"
 test -d $HOME/local/lib && PATH="$HOME/local/lib:$PATH"
-
-# Go configuration
-#TODO use of gvm ======================
-export GOROOT=/opt/go
-export GOOS=linux
-export GOARCH=amd64
-#export GOBIN=$GOROOT/bin
-export GOPATH=$HOME/dev/goworkspace
-export PATH=$PATH:/opt/go/bin:$GOPATH/bin
-# ======================================
 
 # ------------------------------------------------------------- Functions
 # Useful personal function, a little combinaison of two other one
@@ -65,14 +58,20 @@ function gi() { curl http://gitignore.io/api/$@ ;}
 #[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh  # This loads NVM
 if [[ -s $HOME/.nvm/nvm.sh ]]; then
     . $HOME/.nvm/nvm.sh  # This loads NVM
-    nvm use v$NODE_VERSION
+    if [ -z "$(nvm list | grep $NODE_VERSION)" ]; then
+      echo "Node $NODE_VERSION not found, install it..."
+      nvm install $NODE_VERSION
+    else
+      nvm use v$NODE_VERSION
+    fi
     [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
     export NODE_PATH=$HOME/.nvm/v$NODE_VERSION/lib/node_modules
     export NODE_ENV=development
 fi
 
 # Python virtualenv made easy
-test -f /usr/local/bin/virtualenvwrapper.sh && source /usr/local/bin/virtualenvwrapper.sh && export WORKON_HOME=$HOME/.virtualenvs
+#test -f /usr/local/bin/virtualenvwrapper.sh && source /usr/local/bin/virtualenvwrapper.sh && export WORKON_HOME=$HOME/.virtualenvs
+#TODO Testing https://github.com/brainsik/virtualenv-burrito
 
 # z is the new j, yo (https://github.com/rupa/z.git)
 test -d $OPENLIBS/z && source $OPENLIBS/z/z.sh
@@ -91,3 +90,36 @@ test -d $OPENLIBS/liquidprompt && source $OPENLIBS/liquidprompt/liquidprompt
 
 # A BASH wrapper for getopts, for simple command line arguments
 test -d $OPENLIBS/optparse && source $OPENLIBS/optparse/optparse.bash
+
+# Python interpreter management
+if [[ -d $HOME/.pyenv ]]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+  if [ -z "$(pyenv local | grep -e ^$PYTHON_VERSION$)" ]; then
+      echo "Python $PYTHON_VERSION not found, install it..."
+    pyenv install $PYTHON_VERSION
+  fi
+  pyenv local $PYTHON_VERSION
+  echo "Now using python $PYTHON_VERSION"
+fi
+
+# Go version management
+if [[ -d $HOME/.gvm ]]; then
+  . $HOME/.gvm/scripts/gvm
+  if [ -z "$(gvm list | grep $GO_VERSION)" ]; then
+      echo "Go $GO_VERSION not found, install it..."
+    gvm install $GO_VERSION
+  fi
+  gvm use $GO_VERSION
+fi
+
+# Enable cheatsheets color syntaxing
+test -d $HOME/.cheat && export CHEATCOLORS=true
+
+# Make stderr output red
+export LD_PRELOAD="$OPENLIBS/stderred/build/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
+
+# hub helps you win at git. http://hub.github.com/
+#TODO Test consequences
+eval "$(hub alias -s)"

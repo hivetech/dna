@@ -1,0 +1,13 @@
+#! /bin/bash
+# powered by DocumentUp and daux.io
+# https://github.com/justinwalsh/daux.io
+# http://documentup.com/
+
+if [ -f doc/package.json ]; then
+  #TODO check dependencies
+  cd doc
+  npm install && grunt
+else
+  #TODO Check git directory
+  x-www-browser http://documentup.com/`git config --get remote.origin.url | cut -d: -f2 | cut -d. -f1`
+fi

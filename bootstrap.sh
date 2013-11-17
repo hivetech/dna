@@ -1,8 +1,4 @@
 #! /bin/bash
-#
-# bootstrap.sh
-# Copyright (C) 2013 Xavier Bruhiere
-#
 
 export DNA_PATH=${DNA_PATH:-"/opt/dna"}
 
@@ -14,9 +10,6 @@ function install() {
     echo "clone dna and install it"
     test -d $DNA_PATH || sudo git clone https://github.com/hivetech/dna.git $DNA_PATH
     cd $DNA_PATH && sudo rake install
-
-    #echo "activate ansible"
-    #. /opt/ansible/hacking/env-setup
 }
 
 echo "install dna..."

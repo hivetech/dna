@@ -1,0 +1,10 @@
+---
+- name: Install cheatsheet project
+  git: repo=git://github.com/chrisallenlane/cheat.git dest={{ openlibs }}/cheat
+- shell: chdir={{ openlibs }}/cheat python setup.py install
+
+- name: Copy cheatsheets
+  file: dest={{ home }}/.cheat state=directory recurse=yes owner={{ ansible_user_id }} mode=600
+- copy: src={{ item }} dest={{ home }}/.cheat owner={{ ansible_user_id }} mode=600
+  with_fileglob:
+    - /{{ dna_root }}/cheatsheets/*

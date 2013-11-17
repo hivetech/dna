@@ -4,7 +4,6 @@
 # Copyright (C) 2013 Xavier Bruhiere
 #
 # Distributed under terms of the MIT license.
-#TODO Test
 
 # const (
   export CONTAINER_LAB="hivetech/lab"
@@ -24,10 +23,13 @@ function check_docker() {
 
 function kick_off_lab() {
   [[ -n "$(docker images | grep $CONTAINER_LAB)" ]] || docker pull $CONTAINER_LAB
+  #TODO Get Id if a container is already running
   ID=$(docker run -d $CONTAINER_LAB)
   PORT=$(docker port  $ID $SSH_PORT)
   echo "[!] ssh password: proto"
-  ssh $USER_LAB@127.0.0.1 -p $PORT
+  #TODO Automatic connection
+  echo "Now run:" 
+  echo -e "\t$ ssh $USER_LAB@127.0.0.1 -p $PORT"
 }
 
 

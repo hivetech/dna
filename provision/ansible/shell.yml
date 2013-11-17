@@ -10,6 +10,11 @@
     - acpi
     - lm-sensors
     - '{{ terminal_multiplexer }}'
+    - build-essential
+    - autoconf
+    - rake
+    - cmake
+    - libncurses5-dev
     
 - name: Copy shared shell configuration file
   template: src={{ dna_root }}/shell/commonrc.j2 dest={{ home }}/.commonrc owner={{ ansible_user_id }} mode=600
@@ -26,6 +31,25 @@
   copy: src={{ dna_root }}/shell/liquidpromptrc-dist dest={{ home }}/.liquidpromptrc
   when: "'{{ shell.prompt }}' == 'liquidprompt'"
 
+# The user-friendly command line shell.
+- name: Download fish-shell
+  git: repo=git://github.com/fish-shell/fish-shell.git dest={{ openlibs }}/fish-shell
+  when: "'{{ shell.default }}' == 'fish'"
+- name: Compile and install fish-shell
+  shell: chdir={{ openlibs }}/fish-shell autoconf && ./configure && make && make install
+  when: "'{{ shell.default }}' == 'fish'"
+- shell: echo "/usr/local/bin/fish" >> /etc/shells
+  when: "'{{ shell.default }}' == 'fish'"
+
+# Framework for managing your fish shell configuration inspired by Oh My ZSH.
+- name: Install oh-my-fish framework
+  shell: export HOME={{ home }} && curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.sh | sh
+  when: "'{{ shell.default }}' == 'fish'"
+  when: "'{{ shell.prompt }}' == 'ohmyfish'"
+- copy: src={{ dna_root }}/shell/fish/config.fish dest={{ home }}/.config/fish owner={{ ansible_user_id }} mode=600
+  when: "'{{ shell.default }}' == 'fish'"
+  when: "'{{ shell.prompt }}' == 'ohmyfish'"
+
 # Bash specific stuff
 - name: Configure bash
   copy: src={{ dna_root }}/shell/bash/bashrc dest={{ home }}/.bashrc owner={{ ansible_user_id }} mode=600
@@ -36,7 +60,7 @@
   when: "'{{ shell.default }}' == 'bash'"
 
 # Zsh specific stuff
-# #FIXME To avoid the script: https://github.com/lmacken/ansible-hacker-playbook/blob/master/playbook.yml
+#FIXME To avoid the script: https://github.com/lmacken/ansible-hacker-playbook/blob/master/playbook.yml
 - name: Install oh-my-zsh framework
   shell: export HOME={{ home }} && curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
   when: "'{{ shell.prompt }}' == 'ohmyzsh'"
@@ -46,8 +70,22 @@
   copy: src={{ dna_root }}/shell/zsh/zshrc dest={{ home }}/.zshrc owner={{ ansible_user_id }} mode=600
   when: "'{{ shell.default }}' == 'zsh'"
 
-- name: Changing the default shell to zsh
+- name: Setting default shell
   action: user shell=/bin/{{ shell.default }} user={{ ansible_user_id }}
+  when: "'{{ shell.default }}' == 'zsh' or '{{ shell.default }}' == 'bash'"
+# Fish-shell binary has a different localtion
+- action: user shell=/usr/local/bin/{{ shell.default }} user={{ ansible_user_id }}
+  when: "'{{ shell.default }}' == 'fish'"
+
+- name: Downlaod bash-it framework
+  git: repo=git://github.com/revans/bash-it.git dest={{ home }}/.bash_it
+  when: "'{{ shell.prompt }}' == 'bashit'"
+- name: Copy non-interactive installation script
+  copy: src={{ dna_root }}/shell/bash/install-bash-it.sh dest={{ home }}/.bash_it owner={{ ansible_user_id }} mode=755
+  when: "'{{ shell.prompt }}' == 'bashit'"
+- name: Install bash-it
+  shell: export HOME={{ home }} && /{{ home }}/.bash_it/install-bash-it.sh
+  when: "'{{ shell.prompt }}' == 'bashit'"
 
 # Multiplexers
 - name: Configure screen
@@ -56,3 +94,21 @@
 - name: Configure tmux
   copy: src={{ dna_root }}/shell/multiplexer/square.tmux.conf dest={{ home }}/.tmux.conf owner={{ ansible_user_id }} mode=600
   when: "'{{ terminal_multiplexer }}' == 'tmux'"
+
+# stderr in red.
+- name: Download stderred, make errors red in your shell
+  git: repo=https://github.com/sickill/stderred.git
+       dest={{ openlibs }}/stderred
+- name: Build and install stderred
+  shell: cd '{{ openlibs }}'/stderred && make
+
+# Fish shell like syntax highlighting for Zsh
+- name: Install zsh highlighting
+  git: repo=https://github.com/zsh-users/zsh-syntax-highlighting.git
+       dest={{ openlibs }}/zsh-syntax-highlighting
+  when: "'{{ shell.default }}' == 'zsh'"
+# ZSH port of Fish shell's history search feature
+- name: Install zsh command history search
+  git: repo=https://github.com/zsh-users/zsh-history-substring-search.git
+       dest={{openlibs}}/zsh-history-substring-search
+  when: "'{{ shell.default }}' == 'zsh'"

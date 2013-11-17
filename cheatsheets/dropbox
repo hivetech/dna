@@ -1,0 +1,7 @@
+# Upload a directory to dropbox
+dropbox-uploader upload <local-dir> <remote-dir>
+
+# Download a remote directory
+dropbox-uploader download <remote-dir> <local-dir>
+
+#TODO complete... https://github.com/andreafabrizi/Dropbox-Uploader

@@ -1,0 +1,35 @@
+# git-extras - GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
+
+# Get some help
+git extras --help
+
+# Available commands
+  git squash
+  git summary
+  git effort
+  git changelog
+  git commits-since
+  git count
+  git create-branch
+  git delete-branch
+  git delete-submodule
+  git delete-tag
+  git fresh-branch
+  git graft
+  git alias
+  git ignore
+  git info
+  git release
+  git contrib
+  git repl
+  git undo
+  git gh-pages
+  git setup
+  git touch
+  git obliterate
+  git feature
+  git refactor
+  git bug
+  git promote
+  git local-commits
+  git archive-file

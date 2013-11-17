@@ -7,10 +7,14 @@ DNA
 
 > Hacking environment genetics
 
+> By [Hive Tech](unide.co)
+
+This README is [also available in a friendly navigable format](http://documentup.com/hivetech/dna).
+
 
 DNA is a community-driven compilation of dotfiles and projects, aimed
 at creating the most awesome and powerful development environment. 
-We use it here a Hivetech to setup fresh new machines and to provide our
+We use it here a Hivetech to setup fresh new machines and provide our
 [hivelab charm](https://github.com/hivetech/cells/tree/master/precise/hivelab)
 for the Unide project.
 
@@ -42,28 +46,49 @@ previous repo (https://github.com/hackliff/Dotfiles)
 * Shell
 
     * Oh-my-zsh - [A community-driven framework for managing your zsh configuration](https://github.com/robbyrussell/oh-my-zsh)
+    * Oh-my-fish - [Framework for managing your fish shell configuration inspired by Oh My ZSH](https://github.com/bpinto/oh-my-fish)
+    * Fish-shell - [The user-friendly command line shell](https://github.com/fish-shell/fish-shell)
     * Liquidprompt - [A full-featured & carefully designed adaptive prompt for Bash & Zsh](https://github.com/nojhan/liquidprompt)
+    * Bash-it - [A community bash framework](https://github.com/revans/bash-it)
     * Gitignore.io - [Generate useful .gitignore files for your project](https://github.com/joeblau/gitignore.io)
+    * Stderred - [Stderr output in red](https://github.com/sickill/stderred)
+    * Cheat - [cheat allows you to create and view interactive cheatsheets on
+      the command-line. It was designed to help remind *nix system
+      administrators of options for commands that they use frequently, but not
+      frequently enough to remember.](https://github.com/chrisallenlane/cheat)
     * An easy way to extend the configuration with hooks shell/customrc.sh and shell/custom-alias.sh
-    * carefully designed \*rc files, screen and tmux configuration
+    * Carefully designed and organized \*rc files, screen and tmux configurations
+    * [Fish shell like syntax highlighting for Zsh](https://github.com/zsh-users/zsh-syntax-highlighting)
+    * [ZSH port of Fish shell's history search feature](https://github.com/zsh-users/zsh-history-substring-search)
 
 * Git
 
     * Git flow - [Git extensions to provide high-level repository operations for Vincent Driessen's branching model](https://github.com/nvie/gitflow)
     * Git-extras - [GIT utilities -- repo summary, repl, changelog population, author commit percentages and more](https://github.com/visionmedia/git-extras)
     * Scm breeze - [Adds numbered shortcuts to the output git status, and much more](https://github.com/ndbroadbent/scm_breeze)
+    * Hub - [hub helps you win at git](https://github.com/github/hub)
 
 * Dev
 
     * Optparse - [A BASH wrapper for getopts, for simple command line arguments](https://github.com/nk412/optparse)
     * Autopep8 - [A tool that automatically formats Python code to conform to the PEP 8 style guide](https://github.com/hhatto/autopep8)
+    * Virtual Burrito - [One command to have a working virtualenv + virtualenvwrapper environment](https://github.com/brainsik/virtualenv-burrito)
+    * Gvm - [Go Version Manager](https://github.com/moovweb/gvm)
+    * Pyenv - [Simple Python version management](https://github.com/yyuu/pyenv)
+    * Funcy - [A fancy and practical functional tools](https://github.com/Suor/funcy)
+    * Nvm - [Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
+    * Pip-tools - [A set of tools to keep your pinned Python dependencies fresh](https://github.com/nvie/pip-tools)
+    * Tox - [standardize testing in python](http://tox.readthedocs.org/en/latest/)
 
 * Plugins
 
     * z - [z is the new j, yo](https://github.com/rupa/z)
     * t - [A command-line todo list manager for people that want to finish tasks, not organize them](http://stevelosh.com/projects/t/)
-    * bd - [Quickly go back to a parent directory in linux](https://github.com/vigneshwaranr/bd)
-    * nvm - [Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
+    * Bd - [Quickly go back to a parent directory in linux](https://github.com/vigneshwaranr/bd)
+    * Httpie - [HTTPie is a CLI, cURL-like tool for humans](https://github.com/jkbr/httpie)
+    * Dropbox - [A BASH script which can be used to upload, download, list or delete files from Dropbox](https://github.com/andreafabrizi/Dropbox-Uploader)
+    * View-doc - Use [DocumentUp](https://github.com/jeromegn/DocumentUp) and [Daux.io](https://github.com/justinwalsh/daux.io) to browse your project doc
+    * Autoenv - [Directory-based environments](https://github.com/kennethreitz/autoenv)
 
 * [Vim](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#plugins)
 
@@ -82,8 +107,8 @@ $ cd $DNA_PATH && rake -T
 $ rake dna:synthetize               # Default will setup your local machine
 
 $ # Once installed
-$ dna-help -h
-$ dna-help --all
+$ cheat dna
+$ cheat <sub-command>  # t for example
 ```
 
 Note that the `synthetize` action is idempotent.
@@ -91,7 +116,7 @@ Note that the `synthetize` action is idempotent.
 Sandbox mode (still ansible style)
 ------------
 
-You can use test project in a virtualize environment. Typical use case would be
+You can test the project in a virtualize environment. Typical use case would be
 to enjoy a clean dev env while working in docker powered machines, or test your
 awesome fork.
 
@@ -151,8 +176,8 @@ License
 
 DNA is available under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
 
-Kudos
------
+Partners in crime
+-----------------
 
 * [nvie](https://github.com/nvie)
 * [visionmedia](https://github.com/visionmedia)
@@ -168,5 +193,22 @@ Kudos
 * [hhatto](https://github.com/hhatto)
 * [ndbroadbent](https://github.com/ndbroadbent)
 * [creationix](https://github.com/creationix)
+* [brainsik](https://github.com/brainsik)
+* [moovweb](https://github.com/moovweb)
+* [yyuu](https://github.com/yyuu)
+* [chrisallenlane](https://github.com/chrisallenlane)
+* [revans](https://github.com/revans)
+* [Suor](https://github.com/Suor)
+* [nvie](https://github.com/nvie)
+* holger krekel
+* [jkbr](https://github.com/jkbr)
+* [andreafabrizi](https://github.com/andreafabrizi)
+* [justinwalsh](https://github.com/justinwalsh)
+* [jeromegn](https://github.com/jeromegn)
+* [sickill](https://github.com/sickill)
+* [kennethreitz](https://github.com/kennethreitz)
+* [fish-shell](https://github.com/fish-shell)
+* [zsh-users](https://github.com/zsh-users)
+* [bpinto](https://github.com/bpinto)
 
 * [Vim kudos](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#kudos)

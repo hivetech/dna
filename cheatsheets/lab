@@ -1,0 +1,35 @@
+## Dna cheatsheet
+##
+## To learn more about a sub-command, use `cheat <command>` or <command> --help
+
+# t           - A command-line todo list manager for people that want to finish tasks, not organize them
+# z           - z is the new j, yo
+# bd          - Quickly go back to a parent directory in linux
+# autoenv     - Directory-based environments.
+
+# nvm         - Node Version Manager - Simple bash script to manage multiple active node.js versions
+# gvm         - Go Version Manager
+# pyenv       - Simple Python version management
+
+# autopep8    - A tool that automatically formats Python code to conform to the PEP 8 style guide
+
+# gi <os,languages,ide> - generates gitignore files 
+# up <n>      - Go back n directories
+# back <n>    - Reverses n last directory moves
+# mkdircd     - creates and cd into the new directory
+
+# git-flow    - Git extensions to provide high-level repository operations for Vincent Driessen's branching model
+# git-extras  - GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
+# scm-breeze  - Adds numbered shortcuts to the output git status, and much more
+# hub         - hub helps you win at git. http://hub.github.com/
+
+# golab       - Start and ssh you into a docker container powered by dna, as prototype user
+# task-check  - Report pending tasks in your project
+# openlibs-update - Update git-backed projects in {{ openlibs }}
+# apt-git     - One liner style for installation 
+
+# Funcy python functions - A fancy and practical functional tools
+
+# Pip-tools   - A set of tools to keep your pinned Python dependencies fresh
+
+# Dropbox-uploader - A bash script which can be used to upload, download, delete, list files (and more!)
