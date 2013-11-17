@@ -21,7 +21,7 @@ set -e
     PARALLEL_LEVEL=10
 # )
 
-source utils/libutils.sh
+source utils/utils.bash
 source libsynthetize.sh
 
 function pre_processing() {

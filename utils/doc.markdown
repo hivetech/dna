@@ -57,3 +57,11 @@ And shoot:
 ```
 $ wget -qO- https://raw.github.com/hivetech/dna/blob/develop/utils/apt-git | bash
 ```
+
+view-doc
+--------
+
+Browse beautiful project documentation.
+
+* Default uses DocumentUp.com to expose your ReadMe, if you host the code on github
+* Otherwise look for a doc directory powered by daux.io

@@ -62,3 +62,14 @@ test -f $HOME/.custom-alias && source $HOME/.custom-alias
 
 #TODO Move to zsh specific alias
 alias bower='noglob bower'
+
+# Fish shell like syntax highlighting for Zsh
+test -d $OPENLIBS/zsh-syntax-highlighting && source $OPENLIBS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# ZSH port of Fish shell's history search feature
+if [ -d $OPENLIBS/zsh-history-substring-search ]; then
+  source $OPENLIBS/zsh-history-substring-search/zsh-history-substring-search.zsh
+  # bind UP and DOWN arrow keys
+  bindkey '^[[A' history-substring-search-up
+  bindkey '^[[B' history-substring-search-down
+fi

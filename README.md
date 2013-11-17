@@ -7,6 +7,10 @@ DNA
 
 > Hacking environment genetics
 
+> By [Hive Tech](unide.co)
+
+This README is [also available in a friendly navigable format](http://documentup.com/hivetech/dna).
+
 
 DNA is a community-driven compilation of dotfiles and projects, aimed
 at creating the most awesome and powerful development environment. 
@@ -42,21 +46,27 @@ previous repo (https://github.com/hackliff/Dotfiles)
 * Shell
 
     * Oh-my-zsh - [A community-driven framework for managing your zsh configuration](https://github.com/robbyrussell/oh-my-zsh)
+    * Oh-my-fish - [Framework for managing your fish shell configuration inspired by Oh My ZSH](https://github.com/bpinto/oh-my-fish)
+    * Fish-shell - [The user-friendly command line shell](https://github.com/fish-shell/fish-shell)
     * Liquidprompt - [A full-featured & carefully designed adaptive prompt for Bash & Zsh](https://github.com/nojhan/liquidprompt)
     * Bash-it - [A community bash framework](https://github.com/revans/bash-it)
     * Gitignore.io - [Generate useful .gitignore files for your project](https://github.com/joeblau/gitignore.io)
+    * Stderred - [Stderr output in red](https://github.com/sickill/stderred)
     * Cheat - [cheat allows you to create and view interactive cheatsheets on
       the command-line. It was designed to help remind *nix system
       administrators of options for commands that they use frequently, but not
       frequently enough to remember.](https://github.com/chrisallenlane/cheat)
     * An easy way to extend the configuration with hooks shell/customrc.sh and shell/custom-alias.sh
-    * carefully designed and organized \*rc files, screen and tmux configurations
+    * Carefully designed and organized \*rc files, screen and tmux configurations
+    * [Fish shell like syntax highlighting for Zsh](https://github.com/zsh-users/zsh-syntax-highlighting)
+    * [ZSH port of Fish shell's history search feature](https://github.com/zsh-users/zsh-history-substring-search)
 
 * Git
 
     * Git flow - [Git extensions to provide high-level repository operations for Vincent Driessen's branching model](https://github.com/nvie/gitflow)
     * Git-extras - [GIT utilities -- repo summary, repl, changelog population, author commit percentages and more](https://github.com/visionmedia/git-extras)
     * Scm breeze - [Adds numbered shortcuts to the output git status, and much more](https://github.com/ndbroadbent/scm_breeze)
+    * Hub - [hub helps you win at git](https://github.com/github/hub)
 
 * Dev
 
@@ -77,6 +87,8 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * Bd - [Quickly go back to a parent directory in linux](https://github.com/vigneshwaranr/bd)
     * Httpie - [HTTPie is a CLI, cURL-like tool for humans](https://github.com/jkbr/httpie)
     * Dropbox - [A BASH script which can be used to upload, download, list or delete files from Dropbox](https://github.com/andreafabrizi/Dropbox-Uploader)
+    * View-doc - Use [DocumentUp](https://github.com/jeromegn/DocumentUp) and [Daux.io](https://github.com/justinwalsh/daux.io) to browse your project doc
+    * Autoenv - [Directory-based environments](https://github.com/kennethreitz/autoenv)
 
 * [Vim](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#plugins)
 
@@ -104,7 +116,7 @@ Note that the `synthetize` action is idempotent.
 Sandbox mode (still ansible style)
 ------------
 
-You can use test project in a virtualize environment. Typical use case would be
+You can test the project in a virtualize environment. Typical use case would be
 to enjoy a clean dev env while working in docker powered machines, or test your
 awesome fork.
 
@@ -164,8 +176,8 @@ License
 
 DNA is available under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
 
-Kudos
------
+Partners in crime
+-----------------
 
 * [nvie](https://github.com/nvie)
 * [visionmedia](https://github.com/visionmedia)
@@ -191,5 +203,12 @@ Kudos
 * holger krekel
 * [jkbr](https://github.com/jkbr)
 * [andreafabrizi](https://github.com/andreafabrizi)
+* [justinwalsh](https://github.com/justinwalsh)
+* [jeromegn](https://github.com/jeromegn)
+* [sickill](https://github.com/sickill)
+* [kennethreitz](https://github.com/kennethreitz)
+* [fish-shell](https://github.com/fish-shell)
+* [zsh-users](https://github.com/zsh-users)
+* [bpinto](https://github.com/bpinto)
 
 * [Vim kudos](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#kudos)

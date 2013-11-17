@@ -1,0 +1,5 @@
+# Beautiful Docs - Pointers to useful, well-written, and otherwise beautiful documentation 
+$BROWSER https://github.com/PharkMillups/beautiful-docs
+
+# Use DocumentUp or daux.io dcumentation viewer
+view-doc  # From poject root directory

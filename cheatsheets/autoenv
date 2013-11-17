@@ -1,0 +1,5 @@
+## autoenv - Directory-based environments.
+# Setup the shell environment for a given project
+touch $PROJECT_PATH/.env
+echo "echo 'woah'" > $PROJECT_PATH/.env
+cd $PROJECT_PATH

@@ -9,14 +9,16 @@ editor: vim
 terminal_multiplexer: screen
 
 shell:
-  # bash or zsh
-  default: bash
-  # ohmyzsh, bashit, liquidprompt or nothing special
+  # bash, fish or zsh
+  default: zsh
+  # ohmyzsh, ohmyfish, bashit, liquidprompt or nothing special
   #TODO Change "prompt" into "distribution"
-  prompt: bashit
+  prompt: ohmyzsh
 
 dev:
+  ruby_manager: rbenv
   # Leave it empty to skip the installation
+  ruby_version: 1.9.3
   node_version: 0.11.7
   go_version: go1
   python_version: 2.7.5

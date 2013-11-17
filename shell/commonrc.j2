@@ -116,3 +116,10 @@ fi
 
 # Enable cheatsheets color syntaxing
 test -d $HOME/.cheat && export CHEATCOLORS=true
+
+# Make stderr output red
+export LD_PRELOAD="$OPENLIBS/stderred/build/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
+
+# hub helps you win at git. http://hub.github.com/
+#TODO Test consequences
+eval "$(hub alias -s)"
