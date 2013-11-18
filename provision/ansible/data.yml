@@ -16,11 +16,12 @@ shell:
   prompt: ohmyzsh
 
 dev:
+  # rbenv and, soon, rvm
   ruby_manager: rbenv
   # Leave it empty to skip the installation
-  ruby_version: 1.9.3
+  ruby_version: 2.0.0-dev
   node_version: 0.11.7
-  go_version: go1
+  go_version: go1.2rc5
   python_version: 2.7.5
 
 plugins:

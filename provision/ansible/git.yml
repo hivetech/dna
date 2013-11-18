@@ -22,7 +22,7 @@
   shell: /{{ home }}/.scm_breeze/install.sh
 
 # hub helps you win at git. http://hub.github.com/
-# #TODO Follow completion instruction
+#TODO Follow completion instruction
 - name: Download hub
   git: repo=https://github.com/github/hub.git
        dest={{ openlibs }}/hub

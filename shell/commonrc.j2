@@ -8,6 +8,7 @@ export OPENLIBS={{ openlibs }}
 export NODE_VERSION={{ dev.node_version }}
 export GO_VERSION={{ dev.go_version }}
 export PYTHON_VERSION={{ dev.python_version }}
+export RUBY_VERSION={{ dev.ruby_version }}
 export EDITOR={{ editor }}
 
 TIME=`date +"%T"`
@@ -108,7 +109,7 @@ fi
 if [[ -d $HOME/.gvm ]]; then
   . $HOME/.gvm/scripts/gvm
   if [ -z "$(gvm list | grep $GO_VERSION)" ]; then
-      echo "Go $GO_VERSION not found, install it..."
+    echo "Go $GO_VERSION not found, install it..."
     gvm install $GO_VERSION
   fi
   gvm use $GO_VERSION
@@ -121,5 +122,19 @@ test -d $HOME/.cheat && export CHEATCOLORS=true
 export LD_PRELOAD="$OPENLIBS/stderred/build/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
 
 # hub helps you win at git. http://hub.github.com/
-#TODO Test consequences
-eval "$(hub alias -s)"
+#FIXME Prevent at least scm_breeze plugin to work
+#eval "$(hub alias -s)"
+
+if [[ -d $HOME/.rbenv ]]; then
+  # Rbenv initialisation (ruby version manager)
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+
+  # Check if requested ruby version is installed
+  if [ -z "$(rbenv versions | grep $RUBY_VERSION)" ]; then
+    echo "Ruby $RUBY_VERSION not found, install it..."
+    rbenv install $RUBY_VERSION
+  fi
+  echo "Now using ruby $RUBY_VERSION"
+  rbenv global $RUBY_VERSION
+fi

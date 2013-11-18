@@ -24,6 +24,8 @@ Features
 * Airline status line
 * Useful tlib and webapi libs installed
 * Git diff show
+* Powerfull semantic for search, substitution and abbrev
+* Ruby on rails and bundle shortcuts
 
 
 Keymaps
@@ -49,6 +51,8 @@ Keymaps
     * Nerdtree window        : \<F4\>
     * Buffers window         : ,yr
     * Save as sudo           : :w!!
+    * Better iabbrev         : :Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
+    * Better search          : :Subvert/di{e,ce}/spinner{,s}/g
 
 * Dev
 
@@ -102,13 +106,16 @@ Plugins
 * YankRing - [Maintains a history of previous yanks, changes and deletes ](https://github.com/vim-scripts/YankRing.vim)
 * Airline - [lean & mean status/tabline for vim that's light as air](https://github.com/bling/vim-airline)
 * Gitgutter - [A Vim plugin which shows a git diff in the gutter (sign column)](https://github.com/airblade/vim-gitgutter)
+* Abolish - [easily search for, substitute, and abbreviate multiple variants of a word](https://github.com/tpope/vim-abolish)
+* Rails - [Ruby on Rails power tools](https://github.com/tpope/vim-rails)
+* Bundler - [Lightweight support for Ruby's Bundler](https://github.com/tpope/vim-bundler)
 
 
 Kudos
 -----
 
 * [gmarik](https://github.com/gmarik)
-* [tpope](https://github.com/tpope/vim-fugitive)
+* [tpope](https://github.com/tpope)
 * [scrooloose](https://github.com/scrooloose)
 * [altercation](https://github.com/altercation)
 * [Raimondi](https://github.com/Raimondi)

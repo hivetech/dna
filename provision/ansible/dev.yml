@@ -12,6 +12,7 @@
       - libreadline-dev
       - libbz2-dev
       - libsqlite3-dev
+      - ruby1.9.3
     
 # A BASH wrapper for getopts, for simple command line arguments
 - name: Install optparse
@@ -27,8 +28,18 @@
 - name: Install pip-tools
   pip: name=pip-tools
 
+#FIXME Crash at use
+# Giving git more tentacles
+- name: Install octogit
+  pip: name=octogit
+
 - name: Install tox
   pip: name=tox
+
+# Installs latest available version of rake.
+#FIXME Can't found ruby > 1.9.2
+#- name: Install rubocop
+  #gem: name=rubocop state=latest
 
 #TODO Is it better than using https://github.com/yyuu/pyenv-virtualenvwrapper ?
 # With one command, have a working Python virtualenv + virtualenvwrapper environment.
@@ -51,3 +62,16 @@
 - name: Install Node version manager
   git: repo=https://github.com/creationix/nvm
        dest={{ home }}/.nvm
+
+# ------------------- Ruby
+# Groom your app’s Ruby environment
+- name: Install Rbenv, ruby version manager
+  git: repo=https://github.com/sstephenson/rbenv
+       dest={{ home }}/.rbenv
+  when: "'{{ dev.ruby_manager }}' == 'rbenv'"
+
+# Compile and install Ruby
+- name: Install ruby-build as rbenv plugin
+  git: repo=https://github.com/sstephenson/ruby-build
+    dest={{ home }}/.rbenv/plugins/ruby-build
+  when: "'{{ dev.ruby_manager }}' == 'rbenv'"

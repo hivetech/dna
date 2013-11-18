@@ -79,6 +79,9 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * Nvm - [Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
     * Pip-tools - [A set of tools to keep your pinned Python dependencies fresh](https://github.com/nvie/pip-tools)
     * Tox - [standardize testing in python](http://tox.readthedocs.org/en/latest/)
+    * Rbenv - [Groom your app’s Ruby environment](https://github.com/sstephenson/rbenv)
+    * Ruby-build - [Compile and install Ruby](https://github.com/sstephenson/ruby-build)
+    * Rubocop - [A robust Ruby code analyzer, based on the community Ruby style guide](https://github.com/bbatsov/rubocop)
 
 * Plugins
 
@@ -107,11 +110,11 @@ $ cd $DNA_PATH && rake -T
 $ rake dna:synthetize               # Default will setup your local machine
 
 $ # Once installed
-$ cheat dna
-$ cheat <sub-command>  # t for example
+$ cheat lab
+$ cheat <sub-command>  # git-extras for example
 ```
 
-Note that the `synthetize` action is idempotent.
+Notice the `synthetize` action is idempotent.
 
 Sandbox mode (still ansible style)
 ------------
@@ -210,5 +213,9 @@ Partners in crime
 * [fish-shell](https://github.com/fish-shell)
 * [zsh-users](https://github.com/zsh-users)
 * [bpinto](https://github.com/bpinto)
+* [sstephenson](https://github.com/sstephenson)
+* [bbatsov](https://github.com/bbatsov)
 
 * [Vim kudos](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#kudos)
+
+... among many, many more contributors on cited projects.
