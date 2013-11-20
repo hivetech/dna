@@ -27,27 +27,27 @@
 
   tasks:
     # Factored instructions
-    - name: Install common dependencies
-      when: ansible_pkg_mgr == "apt"
-      action: apt pkg=$item state=latest update_cache=true
-      with_items:
-        - wget
-        - git-core
-        - mercurial
+    #- name: Install common dependencies
+      #when: ansible_pkg_mgr == "apt"
+      #action: apt pkg=$item state=latest update_cache=true
+      #with_items:
+        #- wget
+        #- git-core
+        #- mercurial
     
     # Core components
     - include: shell.yml
-    - include: cheatsheet.yml
-    - include: git.yml
-    - include: dev.yml
-    - include: utils.yml
-    - include: vim.yml
-      when: "'{{ editor }}' == 'vim'"
+    #- include: cheatsheet.yml
+    #- include: git.yml
+    #- include: dev.yml
+    #- include: utils.yml
+    #- include: vim.yml
+      #when: "'{{ editor }}' == 'vim'"
 
     # Plugins
-    - include: '{{ item }}'
-      when: "'{{ item }}'.split('/')[-1][:-4] in {{ plugins }}"
-      with_fileglob: plugins/*
+    #- include: '{{ item }}'
+      #when: "'{{ item }}'.split('/')[-1][:-4] in {{ plugins }}"
+      #with_fileglob: plugins/*
 
     # Finish him
     - name: giving back permissions to the user

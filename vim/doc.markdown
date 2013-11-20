@@ -72,12 +72,18 @@ Keymaps
     * opens git dirty files              : ,ocf
     * Open a window with {ipython,bash,zsh,mysql,node,irb,R} prompt : ,t{y,b,z,s,n,i,r}
     * Go to {next,previous} git change   : g{h,H}
+    * <C-x><C-o>                         : Completion menu for go code
 
 * Move
 
     * 4 lines {forward,backward} : \<C-{e,y}\>
     * Navigate buffers           : {right,left} arrow
     * Navigate windows           : {up,down} arrow
+
+* LaTex
+
+    * Compile the current file   : ,ll
+    * Omnicompletion             : <C-x><C-o>
 
 
 
@@ -109,6 +115,9 @@ Plugins
 * Abolish - [easily search for, substitute, and abbreviate multiple variants of a word](https://github.com/tpope/vim-abolish)
 * Rails - [Ruby on Rails power tools](https://github.com/tpope/vim-rails)
 * Bundler - [Lightweight support for Ruby's Bundler](https://github.com/tpope/vim-bundler)
+* Vim-gocode - [A Go bundle for Vundle or Pathogen](https://github.com/Blackrush/vim-gocode)
+* LaTex-Box - [Lightweight Toolbox for LaTeX](https://github.com/LaTeX-Box-Team/LaTeX-Box)
+* YouCompleteMe - [A code-completion engine for Vim](https://github.com/Valloric/YouCompleteMe)
 
 
 Kudos
@@ -133,3 +142,6 @@ Kudos
 * [fishburn](http://www.vim.org/account/profile.php?user_id=837)
 * [bling](https://github.com/bling)
 * [airblade](https://github.com/airblade)
+* [Blackrush](https://github.com/Blackrush)
+* [LaTeX-Box](https://github.com/LaTeX-Box-Team)
+* [Valloric](https://github.com/Valloric)

@@ -25,6 +25,9 @@ function! LoadBundles()
     Bundle 'https://github.com/tpope/vim-rails'
     Bundle 'https://github.com/tpope/vim-bundler'
     Bundle 'bling/vim-airline'
+    Bundle 'Blackrush/vim-gocode'
+    Bundle 'LaTeX-Box-Team/LaTeX-Box'
+    Bundle 'Valloric/YouCompleteMe'
     " --------------------------------------------------
 
     " Extra plugins ------------------------------------

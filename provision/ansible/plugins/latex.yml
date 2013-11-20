@@ -1,0 +1,9 @@
+---
+- name: Install dev module dependencies
+  when: ansible_pkg_mgr == "apt"
+  action: apt pkg={{ item }} state=latest
+  with_items:
+    - texlive 
+    - texlive-lang-french 
+    - texlive-latex-extra
+    - latexmk

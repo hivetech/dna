@@ -66,7 +66,8 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * Git flow - [Git extensions to provide high-level repository operations for Vincent Driessen's branching model](https://github.com/nvie/gitflow)
     * Git-extras - [GIT utilities -- repo summary, repl, changelog population, author commit percentages and more](https://github.com/visionmedia/git-extras)
     * Scm breeze - [Adds numbered shortcuts to the output git status, and much more](https://github.com/ndbroadbent/scm_breeze)
-    * Hub - [hub helps you win at git](https://github.com/github/hub)
+    * Octogit - [giving git more tentacles](http://myusuf3.github.com/octogit/)
+    * Git-hub - [Do GitHub operations from the `git` command](https://github.com/ingydotnet/git-hub)
 
 * Dev
 
@@ -81,7 +82,10 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * Tox - [standardize testing in python](http://tox.readthedocs.org/en/latest/)
     * Rbenv - [Groom your app’s Ruby environment](https://github.com/sstephenson/rbenv)
     * Ruby-build - [Compile and install Ruby](https://github.com/sstephenson/ruby-build)
+    * Rbenv-bundler - [an rbenv plugin that makes shims aware of bundle installation paths](https://github.com/carsomyr/rbenv-bundler)
+    * Rbenv-gemset - [Add excellent gem / gemset management to your rbenv!](https://github.com/jf/rbenv-gemset)
     * Rubocop - [A robust Ruby code analyzer, based on the community Ruby style guide](https://github.com/bbatsov/rubocop)
+    * Gocode - [An autocompletion daemon for the Go programming language](https://github.com/nsf/gocode)
 
 * Plugins
 
@@ -92,6 +96,7 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * Dropbox - [A BASH script which can be used to upload, download, list or delete files from Dropbox](https://github.com/andreafabrizi/Dropbox-Uploader)
     * View-doc - Use [DocumentUp](https://github.com/jeromegn/DocumentUp) and [Daux.io](https://github.com/justinwalsh/daux.io) to browse your project doc
     * Autoenv - [Directory-based environments](https://github.com/kennethreitz/autoenv)
+    * LaTex - [A document preparation system](http://www.latex-project.org/)
 
 * [Vim](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#plugins)
 
@@ -215,6 +220,10 @@ Partners in crime
 * [bpinto](https://github.com/bpinto)
 * [sstephenson](https://github.com/sstephenson)
 * [bbatsov](https://github.com/bbatsov)
+* [nsf](https://github.com/nsf)
+* [ingydotnet](https://github.com/ingydotnet)
+* [carsomyr](https://github.com/carsomyr)
+* [jf](https://github.com/jf)
 
 * [Vim kudos](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#kudos)
 

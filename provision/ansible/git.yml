@@ -21,10 +21,23 @@
 - name: Install scm breeze
   shell: /{{ home }}/.scm_breeze/install.sh
 
+#FIXME Kind of a conflict between the 3 following projects, will see at use
 # hub helps you win at git. http://hub.github.com/
 #TODO Follow completion instruction
-- name: Download hub
-  git: repo=https://github.com/github/hub.git
-       dest={{ openlibs }}/hub
-- name: Install hub
-  shell: chdir=/{{ openlibs }}/hub rake install
+#FIXME Prevent other plugin like scm to work because of the git alias
+#- name: Download hub
+  #git: repo=https://github.com/github/hub.git
+       #dest={{ openlibs }}/hub
+#- name: Install hub
+  #shell: chdir=/{{ openlibs }}/hub rake install
+
+#FIXME Crash at use
+# Giving git more tentacles
+- name: Install octogit
+  pip: name=octogit
+
+# Do GitHub operations from the `git` command
+- name: Install git-hub
+  git: repo=https://github.com/ingydotnet/git-hub.git
+    dest={{ openlibs }}/git-hub
+- shell: chdir={{ openlibs }}/git-hub make install

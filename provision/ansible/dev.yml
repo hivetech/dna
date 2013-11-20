@@ -3,16 +3,19 @@
   when: ansible_pkg_mgr == "apt"
   action: apt pkg={{ item }} state=latest update_cache=true
   with_items:
-      - python-pip
-      - pep8
-      - make
-      - ipython
-      - bison
-      - libncurses5-dev
-      - libreadline-dev
-      - libbz2-dev
-      - libsqlite3-dev
-      - ruby1.9.3
+    - python-pip
+    - pep8
+    - make
+    - ipython
+    - bison
+    - libssl-dev
+    - zlib1g-dev
+    - libncurses5-dev
+    - libreadline-dev
+    - libbz2-dev
+    - libsqlite3-dev
+    - ruby1.9.3
+    - golang
     
 # A BASH wrapper for getopts, for simple command line arguments
 - name: Install optparse
@@ -28,11 +31,6 @@
 - name: Install pip-tools
   pip: name=pip-tools
 
-#FIXME Crash at use
-# Giving git more tentacles
-- name: Install octogit
-  pip: name=octogit
-
 - name: Install tox
   pip: name=tox
 
@@ -42,6 +40,7 @@
   #gem: name=rubocop state=latest
 
 #TODO Is it better than using https://github.com/yyuu/pyenv-virtualenvwrapper ?
+#TODO Check, test and use plugins https://github.com/yyuu/pyenv/wiki/Plugins
 # With one command, have a working Python virtualenv + virtualenvwrapper environment.
 - name: Install python Virtualenv Burrito
   shell: export HOME={{ home }} && curl -s https://raw.github.com/brainsik/virtualenv-burrito/master/virtualenv-burrito.sh | bash
@@ -64,6 +63,7 @@
        dest={{ home }}/.nvm
 
 # ------------------- Ruby
+#NOTE Interesting ? https://github.com/fesplugas/rbenv-installer
 # Groom your app’s Ruby environment
 - name: Install Rbenv, ruby version manager
   git: repo=https://github.com/sstephenson/rbenv
@@ -73,5 +73,21 @@
 # Compile and install Ruby
 - name: Install ruby-build as rbenv plugin
   git: repo=https://github.com/sstephenson/ruby-build
-    dest={{ home }}/.rbenv/plugins/ruby-build
+       dest={{ home }}/.rbenv/plugins/ruby-build
   when: "'{{ dev.ruby_manager }}' == 'rbenv'"
+
+# an rbenv plugin that makes shims aware of bundle installation paths
+- name: Install rbenv-bundler plugin
+  git: repo=https://github.com/carsomyr/rbenv-bundler
+       dest={{ home }}/.rbenv/plugins/bundler
+  when: "'{{ dev.ruby_manager }}' == 'rbenv'"
+
+# Add excellent gem / gemset management to your rbenv!
+- name: Install rbenv-gemset plugin
+  git: repo=https://github.com/jf/rbenv-gemset
+    dest={{ home }}/.rbenv/plugins/rbenv-gemset
+  when: "'{{ dev.ruby_manager }}' == 'rbenv'"
+
+# An autocompletion daemon for the Go programming language
+- name: Install go configuration for vim
+  shell: go get -u github.com/nsf/gocode

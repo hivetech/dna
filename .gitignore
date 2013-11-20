@@ -3,3 +3,6 @@ optparse.bash
 
 # Python
 *.pyc
+
+# pyenv
+.python-version

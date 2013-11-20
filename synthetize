@@ -14,9 +14,10 @@ set -e
 #TODO flag to setup the target for fireball use
 
 # const (
-    INVENTORY=$(locate -b '\hosts' | grep dna)
     #DNA_ROOT=$(locate -l 1 -b -r "^dna$")
+    #INVENTORY=$(locate -b '\hosts' | grep dna)
     DNA_ROOT=$PWD
+    INVENTORY=$DNA_ROOT/provision/ansible/hosts
     DATA=data.yml
     PARALLEL_LEVEL=10
 # )

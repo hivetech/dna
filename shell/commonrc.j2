@@ -60,8 +60,11 @@ function gi() { curl http://gitignore.io/api/$@ ;}
 if [[ -s $HOME/.nvm/nvm.sh ]]; then
     . $HOME/.nvm/nvm.sh  # This loads NVM
     if [ -z "$(nvm list | grep $NODE_VERSION)" ]; then
-      echo "Node $NODE_VERSION not found, install it..."
-      nvm install $NODE_VERSION
+      echo -n "Node $NODE_VERSION not found, do you want to install it ? [y/N] "
+      read answer
+      if [ "${answer}" == "y" ]; then
+        nvm install $NODE_VERSION
+      fi
     else
       nvm use v$NODE_VERSION
     fi
@@ -98,8 +101,11 @@ if [[ -d $HOME/.pyenv ]]; then
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
   if [ -z "$(pyenv local | grep -e ^$PYTHON_VERSION$)" ]; then
-      echo "Python $PYTHON_VERSION not found, install it..."
-    pyenv install $PYTHON_VERSION
+    echo -n "Python $PYTHON_VERSION not found, do you want to install it ? [y/N] "
+    read answer
+    if [ "${answer}" == "y" ]; then
+      pyenv install $PYTHON_VERSION
+    fi
   fi
   pyenv local $PYTHON_VERSION
   echo "Now using python $PYTHON_VERSION"
@@ -108,9 +114,13 @@ fi
 # Go version management
 if [[ -d $HOME/.gvm ]]; then
   . $HOME/.gvm/scripts/gvm
+  #FIXME Not exact matching: Think requested go1 is here if go1.1-rc* is installed for example
   if [ -z "$(gvm list | grep $GO_VERSION)" ]; then
-    echo "Go $GO_VERSION not found, install it..."
-    gvm install $GO_VERSION
+    echo -n "Go $GO_VERSION not found, do you want to install it ? [y/N] "
+    read answer
+    if [ "${answer}" == "y" ]; then
+      gvm install $GO_VERSION
+    fi
   fi
   gvm use $GO_VERSION
 fi
@@ -132,8 +142,11 @@ if [[ -d $HOME/.rbenv ]]; then
 
   # Check if requested ruby version is installed
   if [ -z "$(rbenv versions | grep $RUBY_VERSION)" ]; then
-    echo "Ruby $RUBY_VERSION not found, install it..."
-    rbenv install $RUBY_VERSION
+    echo -n "Ruby $RUBY_VERSION not found, do you want to install it ? [y/N] "
+    read answer
+    if [ "${answer}" == "y" ]; then
+      rbenv install $RUBY_VERSION
+    fi
   fi
   echo "Now using ruby $RUBY_VERSION"
   rbenv global $RUBY_VERSION

@@ -3,16 +3,18 @@
   when: ansible_pkg_mgr == "apt"
   action: apt pkg={{ item }} state=latest update_cache=true
   with_items:
-      - vim
-      - curl
-      - exuberant-ctags
-      - python-dev
-      - xclip
-      - fontconfig
+    - vim
+    - curl
+    - exuberant-ctags
+    - python-dev
+    - xclip
+    - fontconfig
+    - build-essential
+    - cmake
 
 - name: Install python dependencies
   pip: name=twisted
-  pip: name=flake8
+  pip: name={{ dev.python_checker }}
 
 - name: Prepare vim configuration
   file: path={{ home }}/.vim/plugin/settings state=directory recurse=yes owner={{ ansible_user_id }} mode=600
@@ -27,8 +29,16 @@
   with_fileglob:
       - ${dna_root}/vim/plugin/settings/*.vim
 
+#FIXME Nothing appears
 - name: Install Powerline fonts
-  copy: src={{ dna_root }}/misc/fonts/PowerlineSymbols.otf dest={{ home }}/.fonts owner={{ ansible_user_id }} mode=600
+  file: path={{ home }}/.fonts state=directory recurse=yes owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/misc/fonts/PowerlineSymbols.otf dest={{ home }}/.fonts/ owner={{ ansible_user_id }} mode=600
 - shell: fc-cache -vf '{{ home }}'/.fonts
 - shell: mkdir -p '{{ home }}'/.config/fontconfig/conf.d/
 - copy: src={{ dna_root }}/misc/fonts/10-powerline-symbols.conf dest={{ home }}/.config/fontconfig/conf.d/ owner={{ ansible_user_id }} mode=600
+
+- name: Install YouCompleteMe
+  git: repo=https://github.com/Valloric/YouCompleteMe.git
+       dest={{ home }}/.vim/bundle/YouCompleteMe
+- shell: chdir={{ home }}/.vim/bundle/YouCompleteMe git submodule update --init --recursive
+- shell: chdir={{ home }}/.vim/bundle/YouCompleteMe ./install.sh --clang-completer
