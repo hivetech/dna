@@ -25,6 +25,10 @@ dev:
   # Available: flake8, pyflakes, pylint
   python_checker: flake8
 
+git:
+  email: xavier.bruhiere@gmail.com
+  username: hackliff
+
 # t, z, bd, dropbox, utils, autoenv, latex
 plugins:
   - t

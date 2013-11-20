@@ -48,10 +48,14 @@ echo "Create usual directory tree"
 [[ -d $HOME/dev/sandbox ]] || mkdir -p $HOME/dev/sandbox
 
 echo "Setup ssh-key for github"
-#TODO real email
-read -p "Type encryption salt: " salt
+echo -n "Type your Github name: " 
+read github_name
+echo -n "Type your email: " 
+read email
+git config --global user.email "${email}"
+git config --global user.name "${github_name}"
 echo "Name rsa key \"github_id_rsa\""
-ssh-keygen -t rsa -C "${salt}"
+ssh-keygen -t rsa -C "${email}"
 #TODO Get new created key name
 ssh-add github_id_rsa
 xclip -sel clip < $HOME/.ssh/github_id_rsa.pub

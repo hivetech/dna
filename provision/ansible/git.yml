@@ -41,3 +41,7 @@
   git: repo=https://github.com/ingydotnet/git-hub.git
     dest={{ openlibs }}/git-hub
 - shell: chdir={{ openlibs }}/git-hub make install
+
+- name: Setup git minimal working configuration
+  shell: git config --global user.name "{{ git.username }}"
+- shell: git config --global user.email "{{ git.email }}"
