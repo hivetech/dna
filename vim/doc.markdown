@@ -26,6 +26,7 @@ Features
 * Git diff show
 * Powerfull semantic for search, substitution and abbrev
 * Ruby on rails and bundle shortcuts
+* Salstack files support
 
 
 Keymaps
@@ -118,6 +119,7 @@ Plugins
 * Vim-gocode - [A Go bundle for Vundle or Pathogen](https://github.com/Blackrush/vim-gocode)
 * LaTex-Box - [Lightweight Toolbox for LaTeX](https://github.com/LaTeX-Box-Team/LaTeX-Box)
 * YouCompleteMe - [A code-completion engine for Vim](https://github.com/Valloric/YouCompleteMe)
+* Salt-vim - [Vim files for editing Salt files](https://github.com/saltstack/salt-vim)
 
 
 Kudos
@@ -145,3 +147,4 @@ Kudos
 * [Blackrush](https://github.com/Blackrush)
 * [LaTeX-Box](https://github.com/LaTeX-Box-Team)
 * [Valloric](https://github.com/Valloric)
+* [Saltstack](https://github.com/saltstack)

@@ -1,0 +1,12 @@
+function export_keys() {
+  echo "Export specific app env"
+  export APP_ENV=whatever
+  echo "Done"
+}
+
+# Don't do it twice
+if [ -z "$LOADED" ]; then
+  export_keys
+  export LOADED=1
+fi
+

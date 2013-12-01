@@ -20,6 +20,7 @@
 - copy: src={{ dna_root }}/shell/customrc.sh dest={{ home }}/.customrc owner={{ ansible_user_id }} mode=600
 - copy: src={{ dna_root }}/shell/common-alias.sh dest={{ home }}/.common-alias owner={{ ansible_user_id }} mode=600
 - copy: src={{ dna_root }}/shell/custom-alias.sh dest={{ home }}/.custom-alias owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/shell/common-functions.sh dest={{ home }}/.common-functions owner={{ ansible_user_id }} mode=600
 
 # A full-featured & carefully designed adaptive prompt for Bash & Zsh
 - name: Install liquidprompt

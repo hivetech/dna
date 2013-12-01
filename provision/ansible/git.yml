@@ -7,6 +7,7 @@
       # Git extensions to provide high-level repository operations for Vincent Driessen's branching model
       - git-flow
       - make
+      - python-pip
 
 #TODO Git flow autocompletion (https://github.com/bobthecow/git-flow-completion
 
@@ -20,16 +21,6 @@
        dest={{ home }}/.scm_breeze
 - name: Install scm breeze
   shell: /{{ home }}/.scm_breeze/install.sh
-
-#FIXME Kind of a conflict between the 3 following projects, will see at use
-# hub helps you win at git. http://hub.github.com/
-#TODO Follow completion instruction
-#FIXME Prevent other plugin like scm to work because of the git alias
-#- name: Download hub
-  #git: repo=https://github.com/github/hub.git
-       #dest={{ openlibs }}/hub
-#- name: Install hub
-  #shell: chdir=/{{ openlibs }}/hub rake install
 
 #FIXME Crash at use
 # Giving git more tentacles

@@ -28,6 +28,7 @@ function! LoadBundles()
     Bundle 'Blackrush/vim-gocode'
     Bundle 'LaTeX-Box-Team/LaTeX-Box'
     Bundle 'Valloric/YouCompleteMe'
+    Bundle 'saltstack/salt-vim'
     " --------------------------------------------------
 
     " Extra plugins ------------------------------------
