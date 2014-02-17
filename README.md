@@ -13,15 +13,15 @@ This README is [also available in a friendly navigable format](http://documentup
 
 
 DNA is a community-driven compilation of dotfiles and projects, aimed
-at creating the most awesome and powerful development environment. 
-We use it here a Hivetech to setup fresh new machines and provide our
+at creating the most awesome and powerful development environment.
+We use it here at Hivetech to setup fresh new machines and provide our
 [hivelab charm](https://github.com/hivetech/cells/tree/master/precise/hivelab)
 for the Unide project.
 
 Installation is performed through famous configuration managers like ansible
 and [salt](http://saltstack.com/community.html) (currently focused on [ansible](www.ansibleworks.com)) as they obviously play nicely with a
 dotfiles repository and allow you to configure in seconds thousands of machines,
-as well as simply your beloved local one.  
+as well as simply your beloved local one.
 
 It is designed to be plugin-friendly: A new awesome, github featured
 project you discovered for your environment ? Star it and just plug
@@ -40,7 +40,7 @@ $ ssh prototype@127.0.0.1 -p $PORT   # Password: proto
 Content
 -------
 
-This is heavy work in progress. Right now we are cleaning and moving here our
+This is heavy work in progress. Right now I'm cleaning and moving here my
 previous repo (https://github.com/hackliff/Dotfiles)
 
 * Shell
@@ -102,10 +102,14 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * Autoenv - [Directory-based environments](https://github.com/kennethreitz/autoenv)
     * LaTex - [A document preparation system](http://www.latex-project.org/)
     * jq - [Command-line JSON processor](http://stedolan.github.io/jq/)
+    * Pyhn - [Hacker news in your terminal](https://github.com/socketubs/pyhn)
+    * Howdoi - [Instant coding answers via the command line](https://github.com/gleitz/howdoi)
 
-* [Vim](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#plugins)
+* [Vim](https://github.com/hivetech/dna/tree/master/vim/readme.markdown#plugins)
 
-* [Utils](https://github.com/hivetech/dna/blob/develop/utils/doc.markdown)
+* [Utils](https://github.com/hivetech/dna/tree/master/utils/readme.markdown)
+
+* [Openbox](https://github.com/hivetech/dna/tree/master/openbox/readme.markdown)
 
 Usage (ansible style)
 -----
@@ -231,7 +235,9 @@ Partners in crime
 * [jf](https://github.com/jf)
 * [obrajesse](https://github.com/obra)
 * [stedolan](https://github.com/stedolan/jq)
+* [socketubs](https://github.com/socketubs)
+* [gleitz](https://github.com/gleitz)
 
-* [Vim kudos](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#kudos)
+* [Vim kudos](https://github.com/hivetech/dna/tree/master/vim/readme.markdown#kudos)
 
 ... among many, many more contributors on cited projects.

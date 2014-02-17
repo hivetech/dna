@@ -1,6 +1,6 @@
 ---
 # Main entry point for dotfiles installation
-# cli requirement: 
+# cli requirement:
 # ansible-playbook site.yml --ask-sudo-pass -u user \
 #   --extra-vars="hosts=x.x.x.x data=/path/to/config.yml home=/home/you dna_root=some/where"
 # data.yml must define:
@@ -20,7 +20,7 @@
 - hosts: '{{ hosts }}'
   #TODO accelerate: true
 
-  vars_files: 
+  vars_files:
     - '{{ data }}'
 
   sudo: true
@@ -35,7 +35,7 @@
         - git-core
         - mercurial
         - python-pip
-    
+
     # Core components
     #- include: shell.yml
     #- include: cheatsheet.yml

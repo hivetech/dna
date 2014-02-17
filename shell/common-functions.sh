@@ -50,3 +50,21 @@ function extract {
       echo "'$1' is not a valid file"
   fi
 }
+
+function public-ip() {
+  # Other services
+  #http://curlmyip.com
+  #http://ipaddr.me
+  #http://www.icanhazip.com
+  echo "$(wget -qO- http://jsonip.com | cut -d"\"" -f4)"
+}
+
+function search() {
+  grep -RnsI --color=auto $1
+}
+
+function dip() {
+  container_id=$1
+  [ -n "$1" ] || container_id=`dlast`
+  docker inspect $container_id | grep IPAddress | cut -d '"' -f 4
+}

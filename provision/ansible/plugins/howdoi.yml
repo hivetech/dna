@@ -1,0 +1,12 @@
+---
+- name: Install xml dependencies
+  when: ansible_pkg_mgr == "apt"
+  action: apt pkg=$item state=latest
+  with_items:
+    - libxml2-dev
+    - libxslt-dev
+
+# instant coding answers via the command line
+- name: Install Howdoi
+  pip: name=howdoi
+

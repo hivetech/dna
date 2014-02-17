@@ -124,3 +124,6 @@ if [[ -d $HOME/.rbenv ]]; then
     rbenv global $RUBY_VERSION
   fi
 fi
+
+# Map <Caps Lock> as <Esc> on Linux
+xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'

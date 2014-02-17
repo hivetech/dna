@@ -6,3 +6,6 @@ optparse.bash
 
 # pyenv
 .python-version
+
+sdist
+*.egg-info

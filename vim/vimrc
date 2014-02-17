@@ -11,7 +11,7 @@ if filereadable(expand("~/.vim/before.vimrc"))
   source ~/.vim/before.vimrc
 endif
 
-let mapleader=","
+let mapleader=" "
 imap ii <Esc>
 nnoremap ; :
 
@@ -22,16 +22,22 @@ if filereadable(expand("~/.vim/plugin/bundles.vim"))
 endif
 
 " ================ General Config ====================
-set number                      " Line numbers are good
+"set number                      " Line numbers are good
 set fileformats=unix
 set backspace=indent,eol,start  " Allow backspace in insert mode
 set history=1000                " Store lots of :cmdline history
 set showcmd                     " Show incomplete cmds down the bottom
 set showmode                    " Show current mode down the bottom
 set autoread                    " Reload files changed outside vim
-set showmatch		            " Show matching brackets.
+set showmatch		                " Show matching brackets.
 set hidden                      " Hide buffers when they are abandoned
-set mouse=a		                " Enable mouse usage (all modes)
+set mouse=a		                  " Enable mouse usage (all modes)
+set ttyfast                     " Optimize for fast terminal connections
+set gdefault                    " Add the g flag to search/replace by default
+set encoding=utf-8 nobomb       " Use UTF-8 without BOM
+" Show “invisible” characters
+set lcs=tab:▸\ ,trail:·,nbsp:_
+set list
 
 " Uncomment the following to have Vim jump to the last position when reopening a file
 if has("autocmd")
@@ -44,7 +50,7 @@ set hlsearch                    " Hilight searches by default
 set viminfo='100,f1             " Save up to 100 marks, enable capital marks
 set smartcase		            " Do smart case matching
 nmap <silent> // :nohlsearch<cr>
-map <space> /
+"map <space> /
 map <c-space> ?
 
 " ================ Turn Off Swap Files ==============
@@ -128,8 +134,13 @@ nnoremap <Down> <C-w>j
 vnoremap <Down> <C-w>j
 
 " ====================== Misc ========================
-nnoremap <leader>w <Esc>:w<CR>  " Save file
 
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>e :e
+nnoremap <Leader>8 :set tw=80<CR>
+nnoremap <Leader>0 :set tw=0<CR>
+nnoremap <Leader>n :set invnumber<CR>
 nnoremap <leader>N :new<CR>     " Opens a new file
 
 "Dict file completion
@@ -157,7 +168,6 @@ endfunction
 set cmdheight=1
 set statusline=[%l,%v\ %P%M][Cwd\ %{CWD()}][File\ %f]\ %r%h%w\ %#warningmsg#%{SyntasticStatuslineFlag()}%*
 set statusline+=%{fugitive#statusline()}\ (%{&ff})
-nnoremap <leader>l <Esc>:set number<CR>
 
 " define :HighlightLongLines command to highlight the offending parts of
 " lines that are longer than the specified length (defaulting to 80)

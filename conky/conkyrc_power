@@ -1,0 +1,97 @@
+background yes
+update_interval 1
+
+cpu_avg_samples 2
+net_avg_samples 2
+temperature_unit celsius
+
+double_buffer yes
+no_buffers yes
+text_buffer_size 2048
+
+gap_x 310
+gap_y 40
+minimum_size 180 300
+maximum_width 180
+own_window yes
+own_window_type normal
+own_window_argb_visual yes
+own_window_argb_value 150
+#own_window_transparent yes
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+border_inner_margin 0
+border_outer_margin 0
+#alignment tr
+alignment left
+
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+override_utf8_locale yes
+use_xft yes
+xftfont caviar dreams:size=8
+xftalpha 0.5
+uppercase no
+
+default_color FFFFFF
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+color4 EF5A29
+
+#lua_load ~/.config/conky/power.lua
+#lua_draw_hook_pre ring_stats
+#lua_draw_hook_pre draw_battery
+
+#lua_load ~/.config/conky/battery.lua
+#lua_draw_hook_post main
+
+lua_load ~/dev/conky/perso/net_monitor.lua
+lua_draw_hook_post main
+
+
+TEXT
+
+#${voffset 5}
+${offset 70}${cpugraph 20,70 666666 666666}${voffset -15}
+${offset 45}${font Ubuntu:size=7,weight:bold}${color2}Power
+${offset 45}Taux : ${if_existing /sys/class/power_supply/BAT1/}${exec curr=`cat /sys/class/power_supply/BAT1/current_now`; volt=`cat /sys/class/power_supply/BAT1/voltage_now`; expr $curr \* $volt / 1000000000} mW} $else 0 mW$endif
+${offset 45}${if_existing /sys/class/power_supply/BAT1}${if_match ${battery_percent BAT1} >= 90}${color green}[!] High loaded${endif}${if_match ${battery_percent BAT1} < 30}${if_match ${battery_percent BAT1} > 15}${color}[!] Low loaded${endif}${endif}${if_match ${battery_percent BAT1} <= 15}${color2}[!] Critical Level [!]${endif}${endif}
+
+${offset 10}${color2}${if_existing /sys/class/power_supply/BAT1/}${battery BAT1} - ${battery_time BAT1} $else No battery detected - Sector$endif
+
+${font Ubuntu:size=7,weight:bold}${color4}POWER ${hr 1}
+
+#${offset 10}${font Ubuntu:size=7,weight:bold}${color}Rate ${mpd_bitrate}${font}
+#${offset 10}${font Ubuntu:size=7,weight:bold}${color}${mpd_smart}${font}
+#${offset 20}${font Ubuntu:size=7,weight:bold}${color2}${mpd_status} - ${mpd_elapsed} / ${mpd_length}	[${mpd_percent}%]${font}
+#${offset 10}${font Ubuntu:size=7,weight:bold}${mpd_bar 5,150}${font}
+#${offset 10}${font Ubuntu:size=7,weight:bold}Rand ${mpd_random} - Repeat ${mpd_repeat} - vol ${mpd_vol}%${font}
+#
+#${font Ubuntu:size=7,weight:bold}${color4}MPD ${hr 1}
+
+
+#${font Ubuntu:size=7,weight:bold}${color}${texeci 60 ~/dev/projects/SamBotnet/src/checker/checker.py -o conky}${font}
+#${font Ubuntu:size=7,weight:bold}${color4}SamBotnet ${hr 1}
+${voffset 45}${offset 10}${font Ubuntu:size=7,weight:bold}${color} ETHERNET		    WIFI
+
+${offset 10}${color2}${addr eth0}			${addr wlan0}
+${offset 10}Up	   ${totalup eth0}	  ${totalup wlan0}
+${offset 10}Down	${totaldown eth0}		${totaldown wlan0}
+${offset 10}Externe IP   ${texeci 3600 wget http://checkip.dyndns.org -O - -o /dev/null | cut -d : -f 2 | cut -d \< -f 1}
+${offset 10}Gateway      ${gw_ip}
+${offset 10}MAC             ${wireless_ap wlan0}
+
+${offset 10}${wireless_link_bar wlan0}
+${offset 30}${if_up wlan0}${color2}${wireless_link_qual_perc wlan0}% [${wireless_bitrate wlan0} - ${wireless_mode wlan0}]$endif
+#${offset 10}${color2}${alignr}SSID: ${wireless_essid wlan0}
+#${wireless_link_qual wlan0}
+#${wireless_link_qual_max wlan0}
+#${downspeedgraph eth0}
+#${upspeedgraph eth0}
+#${upspeed eth0} 
+#${downspeed eth0} 
+
+${font Ubuntu:size=7,weight:bold}${color4}NETWORK ${hr 1}

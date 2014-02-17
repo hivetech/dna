@@ -35,7 +35,7 @@ namespace :install do
         sh "sudo pip install --upgrade ansible==1.3.3 2>&1 >> #{logs}"
         msg "Copy configuration file"
         sh "test -d /etc/ansible || sudo mkdir /etc/ansible"
-        sh "sudo cp ansible.cfg /etc/ansible"
+        sh "sudo cp provision/ansible/ansible.cfg /etc/ansible"
 
         msg "!! now: $ source /opt/ansible/hacking/env-setup"
         msg "!! now: $ edit ./provision/ansible/data.yml"

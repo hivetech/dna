@@ -29,6 +29,7 @@ function! LoadBundles()
     Bundle 'LaTeX-Box-Team/LaTeX-Box'
     Bundle 'Valloric/YouCompleteMe'
     Bundle 'saltstack/salt-vim'
+    Bundle 'chriskempson/base16-vim'
     " --------------------------------------------------
 
     " Extra plugins ------------------------------------

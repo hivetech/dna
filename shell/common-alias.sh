@@ -54,6 +54,11 @@ editmarked=brightblue,default'
 # automatic corr
 alias corr='shopt -s cdspell'
 
+# Docker
+alias dlast='docker ps -l -q'
+#alias dclean='docker ps -a -q | awk '{print $1}' | xargs docker rm'
+alias dclean='docker rm `docker ps -a -q`'
+
 # Misc
 alias starwars='telnet towel.blinkenlights.nl.'
 alias clipboard='xclip -sel clip'

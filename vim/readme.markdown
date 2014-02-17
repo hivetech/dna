@@ -20,7 +20,7 @@ Features
 * Tabs with MinibufExpl
 * Persistent undo
 * Leader key : ","
-* Solarized color theme
+* Famous Solarized or Base16 color themes
 * Airline status line
 * Useful tlib and webapi libs installed
 * Git diff show
@@ -96,6 +96,7 @@ Plugins
 * Syntastic - [Syntax checking hacks for vim](https://github.com/scrooloose/syntastic)
 * Solarized - [Precision colorscheme for the vim text editor](https://github.com/altercation/vim-colors-solarized)
 * Delimitmate - [Vim plugin, provides insert mode auto-completion for quotes, parens, brackets, etc](https://github.com/Raimondi/delimitMate)
+* Base 16 - [Color schemes for hackers](https://github.com/chriskempson/base16-vim)
 * Ctrlp - [Fuzzy file, buffer, mru, tag, etc finder](https://github.com/kien/ctrlp.vim)
 * Gundo - [Graph your vim undo tree in style](http://sjl.bitbucket.org/gundo.vim/)
 * Conque-Shell - [Run interactive commands inside a Vim buffer](https://github.com/vim-scripts/Conque-Shell)
@@ -148,3 +149,4 @@ Kudos
 * [LaTeX-Box](https://github.com/LaTeX-Box-Team)
 * [Valloric](https://github.com/Valloric)
 * [Saltstack](https://github.com/saltstack)
+* [chriskempson](https://github.com/chriskempson)

@@ -1,0 +1,75 @@
+# Main conky for zen desktop
+#
+#==============================================================================
+#                               conkyrc_lunatico
+#
+#  Date    : 22/06/2011
+#  author  : DCM
+#  version : v0.2
+#  license : Distributed under the terms of GNU GPL version 2 or later
+#  This version is a modification of conkyrc_orange found at
+#    http://gnome-look.org/content/show.php?content=137503&forumpage=0
+#
+#==============================================================================
+
+background yes
+update_interval 1
+
+cpu_avg_samples 2
+net_avg_samples 2
+temperature_unit celsius
+
+double_buffer yes
+no_buffers yes
+text_buffer_size 2048
+
+gap_x 100
+gap_y 0
+minimum_size 300 1100
+maximum_width 300
+own_window yes
+own_window_type normal
+own_window_argb_visual yes
+own_window_argb_value 150
+#own_window_transparent no
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+border_inner_margin 0
+border_outer_margin 0
+#alignment tr
+alignment left
+
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+override_utf8_locale yes
+use_xft yes
+xftfont caviar dreams:size=8
+xftalpha 0.5
+uppercase no
+
+default_color FFFFFF
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+color4 EF5A29
+
+lua_load ~/dev/conky/clock_rings.lua
+lua_draw_hook_pre clock_rings
+
+
+TEXT
+
+${voffset 300}${offset 10}${font Bitstream charter:size=30,weight:bold}${color}${time %H:%M}
+${voffset -30}${offset 15}${font Bitstream charter:size=10}${color2}${time %A - %B %d, %Y}
+
+${font Bitstream charter:size=12,weight:bold}${color}${voffset 110} Music  ${hr 4} 
+
+${offset 10}${font Bitstream charter:size=10,weight:bold}${color2}${mpd_smart}
+${offset 10}${font Bitstream charter:size=10,weight:bold}${color2}${mpd_percent}%   ${mpd_bar 7, 190}
+
+${hr 4}
+
+${voffset 350}${font Bitstream charter:size=10,weight:bold}${color2}${alignc}$nodename
+${alignc}$sysname - ${execi 86400 lsb_release -si} ${execi 86400 lsb_release -sc}

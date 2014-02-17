@@ -1,0 +1,5 @@
+requests==2.2.1
+sh==1.09
+Logbook==0.6.0
+structlog==0.4.1
+-e git+https://github.com/dotcloud/docker-py.git@master#egg=docker-py-0.2.3
