@@ -12,7 +12,7 @@ package:
 	python setup.py sdist upload
 
 tests: warn_missing_linters
-	flake8 tests dna
+	flake8 --ignore E265 tests dna
 	nosetests -w tests --with-yanc --with-coverage --cover-package=dna
 
 watch: warn_missing_linters

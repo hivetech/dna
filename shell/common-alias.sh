@@ -4,13 +4,14 @@ alias po='popd'
 
 # Basic directory operations
 alias ...='cd ../..'
-alias -- -='cd -'
+alias sw='cd -'
 
 # Super user
 alias _='sudo'
 alias please='sudo'
 
-#alias g='grep -in'
+# NOTE There might be a better way
+alias igrep='grep -in'
 
 # Show history
 alias history='fc -l 1'
@@ -55,9 +56,13 @@ editmarked=brightblue,default'
 alias corr='shopt -s cdspell'
 
 # Docker
+alias dps='docker ps'
 alias dlast='docker ps -l -q'
-#alias dclean='docker ps -a -q | awk '{print $1}' | xargs docker rm'
-alias dclean='docker rm `docker ps -a -q`'
+#alias dcclean="docker ps -a -notrunc | grep 'Exit' | awk '{print $1}' | xargs -r docker rm"
+alias dcclean='docker rm `docker ps -a -q`'
+#alias diclean="docker images -notrunc| grep none | awk '{print $3}' | xargs -r docker rmi"
+alias diclean="docker rmi $( sudo docker images | grep '<none>' | tr -s ' ' | cut -d ' ' -f 3)"
+alias dclean='dcclean && diclean'
 
 # Misc
 alias starwars='telnet towel.blinkenlights.nl.'
@@ -65,3 +70,6 @@ alias clipboard='xclip -sel clip'
 alias chx='chmod +x'
 
 #TODO alias pair-code
+
+# Python style directory creation
+# FIXME alias mkdyr='mkdir $1 && touch $1/__init__.py'

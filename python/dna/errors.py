@@ -22,11 +22,12 @@ class FactoryError(Exception):
 
     def __str__(self):
         msg = self.msg.format(**self.kwargs)
+        #log.error(msg)
         return msg
 
     __unicode__ = __str__
     __repr__ = __str__
 
 
-class ImportContextFailed(FactoryError):
-    msg = "unable to import context builer from {module}: {reason}"
+class DynamicImportFailed(FactoryError):
+    msg = "unable to import {module}: {reason}"

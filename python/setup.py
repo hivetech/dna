@@ -13,16 +13,23 @@ if sys.argv[-1] == 'test':
 
 # Needs also : apt-get install swig
 requires = [
-    'requests==2.2.1',
-    'sh==1.09',
+    'requests>=2.2.1',
+    'sh>=1.09',
+    'python-dateutil>=2.2',
+    'raven>=4.2.1',
     'Logbook>=0.6.0',
     'structlog>=0.4.1',
-    'docker-py>=0.2.3']
+    'docker-py>=0.2.3',
+    'docopt>=0.6.1',
+    'celery>=3.1.11',
+    'redis>=2.9.1',
+    'Flask-RESTful>=0.2.12',
+    'flask-mongoengine>=0.7.0'
+]
 
 
 def long_description():
     try:
-        #with codecs.open(readme, encoding='utf8') as f:
         with open('README.md') as f:
             return f.read()
     except IOError:

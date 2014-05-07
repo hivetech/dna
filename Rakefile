@@ -1,12 +1,11 @@
 # = DNA Rake - Community-driven dotfiles that will sharpen your system
 #
 # Author::    Xavier Bruhiere
-# Copyright:: (c) 2013, Xavier Bruhiere
+# Copyright:: (c) 2014, Xavier Bruhiere
 # License::   Apache 2.0
 #
 # Feedback appreciated: xavier.bruhiere@gmail.com
 
-# https://github.com/michaeldv/awesome_print
 require "awesome_print"
 
 logs = "/tmp/dna.rake"
@@ -22,7 +21,7 @@ namespace :install do
         msg "install optparse (https://github.com/nk412/optparse)"
         cmd = "test -f optparse.bash || curl -o optparse.bash https://raw.github.com/nk412/optparse/master/optparse.bash"
         result = system(cmd)
-        raise("optparse installation failed..  msg: #{$?}") unless result
+        raise("optparse installation failed: #{$?}") unless result
     end
 
     desc "Install ansible, configuration manager"

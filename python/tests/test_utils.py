@@ -51,3 +51,12 @@ class UtilsTestCase(unittest.TestCase):
             old_id = new_id
             new_id = utils.generate_unique_id()
             self.assertTrue(new_id != old_id)
+
+    def test_truncate_float(self):
+        original_float = 3.232999
+        truncated_float = utils.truncate(original_float, n=2)
+        self.assertIsInstance(truncated_float, float)
+        self.assertGreater(original_float, truncated_float)
+
+    def test_truncate_str(self):
+        self.assertEqual(utils.truncate('nofloat'), 'nofloat')

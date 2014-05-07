@@ -1,13 +1,15 @@
-<p align="center">
-  <img src="https://raw.github.com/hivetech/hivetech.github.io/master/images/logo-unide.png" alt="Unide logo"/>
-</p>
-
 DNA
 ====
 
 > Hacking environment genetics
 
 > By [Hive Tech](unide.co)
+
+
+<p align="center">
+  <img src="https://raw.github.com/hivetech/hivetech.github.io/master/images/logo-unide.png" alt="Unide logo"/>
+</p>
+
 
 This README is [also available in a friendly navigable format](http://documentup.com/hivetech/dna).
 
@@ -107,9 +109,12 @@ previous repo (https://github.com/hackliff/Dotfiles)
 
 * [Vim](https://github.com/hivetech/dna/tree/master/vim/readme.markdown#plugins)
 
+* [Python](https://github.com/hivetech/dna/tree/master/python/README.md)
+
 * [Utils](https://github.com/hivetech/dna/tree/master/utils/readme.markdown)
 
 * [Openbox](https://github.com/hivetech/dna/tree/master/openbox/readme.markdown)
+
 
 Usage (ansible style)
 -----
@@ -129,6 +134,7 @@ $ cheat <sub-command>  # git-extras for example
 ```
 
 Notice the `synthetize` action is idempotent.
+
 
 Sandbox mode (still ansible style)
 ------------

@@ -14,6 +14,7 @@ import calendar
 import time
 from structlog import wrap_logger
 from structlog.processors import JSONRenderer
+from raven.handlers.logbook import SentryHandler
 import logbook
 import dna.utils as utils
 import dna.settings as settings
@@ -49,16 +50,21 @@ def setup(level='debug', show_log=False, filename=settings.LOG['file']):
                                 format_string=settings.LOG['format'],
                                 level=level))
 
+    sentry_dns = settings.LOG['sentry_dns']
+    if sentry_dns:
+        handlers.append(SentryHandler(sentry_dns, level='ERROR'))
+
     return logbook.NestedSetup(handlers)
 
 
-def logger(name=__name__):
+def logger(name=__name__, uuid=False, timestamp=False):
     ''' Configure and return a new logger for hivy modules '''
+    processors = [JSONRenderer()]
+    if uuid:
+        processors.append(add_unique_id)
+    if uuid:
+        processors.append(add_timestamp)
     return wrap_logger(
         logbook.Logger(name),
-        processors=[
-            add_unique_id,
-            add_timestamp,
-            JSONRenderer(),
-        ]
+        processors=processors
     )

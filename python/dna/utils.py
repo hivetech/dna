@@ -13,11 +13,10 @@ import random
 import uuid
 import docker
 import requests
-import json
 import re
 import socket
 from urllib2 import urlopen
-from dna.errors import ImportContextFailed
+from dna.errors import DynamicImportFailed
 
 
 class Version(object):
@@ -28,6 +27,9 @@ class Version(object):
         self.major = int(_version[0])
         self.minor = int(_version[1])
         self.patch = int(_version[2])
+
+    def __str__(self):
+        return 'v' + '.'.join([self.major, self.minor, self.patch])
 
 
 def is_running(process):
@@ -62,6 +64,7 @@ def docker_check():
 
 
 def generate_unique_id():
+    ''' Common GUID method '''
     event_id = uuid.uuid4().get_urn()
     return event_id.split(':')[-1]
 
@@ -71,13 +74,13 @@ def dynamic_import(mod_path, obj_name):
     try:
         module = __import__(mod_path, fromlist=['whatever'])
     except ImportError, error:
-        raise ImportContextFailed(
+        raise DynamicImportFailed(
             module='.'.join([mod_path, obj_name]), reason=error)
 
     if hasattr(module, obj_name):
         obj = getattr(module, obj_name)
     else:
-        raise ImportContextFailed(
+        raise DynamicImportFailed(
             module='.'.join([mod_path, obj_name]),
             reason='module {} has no attribute {}'.
                    format(module.__name__, obj_name))
@@ -86,38 +89,24 @@ def dynamic_import(mod_path, obj_name):
     return obj
 
 
-def activate_pdb_hook():
-    ''' Catch exceptions with a prompt for post-mortem analyzis'''
-    def debug_exception(type_exception, value, tb):
-        import pdb
-        pdb.post_mortem(tb)
-
-    import sys
-    sys.excepthook = debug_exception
-
-
-#NOTE Could use pprint module
-def emphasis(obj, align=True):
-    ''' Clearer data printing '''
-    if isinstance(obj, dict):
-        if align:
-            pretty_msg = os.linesep.join(
-                ["%25s: %s" % (k, obj[k]) for k in sorted(obj.keys())])
-        else:
-            pretty_msg = json.dumps(obj, indent=4, sort_keys=True)
-    else:
-        return obj
-    return pretty_msg
-
-
 def self_ip(public=False):
     ''' Utility for logbook information injection '''
-    if public:
-        data = str(urlopen('http://checkip.dyndns.com/').read())
-        ip_addr = re.compile(
-            r'Address: (\d+\.\d+\.\d+\.\d+)').search(data).group(1)
-    else:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        sock.connect(('google.com', 0))
-        ip_addr = sock.getsockname()[0]
+    try:
+        if public:
+            data = str(urlopen('http://checkip.dyndns.com/').read())
+            ip_addr = re.compile(
+                r'Address: (\d+\.\d+\.\d+\.\d+)').search(data).group(1)
+        else:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            sock.connect(('google.com', 0))
+            ip_addr = sock.getsockname()[0]
+    except Exception, error:
+        print('An error occured, returning default ({})'.format(error))
+        ip_addr = '0.0.0.0'
     return ip_addr
+
+
+def truncate(float_value, n=2):
+    if isinstance(float_value, float):
+        float_value = float('%.*f' % (n, float_value))
+    return float_value

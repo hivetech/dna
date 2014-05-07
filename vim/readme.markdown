@@ -69,7 +69,7 @@ Keymaps
     * {sexy,normal} toogle comments      : ,c{s,\<space\>}
     * opens tagbar                       : \<F3\>
     * align lines on {character}         : \<Ctrl-a\>{character}
-    * opens tasks list                   : ,t
+    * opens tasks list                   : ,td
     * opens git dirty files              : ,ocf
     * Open a window with {ipython,bash,zsh,mysql,node,irb,R} prompt : ,t{y,b,z,s,n,i,r}
     * Go to {next,previous} git change   : g{h,H}
