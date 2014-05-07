@@ -20,10 +20,13 @@ Features
 * Tabs with MinibufExpl
 * Persistent undo
 * Leader key : ","
-* Solarized color theme
+* Famous Solarized or Base16 color themes
 * Airline status line
 * Useful tlib and webapi libs installed
 * Git diff show
+* Powerfull semantic for search, substitution and abbrev
+* Ruby on rails and bundle shortcuts
+* Salstack files support
 
 
 Keymaps
@@ -49,6 +52,8 @@ Keymaps
     * Nerdtree window        : \<F4\>
     * Buffers window         : ,yr
     * Save as sudo           : :w!!
+    * Better iabbrev         : :Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
+    * Better search          : :Subvert/di{e,ce}/spinner{,s}/g
 
 * Dev
 
@@ -64,16 +69,22 @@ Keymaps
     * {sexy,normal} toogle comments      : ,c{s,\<space\>}
     * opens tagbar                       : \<F3\>
     * align lines on {character}         : \<Ctrl-a\>{character}
-    * opens tasks list                   : ,t
+    * opens tasks list                   : ,td
     * opens git dirty files              : ,ocf
     * Open a window with {ipython,bash,zsh,mysql,node,irb,R} prompt : ,t{y,b,z,s,n,i,r}
     * Go to {next,previous} git change   : g{h,H}
+    * <C-x><C-o>                         : Completion menu for go code
 
 * Move
 
     * 4 lines {forward,backward} : \<C-{e,y}\>
     * Navigate buffers           : {right,left} arrow
     * Navigate windows           : {up,down} arrow
+
+* LaTex
+
+    * Compile the current file   : ,ll
+    * Omnicompletion             : <C-x><C-o>
 
 
 
@@ -85,6 +96,7 @@ Plugins
 * Syntastic - [Syntax checking hacks for vim](https://github.com/scrooloose/syntastic)
 * Solarized - [Precision colorscheme for the vim text editor](https://github.com/altercation/vim-colors-solarized)
 * Delimitmate - [Vim plugin, provides insert mode auto-completion for quotes, parens, brackets, etc](https://github.com/Raimondi/delimitMate)
+* Base 16 - [Color schemes for hackers](https://github.com/chriskempson/base16-vim)
 * Ctrlp - [Fuzzy file, buffer, mru, tag, etc finder](https://github.com/kien/ctrlp.vim)
 * Gundo - [Graph your vim undo tree in style](http://sjl.bitbucket.org/gundo.vim/)
 * Conque-Shell - [Run interactive commands inside a Vim buffer](https://github.com/vim-scripts/Conque-Shell)
@@ -102,13 +114,20 @@ Plugins
 * YankRing - [Maintains a history of previous yanks, changes and deletes ](https://github.com/vim-scripts/YankRing.vim)
 * Airline - [lean & mean status/tabline for vim that's light as air](https://github.com/bling/vim-airline)
 * Gitgutter - [A Vim plugin which shows a git diff in the gutter (sign column)](https://github.com/airblade/vim-gitgutter)
+* Abolish - [easily search for, substitute, and abbreviate multiple variants of a word](https://github.com/tpope/vim-abolish)
+* Rails - [Ruby on Rails power tools](https://github.com/tpope/vim-rails)
+* Bundler - [Lightweight support for Ruby's Bundler](https://github.com/tpope/vim-bundler)
+* Vim-gocode - [A Go bundle for Vundle or Pathogen](https://github.com/Blackrush/vim-gocode)
+* LaTex-Box - [Lightweight Toolbox for LaTeX](https://github.com/LaTeX-Box-Team/LaTeX-Box)
+* YouCompleteMe - [A code-completion engine for Vim](https://github.com/Valloric/YouCompleteMe)
+* Salt-vim - [Vim files for editing Salt files](https://github.com/saltstack/salt-vim)
 
 
 Kudos
 -----
 
 * [gmarik](https://github.com/gmarik)
-* [tpope](https://github.com/tpope/vim-fugitive)
+* [tpope](https://github.com/tpope)
 * [scrooloose](https://github.com/scrooloose)
 * [altercation](https://github.com/altercation)
 * [Raimondi](https://github.com/Raimondi)
@@ -126,3 +145,8 @@ Kudos
 * [fishburn](http://www.vim.org/account/profile.php?user_id=837)
 * [bling](https://github.com/bling)
 * [airblade](https://github.com/airblade)
+* [Blackrush](https://github.com/Blackrush)
+* [LaTeX-Box](https://github.com/LaTeX-Box-Team)
+* [Valloric](https://github.com/Valloric)
+* [Saltstack](https://github.com/saltstack)
+* [chriskempson](https://github.com/chriskempson)

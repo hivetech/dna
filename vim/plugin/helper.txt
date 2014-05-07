@@ -58,3 +58,5 @@ Python
 ,b            : Set a breakpoint
 
 ,ss           : Toggle spell checking
+
+,sw           : Remove trailing whitespaces

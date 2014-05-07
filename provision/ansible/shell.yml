@@ -1,7 +1,6 @@
 ---
 
 - name: Install shell module dependencies
-  #when: ansible_os_family == "Debian"
   when: ansible_pkg_mgr == "apt"
   action: apt pkg={{ item }} state=latest update_cache=true
   with_items:
@@ -15,12 +14,15 @@
     - rake
     - cmake
     - libncurses5-dev
-    
+
 - name: Copy shared shell configuration file
   template: src={{ dna_root }}/shell/commonrc.j2 dest={{ home }}/.commonrc owner={{ ansible_user_id }} mode=600
 - copy: src={{ dna_root }}/shell/customrc.sh dest={{ home }}/.customrc owner={{ ansible_user_id }} mode=600
 - copy: src={{ dna_root }}/shell/common-alias.sh dest={{ home }}/.common-alias owner={{ ansible_user_id }} mode=600
 - copy: src={{ dna_root }}/shell/custom-alias.sh dest={{ home }}/.custom-alias owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/shell/common-functions.sh dest={{ home }}/.common-functions owner={{ ansible_user_id }} mode=600
+
+- copy: src={{ dna_root }}/shell/wgetrc dest={{ home }}/.wgetrc owner={{ ansible_user_id }} mode=600
 
 # A full-featured & carefully designed adaptive prompt for Bash & Zsh
 - name: Install liquidprompt
@@ -112,3 +114,8 @@
   git: repo=https://github.com/zsh-users/zsh-history-substring-search.git
        dest={{openlibs}}/zsh-history-substring-search
   when: "'{{ shell.default }}' == 'zsh'"
+
+# Copy libs
+- name: Copy utils libs in /usr/local/lib
+  copy: src={{ dna_root }}/shell/utils.bash dest=/usr/local/lib/ owner={{ ansible_user_id }} mode=755
+

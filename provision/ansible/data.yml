@@ -12,20 +12,30 @@ shell:
   # bash, fish or zsh
   default: zsh
   # ohmyzsh, ohmyfish, bashit, liquidprompt or nothing special
-  #TODO Change "prompt" into "distribution"
   prompt: ohmyzsh
 
 dev:
+  # rbenv and, soon, rvm
   ruby_manager: rbenv
   # Leave it empty to skip the installation
-  ruby_version: 1.9.3
+  ruby_version: 2.0.0-dev
   node_version: 0.11.7
-  go_version: go1
-  python_version: 2.7.5
+  go_version: go1.2rc5
+  python_version: 3.0.1
+  # Available: flake8, pyflakes, pylint
+  python_checker: flake8
 
+git:
+  email: xavier.bruhiere@gmail.com
+  username: hackliff
+
+# t, z, bd, dropbox, utils, autoenv, latex
 plugins:
   - t
   - z
   - bd
   - dropbox
   - utils
+  - autoenv
+  - jq
+  - howdoi

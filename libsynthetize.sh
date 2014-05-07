@@ -11,11 +11,12 @@ function is_installed () {
 # Synthetize needs ansible and docker to work
 function check_dependencies() {
     ret_ansible=$(is_installed "ansible")
-    ret_docker=$(is_installed "docker")
+    #FIXME Docker dep matters only if the user requested prototype action
+    #ret_docker=$(is_installed "docker")
     if [[ $ret_ansible -ne 0 ]]; then
       echo 1
-    elif [[ $ret_docker -ne 0 ]]; then
-      echo 1
+    #elif [[ $ret_docker -ne 0 ]]; then
+      #echo 1
     else
       echo 0
     fi

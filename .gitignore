@@ -3,3 +3,10 @@ optparse.bash
 
 # Python
 *.pyc
+.coverage
+
+# pyenv
+.python-version
+
+dist
+*.egg-info

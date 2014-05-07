@@ -19,3 +19,4 @@ shopt -s progcomp
 
 test -f $HOME/.commonrc && source $HOME/.commonrc
 test -f $HOME/.customrc && source $HOME/.customrc
+test -f $HOME/.common-functions && source $HOME/.common-functions
