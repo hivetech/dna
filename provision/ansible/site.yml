@@ -1,6 +1,6 @@
 ---
 # Main entry point for dotfiles installation
-# cli requirement: 
+# cli requirement:
 # ansible-playbook site.yml --ask-sudo-pass -u user \
 #   --extra-vars="hosts=x.x.x.x data=/path/to/config.yml home=/home/you dna_root=some/where"
 # data.yml must define:
@@ -20,34 +20,35 @@
 - hosts: '{{ hosts }}'
   #TODO accelerate: true
 
-  vars_files: 
+  vars_files:
     - '{{ data }}'
 
   sudo: true
 
   tasks:
     # Factored instructions
-    #- name: Install common dependencies
-      #when: ansible_pkg_mgr == "apt"
-      #action: apt pkg=$item state=latest update_cache=true
-      #with_items:
-        #- wget
-        #- git-core
-        #- mercurial
-    
+    - name: Install common dependencies
+      when: ansible_pkg_mgr == "apt"
+      action: apt pkg=$item state=latest update_cache=true
+      with_items:
+        - wget
+        - git-core
+        - mercurial
+        - python-pip
+
     # Core components
-    - include: shell.yml
+    #- include: shell.yml
     #- include: cheatsheet.yml
-    #- include: git.yml
-    #- include: dev.yml
-    #- include: utils.yml
-    #- include: vim.yml
-      #when: "'{{ editor }}' == 'vim'"
+    - include: git.yml
+    - include: dev.yml
+    - include: utils.yml
+    - include: vim.yml
+      when: "'{{ editor }}' == 'vim'"
 
     # Plugins
-    #- include: '{{ item }}'
-      #when: "'{{ item }}'.split('/')[-1][:-4] in {{ plugins }}"
-      #with_fileglob: plugins/*
+    - include: '{{ item }}'
+      when: "'{{ item }}'.split('/')[-1][:-4] in {{ plugins }}"
+      with_fileglob: plugins/*
 
     # Finish him
     - name: giving back permissions to the user

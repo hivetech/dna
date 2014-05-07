@@ -1,0 +1,92 @@
+Conky
+______________________________________________________________________________
+
+#Fonctionnement de conky 
+  total_run_times 0               #Temps en secondes ; 0 = toujours actif
+  background yes                  #Pour que conky tourne en arrière plan ; no = pour les tests
+
+#Réglages système
+  cpu_avg_samples 10               #Nb d'échantillons pour calculer la moyenne d'utilisation CPU
+  net_avg_samples 20               #Nb d'échantillons pour calculer la moyenne d'utilisation CPU
+
+#Mémoire
+  double_buffer yes               #Éviter le clignotement
+  no_buffers yes                  #Soustraire les mémoires tampons de la mémoire utilisée
+  text_buffer_size 1024           #Taille du cache pour le texte
+
+#Affichage
+  out_to_console no               #Affiche le texte sur la sortie standard
+  update_interval 1               #Taux de rafraîchissement de la fenêtre (s)
+
+#Fenêtre conky
+  alignment top_right             #Alignement
+ #---
+  minimum_size 1100 300             #Taille minimum (px) ; largeur / hauteur
+  maximum_width 1100               #Largeur maximum (px)
+ #---
+  gap_x 20                         #Écart avec le bord gauche / droit
+  gap_y 150                        #Écart avec le bord haut / bas
+ #---
+  draw_shades no                  #Afficher les ombres
+  draw_outline no                 #Afficher les contours de fenêtre
+  draw_borders no                 #Afficher des contours autour des blocs de texte
+  border_width 1                  #Largeur du contour
+  border_inner_margin 1           #Largeur des marges
+ #---
+  own_window yes                  #Utiliser sa propre fenêtre
+  own_window_type normal        #Type de fenêtre ; normal / override / desktop
+  own_window_transparent yes      #Pseudo transparence
+  own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+#Mise en forme
+  use_xft yes                     #Utiliser Xft (polices lissées etc)
+  xftalpha 1                      #Utiliser Xft
+  override_utf8_locale yes        #Force l'UTF8
+  uppercase no                    #Tout le texte en majuscule
+  use_spacer left                 #Ajoute des espaces après certains objets (qu'avec des polices fixes)
+ #---
+  xftfont saxMono:size=9          #Police par défaut
+ #---
+  default_bar_size 50 3           #Barre par défaut (longeur hauteur)
+  stippled_borders 3              #Taille des pointillés
+
+#Couleurs
+  default_color FFFFFF            #Couleur par défaut
+  default_shade_color 333333      #Couleur des ombres
+  default_outline_color black     #Couleur des contours
+ #---
+  color1 424c52                   #Gris
+  color2 9A9A9A                   #Gris clair
+  color3 EF5A29
+  color4 FFFFFF
+ #---
+  short_units yes                 #Unités courtes
+  pad_percents 2                  #Unité à 2 décimales
+
+#LUA : Clock
+   lua_load ~/dev/conky/time.lua
+   lua_draw_hook_pre ring_stats
+
+
+#LUA : Background
+  #lua_load $HOME/conky/Script/bg.lua
+  #lua_draw_hook_pre draw_bg
+
+
+TEXT
+
+${voffset 90}${font Bitstream charter:size=30}${alignr}${time %d.%m}${font}
+#${voffset 134}${color3}${goto 205}${hr 1}
+${color3}${goto 205}${hr 1}
+${color4}${alignr}Root   ${fs_bar 3,80 /}   ${alignr}${fs_free /}
+${color4}${alignr}User   ${fs_bar 3,80 /home/xavier}   ${alignr}${fs_free /home/xavier}
+${color4}${alignr}${if_mounted /media/disk}  USB   ${fs_bar 3,80 /media/disk}   ${alignr}${fs_free /media/disk}$endif${if_mounted /media/LaCie} Lacie   ${fs_bar 3,80 /media/LaCie}   ${alignr}${fs_free /media/LaCie}$endif${if_mounted /media/disk-1}  Android   ${fs_bar 3,80 /media/disk-1}   ${alignr}${fs_free /media/disk-1}$endif
+# / ${fs_size /media/LaCie} ${fs_free_perc /media/LaCie}$endif
+#${alignc}${offset 110}${voffset -50}${mpd_status} ${mpd_track} - ${color e0e0e0}${font}${mpd_smart}${color} ${mpd_bar 5,100}
+
+
+${voffset -74}${color3}${if_match ${acpitemp} > 60}${offset 188}${font Bitstream charter:size=15} [!] $else ${offset 197}${font Bitstream charter:size=20}$endif${execi 20 sensors | grep -A 0 'temp1' | cut -c15-20}${font}
+${voffset -64}${offset 200}${color3}${font Bitstream charter:size=20}${execi 20 sensors | grep -A 0 'temp2' | cut -c15-20}${font}
+
+#L'option -i est utilisée pour effectuer cette vérification toute les x secondes (ici toutes les 60 secondes, donc toute les minutes :) )
+#${imap_unseen imap.gmail.com xavier.bruhiere@gmail.com nintendo -i 60} 

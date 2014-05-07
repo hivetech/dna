@@ -143,3 +143,13 @@ nmap <leader>wr :%s///g
 "open the taglist (method browser) using F3
 nnoremap <silent> <F3> :TagbarToggle<CR>
 "set tags=~/myCtags
+
+" Strip trailing whitespace (,ss)
+function! StripWhitespace()
+        let save_cursor = getpos(".")
+        let old_query = getreg('/')
+        :%s/\s\+$//e
+        call setpos('.', save_cursor)
+        call setreg('/', old_query)
+endfunction
+noremap <leader>sw :call StripWhitespace()<CR>

@@ -1,0 +1,11 @@
+# Tips and tricks about zsh, with examples
+x-www-browser http://grml.org/zsh/zsh-lovers.html
+
+# Suffix aliases : Press return-key after entering foobar.tex starts vim with foobar.tex
+alias -s tex=vim
+
+# Print N-digits random number
+echo ${(l:${N}::0:)${RANDOM}}
+
+# Remove zero length and .bak files in a directory
+rm -i *(.L0) *.bak(.)

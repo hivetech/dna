@@ -1,12 +1,11 @@
 ---
-#TODO Distinction between bin, lib and templates
+# Copy bins
 - name: Copy utils scripts in /usr/local/bin
-  copy: src={{ item }} dest=/usr/local/bin owner={{ ansible_user_id }} mode=755
-  with_fileglob: 
-      - /{{ dna_root }}/utils/*
+  copy: src={{ dna_root }}/utils/apt-git dest=/usr/local/bin/ owner={{ ansible_user_id }} mode=755
+  copy: src={{ dna_root }}/utils/bizu.sh dest=/usr/local/bin/ owner={{ ansible_user_id }} mode=755
+  copy: src={{ dna_root }}/utils/task-check dest=/usr/local/bin/ owner={{ ansible_user_id }} mode=755
+  copy: src={{ dna_root }}/utils/view-doc dest=/usr/local/bin/ owner={{ ansible_user_id }} mode=755
 
-#FIXME Don't change template extension
+# Copy templates
 - name: Copy template scripts in /usr/local/bin
-  template: src={{ item }} dest=/usr/local/bin owner={{ ansible_user_id }} mode=755
-  with_fileglob: 
-      - /{{ dna_root }}/utils/*.j2
+  template: src={{ dna_root }}/utils/openlibs-update.j2 dest=/usr/local/bin/openlibs-update owner={{ ansible_user_id }} mode=755

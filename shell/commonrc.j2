@@ -1,4 +1,3 @@
-#TODO Ask user choice before installing go, python or node version (this is long process)
 # ------------------------------------------------------------ Constants
 # Assumptions (born to be tuned):
 #    - Your IT projects are in $HOME/dev/projects
@@ -23,38 +22,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 test -d $HOME/local/bin && PATH="$HOME/local/bin:$PATH"
 test -d $HOME/local/lib && PATH="$HOME/local/lib:$PATH"
 
-# ------------------------------------------------------------- Functions
-# Useful personal function, a little combinaison of two other one
-function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
-function up()
-{
-    LIMIT=$1
-    P=$PWD
-    for ((i=1; i <= LIMIT; i++))
-    do
-        P=$P/..
-    done
-    cd $P
-    export MPWD=$P
-}
-
-function back()
-{
-    LIMIT=$1
-    P=$MPWD
-    for ((i=1; i <= LIMIT; i++))
-    do
-        P=${P%/..}
-    done
-    cd $P
-    export MPWD=$P
-}
-
-#TODO Should it be replaced by https://github.com/simonwhitaker/gitignore-boilerplates ?
-# Command line access to http://gitignore.io/, powered by https://github.com/github/gitignore
-function gi() { curl http://gitignore.io/api/$@ ;}
-
-# ------------------------------------------------------------- Plugins
+# ----------------------------------------------------------- Plugins
 # Node version management
 #[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh  # This loads NVM
 if [[ -s $HOME/.nvm/nvm.sh ]]; then
@@ -76,6 +44,8 @@ fi
 # Python virtualenv made easy
 #test -f /usr/local/bin/virtualenvwrapper.sh && source /usr/local/bin/virtualenvwrapper.sh && export WORKON_HOME=$HOME/.virtualenvs
 #TODO Testing https://github.com/brainsik/virtualenv-burrito
+# startup virtualenv-burrito
+[ -f "$HOME/.venvburrito/startup.sh" ] && . "$HOME/.venvburrito/startup.sh"
 
 # z is the new j, yo (https://github.com/rupa/z.git)
 test -d $OPENLIBS/z && source $OPENLIBS/z/z.sh
@@ -106,8 +76,9 @@ if [[ -d $HOME/.pyenv ]]; then
     if [ "${answer}" == "y" ]; then
       pyenv install $PYTHON_VERSION
     fi
+  else
+    pyenv local $PYTHON_VERSION
   fi
-  pyenv local $PYTHON_VERSION
   echo "Now using python $PYTHON_VERSION"
 fi
 
@@ -121,8 +92,9 @@ if [[ -d $HOME/.gvm ]]; then
     if [ "${answer}" == "y" ]; then
       gvm install $GO_VERSION
     fi
+  else
+    gvm use $GO_VERSION
   fi
-  gvm use $GO_VERSION
 fi
 
 # Enable cheatsheets color syntaxing
@@ -147,7 +119,11 @@ if [[ -d $HOME/.rbenv ]]; then
     if [ "${answer}" == "y" ]; then
       rbenv install $RUBY_VERSION
     fi
+  else
+    echo "Now using ruby $RUBY_VERSION"
+    rbenv global $RUBY_VERSION
   fi
-  echo "Now using ruby $RUBY_VERSION"
-  rbenv global $RUBY_VERSION
 fi
+
+# Map <Caps Lock> as <Esc> on Linux
+xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'

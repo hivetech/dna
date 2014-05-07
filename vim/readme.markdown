@@ -20,12 +20,13 @@ Features
 * Tabs with MinibufExpl
 * Persistent undo
 * Leader key : ","
-* Solarized color theme
+* Famous Solarized or Base16 color themes
 * Airline status line
 * Useful tlib and webapi libs installed
 * Git diff show
 * Powerfull semantic for search, substitution and abbrev
 * Ruby on rails and bundle shortcuts
+* Salstack files support
 
 
 Keymaps
@@ -68,7 +69,7 @@ Keymaps
     * {sexy,normal} toogle comments      : ,c{s,\<space\>}
     * opens tagbar                       : \<F3\>
     * align lines on {character}         : \<Ctrl-a\>{character}
-    * opens tasks list                   : ,t
+    * opens tasks list                   : ,td
     * opens git dirty files              : ,ocf
     * Open a window with {ipython,bash,zsh,mysql,node,irb,R} prompt : ,t{y,b,z,s,n,i,r}
     * Go to {next,previous} git change   : g{h,H}
@@ -95,6 +96,7 @@ Plugins
 * Syntastic - [Syntax checking hacks for vim](https://github.com/scrooloose/syntastic)
 * Solarized - [Precision colorscheme for the vim text editor](https://github.com/altercation/vim-colors-solarized)
 * Delimitmate - [Vim plugin, provides insert mode auto-completion for quotes, parens, brackets, etc](https://github.com/Raimondi/delimitMate)
+* Base 16 - [Color schemes for hackers](https://github.com/chriskempson/base16-vim)
 * Ctrlp - [Fuzzy file, buffer, mru, tag, etc finder](https://github.com/kien/ctrlp.vim)
 * Gundo - [Graph your vim undo tree in style](http://sjl.bitbucket.org/gundo.vim/)
 * Conque-Shell - [Run interactive commands inside a Vim buffer](https://github.com/vim-scripts/Conque-Shell)
@@ -118,6 +120,7 @@ Plugins
 * Vim-gocode - [A Go bundle for Vundle or Pathogen](https://github.com/Blackrush/vim-gocode)
 * LaTex-Box - [Lightweight Toolbox for LaTeX](https://github.com/LaTeX-Box-Team/LaTeX-Box)
 * YouCompleteMe - [A code-completion engine for Vim](https://github.com/Valloric/YouCompleteMe)
+* Salt-vim - [Vim files for editing Salt files](https://github.com/saltstack/salt-vim)
 
 
 Kudos
@@ -145,3 +148,5 @@ Kudos
 * [Blackrush](https://github.com/Blackrush)
 * [LaTeX-Box](https://github.com/LaTeX-Box-Team)
 * [Valloric](https://github.com/Valloric)
+* [Saltstack](https://github.com/saltstack)
+* [chriskempson](https://github.com/chriskempson)

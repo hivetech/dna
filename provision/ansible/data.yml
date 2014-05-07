@@ -36,4 +36,6 @@ plugins:
   - bd
   - dropbox
   - utils
-  - autoenv:q
+  - autoenv
+  - jq
+  - howdoi

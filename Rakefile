@@ -1,12 +1,11 @@
 # = DNA Rake - Community-driven dotfiles that will sharpen your system
 #
 # Author::    Xavier Bruhiere
-# Copyright:: (c) 2013, Xavier Bruhiere
+# Copyright:: (c) 2014, Xavier Bruhiere
 # License::   Apache 2.0
 #
 # Feedback appreciated: xavier.bruhiere@gmail.com
 
-# https://github.com/michaeldv/awesome_print
 require "awesome_print"
 
 logs = "/tmp/dna.rake"
@@ -22,7 +21,7 @@ namespace :install do
         msg "install optparse (https://github.com/nk412/optparse)"
         cmd = "test -f optparse.bash || curl -o optparse.bash https://raw.github.com/nk412/optparse/master/optparse.bash"
         result = system(cmd)
-        raise("optparse installation failed..  msg: #{$?}") unless result
+        raise("optparse installation failed: #{$?}") unless result
     end
 
     desc "Install ansible, configuration manager"
@@ -35,7 +34,7 @@ namespace :install do
         sh "sudo pip install --upgrade ansible==1.3.3 2>&1 >> #{logs}"
         msg "Copy configuration file"
         sh "test -d /etc/ansible || sudo mkdir /etc/ansible"
-        sh "sudo cp ansible.cfg /etc/ansible"
+        sh "sudo cp provision/ansible/ansible.cfg /etc/ansible"
 
         msg "!! now: $ source /opt/ansible/hacking/env-setup"
         msg "!! now: $ edit ./provision/ansible/data.yml"

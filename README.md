@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://raw.github.com/hivetech/hivetech.github.io/master/images/logo-unide.png" alt="Unide logo"/>
-</p>
-
 DNA
 ====
 
@@ -9,19 +5,25 @@ DNA
 
 > By [Hive Tech](unide.co)
 
+
+<p align="center">
+  <img src="https://raw.github.com/hivetech/hivetech.github.io/master/images/logo-unide.png" alt="Unide logo"/>
+</p>
+
+
 This README is [also available in a friendly navigable format](http://documentup.com/hivetech/dna).
 
 
 DNA is a community-driven compilation of dotfiles and projects, aimed
-at creating the most awesome and powerful development environment. 
-We use it here a Hivetech to setup fresh new machines and provide our
+at creating the most awesome and powerful development environment.
+We use it here at Hivetech to setup fresh new machines and provide our
 [hivelab charm](https://github.com/hivetech/cells/tree/master/precise/hivelab)
 for the Unide project.
 
 Installation is performed through famous configuration managers like ansible
 and [salt](http://saltstack.com/community.html) (currently focused on [ansible](www.ansibleworks.com)) as they obviously play nicely with a
 dotfiles repository and allow you to configure in seconds thousands of machines,
-as well as simply your beloved local one.  
+as well as simply your beloved local one.
 
 It is designed to be plugin-friendly: A new awesome, github featured
 project you discovered for your environment ? Star it and just plug
@@ -40,7 +42,7 @@ $ ssh prototype@127.0.0.1 -p $PORT   # Password: proto
 Content
 -------
 
-This is heavy work in progress. Right now we are cleaning and moving here our
+This is heavy work in progress. Right now I'm cleaning and moving here my
 previous repo (https://github.com/hackliff/Dotfiles)
 
 * Shell
@@ -50,7 +52,6 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * Fish-shell - [The user-friendly command line shell](https://github.com/fish-shell/fish-shell)
     * Liquidprompt - [A full-featured & carefully designed adaptive prompt for Bash & Zsh](https://github.com/nojhan/liquidprompt)
     * Bash-it - [A community bash framework](https://github.com/revans/bash-it)
-    * Gitignore.io - [Generate useful .gitignore files for your project](https://github.com/joeblau/gitignore.io)
     * Stderred - [Stderr output in red](https://github.com/sickill/stderred)
     * Cheat - [cheat allows you to create and view interactive cheatsheets on
       the command-line. It was designed to help remind *nix system
@@ -61,9 +62,10 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * [Fish shell like syntax highlighting for Zsh](https://github.com/zsh-users/zsh-syntax-highlighting)
     * [ZSH port of Fish shell's history search feature](https://github.com/zsh-users/zsh-history-substring-search)
 
-* Git
+* Versioning
 
     * Git flow - [Git extensions to provide high-level repository operations for Vincent Driessen's branching model](https://github.com/nvie/gitflow)
+    * Gitignore.io - [Generate useful .gitignore files for your project](https://github.com/joeblau/gitignore.io)
     * Git-extras - [GIT utilities -- repo summary, repl, changelog population, author commit percentages and more](https://github.com/visionmedia/git-extras)
     * Scm breeze - [Adds numbered shortcuts to the output git status, and much more](https://github.com/ndbroadbent/scm_breeze)
     * Octogit - [giving git more tentacles](http://myusuf3.github.com/octogit/)
@@ -75,7 +77,10 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * Autopep8 - [A tool that automatically formats Python code to conform to the PEP 8 style guide](https://github.com/hhatto/autopep8)
     * Virtual Burrito - [One command to have a working virtualenv + virtualenvwrapper environment](https://github.com/brainsik/virtualenv-burrito)
     * Gvm - [Go Version Manager](https://github.com/moovweb/gvm)
-    * Pyenv - [Simple Python version management](https://github.com/yyuu/pyenv)
+    * Pyenv - [Simple Python version management](https://github.com/yyuu/pyenv), 
+      with [pip-rehash](https://github.com/yyuu/pyenv-pip-rehash), [doctor](https://github.com/yyuu/pyenv-doctor),
+      [installer](https://github.com/yyuu/pyenv-installer), [pip-migrate](https://github.com/yyuu/pyenv-pip-migrate), 
+      [update](https://github.com/yyuu/pyenv-update) and [virtualenvs](https://github.com/yyuu/pyenv-virtualenv) plugins
     * Funcy - [A fancy and practical functional tools](https://github.com/Suor/funcy)
     * Nvm - [Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
     * Pip-tools - [A set of tools to keep your pinned Python dependencies fresh](https://github.com/nvie/pip-tools)
@@ -86,6 +91,7 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * Rbenv-gemset - [Add excellent gem / gemset management to your rbenv!](https://github.com/jf/rbenv-gemset)
     * Rubocop - [A robust Ruby code analyzer, based on the community Ruby style guide](https://github.com/bbatsov/rubocop)
     * Gocode - [An autocompletion daemon for the Go programming language](https://github.com/nsf/gocode)
+    * Simple Defects - [SD is a peer-to-peer bug tracker that’s built for sharing and use both online and offline](http://syncwith.us/sd/)
 
 * Plugins
 
@@ -97,10 +103,18 @@ previous repo (https://github.com/hackliff/Dotfiles)
     * View-doc - Use [DocumentUp](https://github.com/jeromegn/DocumentUp) and [Daux.io](https://github.com/justinwalsh/daux.io) to browse your project doc
     * Autoenv - [Directory-based environments](https://github.com/kennethreitz/autoenv)
     * LaTex - [A document preparation system](http://www.latex-project.org/)
+    * jq - [Command-line JSON processor](http://stedolan.github.io/jq/)
+    * Pyhn - [Hacker news in your terminal](https://github.com/socketubs/pyhn)
+    * Howdoi - [Instant coding answers via the command line](https://github.com/gleitz/howdoi)
 
-* [Vim](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#plugins)
+* [Vim](https://github.com/hivetech/dna/tree/master/vim/readme.markdown#plugins)
 
-* [Utils](https://github.com/hivetech/dna/blob/develop/utils/doc.markdown)
+* [Python](https://github.com/hivetech/dna/tree/master/python/README.md)
+
+* [Utils](https://github.com/hivetech/dna/tree/master/utils/readme.markdown)
+
+* [Openbox](https://github.com/hivetech/dna/tree/master/openbox/readme.markdown)
+
 
 Usage (ansible style)
 -----
@@ -120,6 +134,7 @@ $ cheat <sub-command>  # git-extras for example
 ```
 
 Notice the `synthetize` action is idempotent.
+
 
 Sandbox mode (still ansible style)
 ------------
@@ -224,7 +239,11 @@ Partners in crime
 * [ingydotnet](https://github.com/ingydotnet)
 * [carsomyr](https://github.com/carsomyr)
 * [jf](https://github.com/jf)
+* [obrajesse](https://github.com/obra)
+* [stedolan](https://github.com/stedolan/jq)
+* [socketubs](https://github.com/socketubs)
+* [gleitz](https://github.com/gleitz)
 
-* [Vim kudos](https://github.com/hivetech/dna/blob/develop/vim/doc.markdown#kudos)
+* [Vim kudos](https://github.com/hivetech/dna/tree/master/vim/readme.markdown#kudos)
 
 ... among many, many more contributors on cited projects.

@@ -16,6 +16,7 @@
     - libsqlite3-dev
     - ruby1.9.3
     - golang
+    - sd
     
 # A BASH wrapper for getopts, for simple command line arguments
 - name: Install optparse
@@ -34,7 +35,6 @@
 - name: Install tox
   pip: name=tox
 
-# Installs latest available version of rake.
 #FIXME Can't found ruby > 1.9.2
 #- name: Install rubocop
   #gem: name=rubocop state=latest
@@ -49,7 +49,9 @@
 # Simple Python version management
 #FIXME Everything installed with pip here won't be available with futur version of python installed with pyenv
 - name: Download python version manager
-  git: repo=git://github.com/yyuu/pyenv.git dest={{ home }}/.pyenv
+  #git: repo=git://github.com/yyuu/pyenv.git dest={{ home }}/.pyenv
+  shell: curl https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+  when: "{{ dev.python_version }} != ''"
 
 #TODO https://github.com/nsf/gocode
 # Go Version Manager http://github.com/moovweb/gvm

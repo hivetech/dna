@@ -8,3 +8,6 @@ prototype ansible_ssh_host=127.0.0.1 ansible_ssh_port=49500 ansible_ssh_user=pro
 
 [thib]
 thib ansible_ssh_host=192.168.0.20 ansible_ssh_user=tbruhiere ansible_ssh_pass=M@non22
+
+[digitalocean]
+digitalocean ansible_ssh_host=162.243.58.195 ansible_ssh_user=root

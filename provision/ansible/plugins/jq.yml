@@ -1,0 +1,8 @@
+---
+# Command-line JSON processor http://stedolan.github.io/jq/
+- name: Download jq
+  shell: wget http://stedolan.github.io/jq/download/source/jq-1.3.tar.gz
+- shell: cd /tmp && tar xvzf jq-1.3.tar.gz
+
+- name: Compile and install jq
+  shell: cd /tmp/jq-1.3 && ./configure && make && make install

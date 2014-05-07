@@ -1,0 +1,19 @@
+## sd - SD is a peer-to-peer bug tracker that’s built for sharing and use both online and offline
+# Optional : Prefix commands by 'git' for a better collaboration
+# Get help 
+sd help
+
+# Initialize a ticket tracker in a git repository
+(git) sd init
+
+# List tickets and get informations
+sd ticket list --owner=<mail>
+sd ticket show <id>
+sd ticket tickets <id>
+
+# Manage a ticket
+sd ticket create -- summary="This is a summary" status=open
+sd ticket take <id>
+sd ticket give <id> <mail>
+sd ticket comment <id>
+sd ticket close <id>

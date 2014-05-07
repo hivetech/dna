@@ -3,18 +3,6 @@ Hivetech Utils Scripts
 
 Various scripts to rigorously cultivate our lazyness.
 
-dna-help
---------
-
-Helper for `dna` users. It keeps track of what `dna` synthetized here.
-
-```console
-$ dna-help --help
-$ dna-help --all
-$ dna-help <plugin>
-```
-
-
 golab
 -----
 
