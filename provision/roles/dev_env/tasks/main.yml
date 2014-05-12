@@ -1,0 +1,37 @@
+---
+
+- name: Install common dependencies
+  when: ansible_pkg_mgr == "apt"
+  action: apt pkg={{ item }} state=latest update_cache=true
+  with_items:
+    - wget
+    - git-core
+    - mercurial
+    - python-pip
+  tags:
+    - common
+    - packages
+    - init
+
+# Common console configurations
+- include: shell.yml tags=shell,terminal
+# Specific shells
+- include: fish_shell.yml tags=shell,terminal,fish_shell
+  when: "'shell.default' == 'fish'"
+- include: bash.yml tags=shell,terminal,bash
+  when: "'shell.default' == 'bash'"
+- include: zsh.yml tags=shell,terminal,zsh
+  when: "'shell.default' == 'zsh'"
+
+- include: cheatsheet.yml tags=doc
+- include: git.yml tags=vcs,git
+- include: dev.yml tags=dev,tools
+- include: utils.yml tags=utils
+- include: vim.yml tags=dev,tools,editor
+  when: "'{{ editor }}' == 'vim'"
+
+# FIXME Deprecated
+# Plugins
+#- include: '{{ item }}'
+  #when: "'{{ item }}'.split('/')[-1][:-4] in {{ plugins }}"
+  #with_fileglob: plugins/*

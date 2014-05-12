@@ -1,4 +1,11 @@
----
+# HTTPie is a CLI, cURL-like tool for humans. http://httpie.org
+- name: Install httpie
+  pip: name=httpie
+
+# Directory-based environments.
+- name: Install Autoenv
+  pip: name=autoenv
+
 # Command-line JSON processor http://stedolan.github.io/jq/
 - name: Download jq
   shell: wget http://stedolan.github.io/jq/download/source/jq-1.3.tar.gz

@@ -17,7 +17,7 @@
     - ruby1.9.3
     - golang
     - sd
-    
+
 # A BASH wrapper for getopts, for simple command line arguments
 - name: Install optparse
   shell: wget -O /usr/local/lib/optparse.bash https://raw.github.com/nk412/optparse/master/optparse.bash
@@ -35,25 +35,24 @@
 - name: Install tox
   pip: name=tox
 
-#FIXME Can't found ruby > 1.9.2
+# FIXME Can't found ruby > 1.9.2
 #- name: Install rubocop
   #gem: name=rubocop state=latest
 
-#TODO Is it better than using https://github.com/yyuu/pyenv-virtualenvwrapper ?
-#TODO Check, test and use plugins https://github.com/yyuu/pyenv/wiki/Plugins
+# TODO Is it better than using https://github.com/yyuu/pyenv-virtualenvwrapper ?
+# TODO Check, test and use plugins https://github.com/yyuu/pyenv/wiki/Plugins
 # With one command, have a working Python virtualenv + virtualenvwrapper environment.
 - name: Install python Virtualenv Burrito
   shell: export HOME={{ home }} && curl -s https://raw.github.com/brainsik/virtualenv-burrito/master/virtualenv-burrito.sh | bash
   ignore_errors: yes   # The script ends up with wrong status if it already exists but that is not an error and we want to stay idempotent
 
 # Simple Python version management
-#FIXME Everything installed with pip here won't be available with futur version of python installed with pyenv
+# FIXME Everything installed with pip here won't be available with futur version of python installed with pyenv
 - name: Download python version manager
   #git: repo=git://github.com/yyuu/pyenv.git dest={{ home }}/.pyenv
   shell: curl https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-  when: "{{ dev.python_version }} != ''"
+  when: "'{{ dev.python_version }}' != ''"
 
-#TODO https://github.com/nsf/gocode
 # Go Version Manager http://github.com/moovweb/gvm
 - name: Install go version manager
   shell: export HOME={{ home }} && curl -s https://raw.github.com/moovweb/gvm/master/binscripts/gvm-installer | bash
@@ -65,7 +64,7 @@
        dest={{ home }}/.nvm
 
 # ------------------- Ruby
-#NOTE Interesting ? https://github.com/fesplugas/rbenv-installer
+# NOTE Interesting ? https://github.com/fesplugas/rbenv-installer
 # Groom your app’s Ruby environment
 - name: Install Rbenv, ruby version manager
   git: repo=https://github.com/sstephenson/rbenv
@@ -90,6 +89,8 @@
     dest={{ home }}/.rbenv/plugins/rbenv-gemset
   when: "'{{ dev.ruby_manager }}' == 'rbenv'"
 
+# FIXME go errors while installing
+# TODO Vim specific stuff
 # An autocompletion daemon for the Go programming language
-- name: Install go configuration for vim
-  shell: go get -u github.com/nsf/gocode
+#- name: Install go configuration for vim
+  #shell: go get -u github.com/nsf/gocode

@@ -1,0 +1,41 @@
+---
+# DNA configuration
+# Parameters here will be used for template variable and conditional task execution
+
+# Open source codes will be store there
+openlibs: /opt
+editor: vim
+# Screen or tmux configurations available
+terminal_multiplexer: screen
+
+shell:
+  # bash, fish or zsh
+  default: zsh
+  # ohmyzsh, ohmyfish, bashit, liquidprompt or nothing special
+  prompt: ohmyzsh
+
+dev:
+  # rbenv and, soon, rvm
+  ruby_manager: rbenv
+  # Leave it empty to skip the installation
+  ruby_version: 2.0.0-dev
+  node_version: 0.10.26
+  go_version: go1.2rc5
+  python_version: 2.7.5
+  # Available: flake8, pyflakes, pylint, pep8
+  python_checker: flake8
+
+git:
+  email: xavier.bruhiere@gmail.com
+  username: hackliff
+
+# t, z, bd, dropbox, utils, autoenv, latex
+plugins:
+  - t
+  - z
+  - bd
+  - dropbox
+  - utils
+  - autoenv
+  - jq
+  - howdoi

@@ -21,15 +21,13 @@ We use it here at Hivetech to setup fresh new machines and provide our
 for the Unide project.
 
 Installation is performed through famous configuration managers like ansible
-and [salt](http://saltstack.com/community.html) (currently focused on [ansible](www.ansibleworks.com)) as they obviously play nicely with a
-dotfiles repository and allow you to configure in seconds thousands of machines,
-as well as simply your beloved local one.
+and [salt](http://saltstack.com/community.html) (currently focused on
+[ansible](www.ansibleworks.com)) as they obviously play nicely with a dotfiles
+repository, and allow you to configure in seconds thousands of machines, as well
+as simply your beloved local one.
 
-It is designed to be plugin-friendly: A new awesome, github featured
-project you discovered for your environment ? Star it and just plug
-a playbook ( / minion / recipe / manifest / script) in the plugin directory.
-
-If you are familiar with [docker](http://www.docker.io), you can test the environment:
+If you are familiar with [docker](http://www.docker.io), you can test the
+environment this project can produce.
 
 ```console
 $ docker pull hivetech/lab
@@ -116,7 +114,7 @@ previous repo (https://github.com/hackliff/Dotfiles)
 * [Openbox](https://github.com/hivetech/dna/tree/master/openbox/readme.markdown)
 
 
-Usage (ansible style)
+Usage
 -----
 
 ```console
@@ -133,10 +131,10 @@ $ cheat lab
 $ cheat <sub-command>  # git-extras for example
 ```
 
-Notice the `synthetize` action is idempotent.
+Note the `synthetize` action is idempotent.
 
 
-Sandbox mode (still ansible style)
+Sandbox mode
 ------------
 
 You can test the project in a virtualize environment. Typical use case would be

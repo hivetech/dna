@@ -1,0 +1,20 @@
+---
+
+# Zsh specific stuff
+# FIXME To avoid the script: https://github.com/lmacken/ansible-hacker-playbook/blob/master/playbook.yml
+- name: Install oh-my-zsh framework
+  shell: export HOME={{ home }} && curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+  when: "'{{ shell.prompt }}' == 'ohmyzsh'"
+  ignore_errors: yes   # The script ends up with a non-fatal error, so don't stop ansible for that
+- name: Configure zsh
+  copy: src={{ dna_root }}/shell/zsh/zshrc dest={{ home }}/.zshrc owner={{ ansible_user_id }} mode=600
+
+# Fish shell like syntax highlighting for Zsh
+- name: Install zsh highlighting
+  git: repo=https://github.com/zsh-users/zsh-syntax-highlighting.git
+       dest={{ openlibs }}/zsh-syntax-highlighting
+
+# ZSH port of Fish shell's history search feature
+- name: Install zsh command history search
+  git: repo=https://github.com/zsh-users/zsh-history-substring-search.git
+       dest={{openlibs}}/zsh-history-substring-search

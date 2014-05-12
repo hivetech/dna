@@ -1,5 +1,0 @@
----
-# Directory-based environments.
-- name: Install  Pyhn
-  pip: name=pyhn
-

@@ -9,49 +9,26 @@
 #   - shell.default        - bash or zsh
 #   - shell.prompt         - oh-my-zsh or liquidprompt
 #   - dev.node_version     - node version to install with nvm
-#   - plugins              - list of plugins to install
 
 # I want ansible_user_id to be the given --user $USER, not root
 # https://github.com/ansible/ansible/issues/2516
-- hosts: '{{ hosts }}'
+- hosts: "{{ hosts }}"
   sudo: no
   gather_facts: yes
 
-- hosts: '{{ hosts }}'
-  #TODO accelerate: true
+- hosts: "{{ hosts }}"
 
-  vars_files:
-    - '{{ data }}'
+  pre_tasks:
+    - shell: echo 'synthetizing dna ...'
 
-  sudo: true
+  roles:
+    - dev_env
+    - plugins
 
-  tasks:
-    # Factored instructions
-    - name: Install common dependencies
-      when: ansible_pkg_mgr == "apt"
-      action: apt pkg=$item state=latest update_cache=true
-      with_items:
-        - wget
-        - git-core
-        - mercurial
-        - python-pip
-
-    # Core components
-    #- include: shell.yml
-    #- include: cheatsheet.yml
-    - include: git.yml
-    - include: dev.yml
-    - include: utils.yml
-    - include: vim.yml
-      when: "'{{ editor }}' == 'vim'"
-
-    # Plugins
-    - include: '{{ item }}'
-      when: "'{{ item }}'.split('/')[-1][:-4] in {{ plugins }}"
-      with_fileglob: plugins/*
-
+  post_tasks:
     # Finish him
     - name: giving back permissions to the user
       shell: chown -R {{ ansible_user_id }}:{{ ansible_user_id }} {{ home }}
     - shell: chmod -R ug+rxw,o+rx {{ home }}
+    - shell: echo 'Done, happy hacking!'
 

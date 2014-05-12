@@ -1,0 +1,16 @@
+---
+
+# The user-friendly command line shell.
+- name: Download fish-shell
+  git: repo=git://github.com/fish-shell/fish-shell.git dest={{ openlibs }}/fish-shell
+- name: Compile and install fish-shell
+  shell: chdir={{ openlibs }}/fish-shell autoconf && ./configure && make && make install
+- name: Register fish shell on the system
+  shell: echo "/usr/local/bin/fish" >> /etc/shells
+
+# Framework for managing your fish shell configuration inspired by Oh My ZSH.
+- name: Install oh-my-fish framework
+  shell: export HOME={{ home }} && curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.sh | sh
+  when: "'shell.prompt' == 'ohmyfish'"
+- copy: src={{ dna_root }}/shell/fish/config.fish dest={{ home }}/.config/fish owner={{ ansible_user_id }} mode=600
+  when: "'shell.prompt' == 'ohmyfish'"

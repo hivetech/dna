@@ -31,12 +31,11 @@ namespace :install do
         sh "sudo apt-get update 2>&1 >> #{logs}"
         sh "sudo apt-get install -y sshpass python-pip python-dev git-core 2>&1 >> #{logs}"
         msg "install ansible, configuration manager"
-        sh "sudo pip install --upgrade ansible==1.3.3 2>&1 >> #{logs}"
+        sh "sudo pip install --use-mirrors --upgrade ansible==1.6.1 2>&1 >> #{logs}"
         msg "Copy configuration file"
         sh "test -d /etc/ansible || sudo mkdir /etc/ansible"
         sh "sudo cp provision/ansible/ansible.cfg /etc/ansible"
 
-        msg "!! now: $ source /opt/ansible/hacking/env-setup"
         msg "!! now: $ edit ./provision/ansible/data.yml"
 
         msg "Installation is done."
@@ -59,7 +58,7 @@ namespace :install do
     desc "Install dev extra dependencies"
     task :extras do
         msg "Install dev extra deps"
-	    sh "pip install --upgrade ansible-shell 2>&1 >> #{logs}"
+        sh "pip install --upgrade ansible-shell 2>&1 >> #{logs}"
     end
 end
 

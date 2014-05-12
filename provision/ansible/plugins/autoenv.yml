@@ -1,5 +1,0 @@
----
-# Directory-based environments.
-- name: Install Autoenv
-  pip: name=autoenv
-
