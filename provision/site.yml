@@ -9,7 +9,6 @@
 #   - shell.default        - bash or zsh
 #   - shell.prompt         - oh-my-zsh or liquidprompt
 #   - dev.node_version     - node version to install with nvm
-#   - plugins              - list of plugins to install
 
 # I want ansible_user_id to be the given --user $USER, not root
 # https://github.com/ansible/ansible/issues/2516
@@ -24,6 +23,7 @@
 
   roles:
     - dev_env
+    - plugins
 
   post_tasks:
     # Finish him

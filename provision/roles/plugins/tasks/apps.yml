@@ -1,16 +1,20 @@
 ---
-#NOTE http://todotxt.com/ as an alternative ?
-#FIXME This step is skipped 
+# NOTE http://todotxt.com/ as an alternative ?
+# FIXME This step is skipped
+
 - name: Install t package dependencies
   when: ansible_pkg_mgr == "apt"
-  action: apt pkg=$item state=latest
+  action: apt pkg={{ item }} state=latest
   with_items:
     - mercurial
-    
-# z is the new j, yo
+
 - name: Install todolist manager t
   hg: repo=http://bitbucket.org/sjl/t/
       dest={{ openlibs }}/t
 
 - name: Create tasks directory
   file: dest={{ home }}/.tasks state=directory owner={{ ansible_user_id }} mode=600
+
+# Hacker news client
+- name: Install  Pyhn
+  pip: name=pyhn

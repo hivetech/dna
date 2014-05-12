@@ -1,0 +1,8 @@
+---
+
+# Common console configurations
+- include: dev_tools.yml tags=dev,tools
+- include: cli.yml tags=cli,terminal
+- include: data.yml tags=dropbox,data,storage
+- include: apps.yml tags=apps,utils,tools
+- include: latex.yml tags=latex,writing

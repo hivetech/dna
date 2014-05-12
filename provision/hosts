@@ -1,7 +1,7 @@
 localhost ansible_connection=local
 
 [base]
-172.17.0.5
+172.17.0.3
 
 [vagrant]
 192.168.100.10

@@ -1,0 +1,7 @@
+---
+
+# Bash specific stuff
+- name: Configure bash
+  copy: src={{ dna_root }}/shell/bash/bashrc dest={{ home }}/.bashrc owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/shell/bash/bash_profile dest={{ home }}/.bash_profile owner={{ ansible_user_id }} mode=600
+- copy: src={{ dna_root }}/shell/bash/bash_logout dest={{ home }}/.bash_logout owner={{ ansible_user_id }} mode=600
