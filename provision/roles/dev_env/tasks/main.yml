@@ -1,0 +1,24 @@
+---
+
+- name: Install common dependencies
+  when: ansible_pkg_mgr == "apt"
+  action: apt pkg={{ item }} state=latest update_cache=true
+  with_items:
+    - wget
+    - git-core
+    - mercurial
+    - python-pip
+
+- include: shell.yml
+- include: cheatsheet.yml
+- include: git.yml tags=vcs
+- include: dev.yml
+- include: utils.yml
+- include: vim.yml tags=editor
+  when: "'{{ editor }}' == 'vim'"
+
+# FIXME Deprecated
+# Plugins
+#- include: '{{ item }}'
+  #when: "'{{ item }}'.split('/')[-1][:-4] in {{ plugins }}"
+  #with_fileglob: plugins/*

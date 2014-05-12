@@ -18,7 +18,7 @@
 
 - name: Prepare vim configuration
   file: path={{ home }}/.vim/plugin/settings state=directory recurse=yes owner={{ ansible_user_id }} mode=600
-    
+
 - name: Copy vimrc configuration file
   copy: src={{ dna_root }}/vim/vimrc dest={{ home }}/.vimrc owner={{ ansible_user_id }} mode=600
 - copy: src={{ dna_root }}/vim/plugin/bundles.vim dest={{ home }}/.vim/plugin/bundles.vim owner={{ ansible_user_id }} mode=600
