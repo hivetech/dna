@@ -11,13 +11,12 @@ if sys.argv[-1] == 'test':
     sys.exit(1 if status > 127 else status)
 
 
-# Needs also : apt-get install swig
 requires = [
-    'requests>=2.2.1',
+    'requests>=2.3.0',
     'sh>=1.09',
     'python-dateutil>=2.2',
-    'raven>=4.2.1',
-    'Logbook>=0.6.0',
+    'raven>=4.2.3',
+    'Logbook>=0.7.0',
     'structlog>=0.4.1',
     'docker-py>=0.2.3',
     'docopt>=0.6.1',

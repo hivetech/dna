@@ -78,7 +78,13 @@ class App(object):
         ''' Configure from cli and run the server '''
 
         exit_status = 0
-        args = docopt(app_docopt, version=description)
+        if isinstance(app_docopt, str):
+            args = docopt(app_docopt, version=description)
+        elif isinstance(app_docopt, dict):
+            args = app_docopt
+        else:
+            raise ValueError('unknown configuration object ({})'
+                             .format(type(app_docopt)))
         log_level = args.get('--log', 'debug')
         is_debug = args.get('--debug', False)
         safe_bind = args.get('--bind', '127.0.0.1')
@@ -110,13 +116,12 @@ class App(object):
 
 
 Application = App()
-Application.setup_db()
 
 
 if __name__ == '__main__':
     import dna.apy.resources as resources
     routes = {
-        '/user/<string:username>': resources.User,
+        '/users/<string:username>': resources.User,
         '/test': resources.TestRestricted
     }
     Application.setup_routes(routes)

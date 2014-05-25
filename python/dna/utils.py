@@ -16,12 +16,12 @@ import requests
 import re
 import socket
 from urllib2 import urlopen
-from dna.errors import DynamicImportFailed
+import errors
 
 
 class Version(object):
     ''' Provide a convenient way to manipulate version '''
-    #NOTE Use git tag ?
+    # NOTE Use git tag ?
     def __init__(self, version):
         _version = version.split('.')
         self.major = int(_version[0])
@@ -74,13 +74,13 @@ def dynamic_import(mod_path, obj_name):
     try:
         module = __import__(mod_path, fromlist=['whatever'])
     except ImportError, error:
-        raise DynamicImportFailed(
+        raise errors.DynamicImportFailed(
             module='.'.join([mod_path, obj_name]), reason=error)
 
     if hasattr(module, obj_name):
         obj = getattr(module, obj_name)
     else:
-        raise DynamicImportFailed(
+        raise errors.DynamicImportFailed(
             module='.'.join([mod_path, obj_name]),
             reason='module {} has no attribute {}'.
                    format(module.__name__, obj_name))

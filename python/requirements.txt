@@ -1,8 +1,8 @@
-requests==2.2.1
-raven==4.2.1
+requests==2.3.0
+raven==4.2.3
 python-dateutil==2.2
 sh==1.09
-Logbook==0.6.0
+Logbook==0.7.0
 structlog==0.4.1
 Flask==0.10.1
 Flask-RESTful==0.2.12

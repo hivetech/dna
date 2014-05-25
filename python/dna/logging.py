@@ -2,9 +2,6 @@
 # vim:fenc=utf-8
 
 '''
-  logger configuration
-  -------------------------
-
   :copyright (c) 2014 Hive Tech, SAS.
   :license: Apache 2.0, see LICENSE for more details.
 '''

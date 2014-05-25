@@ -8,16 +8,16 @@
 
 
 import datetime as dt
-from dna.apy.core import Application
+import flask.ext.mongoengine as mongo
 
 
-class User(Application.db.Document):
+class User(mongo.Document):
 
-    created_at = Application.db.DateTimeField(default=dt.datetime.now)
-    username = Application.db.StringField(
+    created_at = mongo.mongoengine.DateTimeField(default=dt.datetime.now)
+    username = mongo.mongoengine.StringField(
         max_length=255, required=True, unique=True)
-    password = Application.db.StringField(max_length=255, default='whatever')
-    api_key = Application.db.StringField(
+    password = mongo.mongoengine.StringField(max_length=255, default='...')
+    api_key = mongo.mongoengine.StringField(
         max_length=255, required=True, unique=True)
 
     meta = {
