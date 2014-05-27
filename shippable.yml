@@ -1,0 +1,31 @@
+language: python
+python:
+  - "2.7"
+
+env:
+  - COVERALLS_REPO_TOKEN=h79z5RjLP53kvsWcelMNmxsj18cC1Ie3R
+
+install:
+  - apt-get install -y mongodb-clients
+  - pip install --use-mirrors -r python/dev-requirements.txt
+  - python python/setup.py install
+
+before_script:
+  - mkdir -p python/shippable/codecoverage python/shippable/testresults
+  - pep8 --ignore E265 python/dna python/tests
+
+script:
+  - cd python && nosetests python/tests --with-coverage --cover-package=dna --with-xunit --xunit-file=shippable/testresults/nosetests.xml
+  - cd python && coverage xml -o shippable/codecoverage/coverage.xml
+
+after_success:
+  - cd python && coveralls
+
+notifications:
+  mail:
+    xavier.bruhiere@gmail.com
+
+branches:
+  only:
+    - master
+    - develop

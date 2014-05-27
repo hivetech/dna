@@ -1,18 +1,23 @@
-import sys
-import os
-from setuptools import setup, find_packages
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# vim:fenc=utf-8
+
+'''
+  Packaging
+  ---------
+
+  :copyright (c) 2014 Xavier Bruhiere
+  :license: Apache 2.0, see LICENSE for more details.
+'''
+
+import multiprocessing
+import setuptools
 from dna import (
     __project__, __version__, __author__, __licence__, __description__
 )
 
 
-if sys.argv[-1] == 'test':
-    status = os.system('make tests')
-    sys.exit(1 if status > 127 else status)
-
-
-requires = [
-    'requests>=2.3.0',
+REQUIREMENTS = [
     'sh>=1.09',
     'python-dateutil>=2.2',
     'raven>=4.2.3',
@@ -28,23 +33,24 @@ requires = [
 
 
 def long_description():
+    ''' Safely provide to setup.py the project README.md '''
     try:
-        with open('README.md') as f:
-            return f.read()
+        with open('README.md') as readme_file:
+            return readme_file.read()
     except IOError:
         return "failed to read README.md"
 
 
-setup(
+setuptools.setup(
     name=__project__,
     version=__version__,
     description=__description__,
     author=__author__,
     author_email='xavier.bruhiere@gmail.com',
-    packages=find_packages(),
+    packages=setuptools.find_packages(),
     long_description=long_description(),
     license=__licence__,
-    install_requires=requires,
+    install_requires=REQUIREMENTS,
     url="https://github.com/hivetech/dna",
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
@@ -55,6 +61,6 @@ setup(
         'Operating System :: OS Independent',
         'Intended Audience :: Science/Research',
         'Topic :: Software Development',
-        'Topic :: System :: Shells',
+        'Topic :: System :: Shells'
     ]
 )

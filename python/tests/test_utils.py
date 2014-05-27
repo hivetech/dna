@@ -12,7 +12,7 @@ import dna.utils as utils
 class UtilsTestCase(unittest.TestCase):
 
     random_length = 64
-    always_running_process = 'init'
+    always_running_process = 'bash'
     version_test = '0.4.1'
 
     def _check_sub_version(self, sub_version):
@@ -35,7 +35,7 @@ class UtilsTestCase(unittest.TestCase):
 
     def test_generate_name(self):
         new_name = utils.generate_random_name()
-        #TODO Regex validation
+        # TODO Regex validation
         self.assertTrue(isinstance(new_name, str))
         new_name = utils.generate_random_name(size=4)
         self.assertTrue(len(new_name) == 4)

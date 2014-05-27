@@ -28,7 +28,7 @@ class FactoryError(Exception):
     def __str__(self):
         msg = self.msg.format(**self.kwargs)
         if self.log:
-          self.log.error(msg, exception=self.__class__.__name__)
+            self.log.error(msg, exception=self.__class__.__name__)
         return msg
 
     __unicode__ = __str__

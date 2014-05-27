@@ -1,7 +1,9 @@
 python library DNA
 ==================
 
-Generic python utilities
+[![Coverage Status](https://coveralls.io/repos/hivetech/dna/badge.png)](https://coveralls.io/r/hivetech/dna)
+
+> Generic python utilities
 
 Installation
 ------------

@@ -40,7 +40,7 @@ $ ssh prototype@127.0.0.1 -p $PORT   # Password: proto
 Content
 -------
 
-This is heavy work in progress. Right now I'm cleaning and moving here my
+** This is heavy work in progress. Right now I'm cleaning and moving here my
 previous repo (https://github.com/hackliff/Dotfiles)
 
 * Shell
