@@ -24,8 +24,10 @@ function! LoadBundles()
     Bundle 'https://github.com/tpope/vim-abolish'
     Bundle 'https://github.com/tpope/vim-rails'
     Bundle 'https://github.com/tpope/vim-bundler'
+    Bundle 'pangloss/vim-javascript'
+    Bundle 'groenewege/vim-less'
+    Bundle 'digitaltoad/vim-jade'
     Bundle 'bling/vim-airline'
-    Bundle 'Blackrush/vim-gocode'
     Bundle 'LaTeX-Box-Team/LaTeX-Box'
     Bundle 'Valloric/YouCompleteMe'
     Bundle 'saltstack/salt-vim'
@@ -33,6 +35,12 @@ function! LoadBundles()
     " --------------------------------------------------
 
     " Extra plugins ------------------------------------
+    " TODO Auto-use it on save
+    Plugin 'editorconfig/editorconfig-vim'
+    Plugin 'junegunn/goyo.vim'
+    Plugin 'Chiel92/vim-autoformat'
+    Plugin 'fatih/vim-go'
+    "Bundle 'Blackrush/vim-gocode'
     " --------------------------------------------------
 
     if executable('ack')

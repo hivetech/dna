@@ -6,6 +6,7 @@
   :license: Apache 2.0, see LICENSE for more details.
 '''
 
+import pandas as pd
 import time
 import datetime as dt
 import pytz
@@ -32,7 +33,8 @@ def normalize_date_format(date):
     if not date.tzinfo:
         local_tz = pytz.timezone(_detect_timezone())
         local_dt = local_tz.localize(date, is_dst=None)
-        date = local_dt.astimezone(pytz.utc)
+        # TODO I'm not sure why and when I need to add a date to make it right
+        date = local_dt.astimezone(pytz.utc) + pd.datetools.day
 
     return date
 

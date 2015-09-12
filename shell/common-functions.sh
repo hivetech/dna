@@ -66,5 +66,11 @@ function search() {
 function dip() {
   container_id=$1
   [ -n "$1" ] || container_id=`dlast`
-  docker inspect $container_id | grep IPAddress | cut -d '"' -f 4
+  docker inspect -f '{{ .NetworkSettings.IPAddress }}' $container_id
+}
+
+function dreduce() {
+  CONTAINER_ID=$1
+  IMAGE_NAME=$2
+  docker export $CONTAINER_ID | docker import - $IMAGE_NAME
 }

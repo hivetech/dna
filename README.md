@@ -161,7 +161,7 @@ Versioning Semantics
 --------------------
 
 For transparency and insight into our release cycle, and for striving to
-maintain backward compatibility, Ghost will be maintained according to the
+maintain backward compatibility, Dna will be maintained according to the
 [Semantic Versioning](http://semver.org/) guidelines as much as possible.
 
 Releases will be numbered with the following format:
@@ -179,7 +179,8 @@ Constructed with the following guidelines:
 Commit messages convention
 --------------------------
 
-From now on git commit messages will follow this [Angular wise document](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#).
+From now on git commit messages will follow this [Angular wise
+document](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#).
 To sum up :
 
 ```

@@ -18,22 +18,23 @@ from dna import (
 
 
 REQUIREMENTS = [
-    'sh>=1.09',
-    'python-dateutil>=2.2',
-    'raven>=4.2.3',
-    'Logbook>=0.7.0',
-    'structlog>=0.4.1',
-    'docker-py>=0.2.3',
-    'docopt>=0.6.1',
-    'celery>=3.1.11',
-    'redis>=2.9.1',
-    'Flask-RESTful>=0.2.12',
-    'flask-mongoengine>=0.7.0'
+    'click',
+    'sh',
+    'python-dateutil',
+    'raven',
+    'Logbook',
+    'structlog',
+    'docker-py',
+    'docopt',
+    'celery',
+    'redis',
+    'Flask-RESTful',
+    'flask-mongoengine'
 ]
 
 
 def long_description():
-    ''' Safely provide to setup.py the project README.md '''
+    """ Safely provide to setup.py the project README.md. """
     try:
         with open('README.md') as readme_file:
             return readme_file.read()

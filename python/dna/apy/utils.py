@@ -36,7 +36,8 @@ def api_doc(full_version, resource, method='GET', **kwargs):
     return doc
 
 
-#NOTE See also https://github.com/wcdolphin/flask-cors
+# NOTE See also https://github.com/wcdolphin/flask-cors
+# NOTE ALready included into flask-api, about to be removed
 def crossdomain(origin=None, methods=None, headers=None,
                 max_age=21600, attach_to_all=True,
                 automatic_options=True):

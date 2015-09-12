@@ -1,19 +1,15 @@
 # hivetech/prototype image
 # A generic machine ready to be configured by ansible
-# VERSION 0.0.1
+# VERSION 0.1.0
 
 # Administration
 FROM ubuntu
 MAINTAINER Xavier Bruhiere, xavier.bruhiere@gmail.com
 
-# Make sure the package repository is up to date
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get upgrade -y
-
 # Local settings
 # Change eventually fr_FR to us_US
-RUN apt-get install -y language-pack-fr
+RUN apt-get update && \
+  apt-get install -y language-pack-fr
 ENV LANGUAGE fr_FR.UTF-8
 ENV LANG fr_FR.UTF-8
 ENV LC_ALL fr_FR.UTF-8

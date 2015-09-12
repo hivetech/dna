@@ -1,8 +1,8 @@
 ---
 # Main entry point for dotfiles installation
-# cli requirement:
-# ansible-playbook site.yml --ask-sudo-pass -u user \
-#   --extra-vars="hosts=x.x.x.x data=/path/to/config.yml home=/home/you dna_root=some/where"
+# Usage:
+#   ansible-playbook site.yml --ask-sudo-pass -u user \
+#     --extra-vars="hosts=x.x.x.x data=/path/to/config.yml home=/home/you dna_root=some/where"
 # data.yml must define:
 #   - openlibs             - where projects will be stored
 #   - terminal_multiplexer - screen or tmux supported

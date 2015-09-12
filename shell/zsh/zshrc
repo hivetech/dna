@@ -74,3 +74,53 @@ if [ -d $OPENLIBS/zsh-history-substring-search ]; then
   bindkey '^[[A' history-substring-search-up
   bindkey '^[[B' history-substring-search-down
 fi
+
+# NOTE Move more plugins toward antigen management ? (like antigen-bundle Tarrasch/zsh-bd)
+# http://antigen.sharats.me ==================
+printf '\033[0;36m'"[ $TIME ] Setup antigen"'\033[0m\n'
+source ~/.antigen.zsh
+antigen use oh-my-zsh
+antigen bundle git
+antigen bundle pip
+antigen bundle command-not-found
+antigen bundle chrissicool/zsh-256color
+#antigen bundle zsh-users/zsh-syntax-highlighting
+
+#antigen theme bureau
+#antigen theme half-life
+antigen theme cypher
+#antigen theme awesomepanda
+#antigen theme robbyrussell
+
+# Auto-suggestions
+antigen bundle oknowton/zsh-dwim
+antigen apply
+# ============================================
+# https://github.com/hchbaw/auto-fu.zsh ======
+printf '\033[0;36m'"[ $TIME ] Setup fuzzy zsh"'\033[0m\n'
+source ~/.zsh/auto-fu; auto-fu-install
+zle-line-init () {auto-fu-init;}; zle -N zle-line-init
+# ============================================
+# https://github.com/tarruda/zsh-autosuggestions
+# Setup zsh-autosuggestions
+#if [ -d $OPENLIBS/zsh-autosuggestions ]; then
+  #printf '\033[0;36m'"[ $TIME ] Setup zsh autocompletion"'\033[0m\n'
+  #source $OPENLIBS/zsh-autosuggestions/autosuggestions.zsh
+
+  ## Enable autosuggestions automatically
+  #zle-line-init() {
+      #zle autosuggest-start
+  #}
+  #zle -N zle-line-init
+
+  ## use ctrl+t to toggle autosuggestions(hopefully this wont be needed as
+  ## zsh-autosuggestions is designed to be unobtrusive)
+  #bindkey '^x' autosuggest-toggle
+  #bindkey '^f' vi-forward-word
+#fi
+# ============================================
+# + https://github.com/felixr/docker-zsh-completion
+# ============================================
+# https://github.com/zsh-users/zsh-completions
+fpath=(path/to/zsh-completions/src $fpath)
+# ============================================

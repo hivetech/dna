@@ -12,12 +12,13 @@
 import os
 from docopt import docopt
 import flask
-from flask.ext import restful
 import mongoengine
+from flask.ext import restful
 from flask.ext.mongoengine import MongoEngine
 import dna.logging
 
 log = dna.logging.logger(__name__)
+
 DEFAULT_DOC = '''Apy api
 
 Usage:
@@ -87,9 +88,11 @@ class App(object):
                              .format(type(app_docopt)))
         log_level = args.get('--log', 'debug')
         is_debug = args.get('--debug', False)
+        # TODO More serious default
+        log_output = 'stdout' if is_debug else 'apy.log'
         safe_bind = args.get('--bind', '127.0.0.1')
         safe_port = int(args.get('--port', 5000))
-        log_setup = dna.logging.setup(level=log_level, show_log=is_debug)
+        log_setup = dna.logging.setup(level=log_level, output=log_output)
 
         with log_setup.applicationbound():
             try:

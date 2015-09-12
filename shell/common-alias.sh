@@ -73,3 +73,9 @@ alias chx='chmod +x'
 
 # Python style directory creation
 # FIXME alias mkdyr='mkdir $1 && touch $1/__init__.py'
+
+# https://hub.github.com/
+alias git=hub
+
+# https://github.com/jonathanslenders/python-prompt-toolkiT
+alias python='ptipython --vi'

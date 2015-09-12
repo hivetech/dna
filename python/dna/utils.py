@@ -69,15 +69,19 @@ def generate_unique_id():
     return event_id.split(':')[-1]
 
 
-def dynamic_import(mod_path, obj_name):
+def dynamic_import(mod_path, obj_name=None):
     ''' Take a string and return the corresponding module '''
     try:
         module = __import__(mod_path, fromlist=['whatever'])
     except ImportError, error:
         raise errors.DynamicImportFailed(
             module='.'.join([mod_path, obj_name]), reason=error)
+    # Make sure we're up-to-date
+    reload(module)
 
-    if hasattr(module, obj_name):
+    if obj_name is None:
+        obj = module
+    elif hasattr(module, obj_name):
         obj = getattr(module, obj_name)
     else:
         raise errors.DynamicImportFailed(
@@ -87,6 +91,11 @@ def dynamic_import(mod_path, obj_name):
         return None
 
     return obj
+
+
+def module_path(module_name):
+    # return module.__file__[:-len('/__init__.pyc')]
+    return dynamic_import(module_name).__path__[0]
 
 
 def self_ip(public=False):
@@ -101,9 +110,18 @@ def self_ip(public=False):
             sock.connect(('google.com', 0))
             ip_addr = sock.getsockname()[0]
     except Exception, error:
-        print('An error occured, returning default ({})'.format(error))
-        ip_addr = '0.0.0.0'
+        print('Online test failed : {}'.format(error))
+        raise
     return ip_addr
+
+
+def is_online():
+    connected = True
+    try:
+        self_ip(public=True)
+    except:
+        connected = False
+    return connected
 
 
 def truncate(float_value, n=2):
